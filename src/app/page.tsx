@@ -1,13 +1,9 @@
+import NavBar from "@/components/navbar/navbar"
+
 export default function Home() {
   return (
     <main>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/cart">Cart</a>
-        <a href="/about">About</a>
-        <a href="/shop">Shop</a>
-        <a href="/auth">Auth</a>
-      </nav>
+      <NavBar />
       <h1>Home</h1>
     </main>
   )
