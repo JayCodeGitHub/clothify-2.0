@@ -1,7 +1,11 @@
+import Products from '@/components/products/products';
+
 export default function Shop() {
     return (
         <main>
-            <h1>Shop</h1>
+           <section>
+                <Products />
+            </section>
         </main>
     )
 }
