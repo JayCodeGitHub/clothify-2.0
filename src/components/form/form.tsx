@@ -1,6 +1,7 @@
 "use client";
 
 import { useState} from 'react'
+import axios from 'axios'
 
 export default function Form() {
     const [form, setForm] = useState({
@@ -16,9 +17,11 @@ export default function Form() {
       })
     }
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault()
-      console.log(form)
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        console.log(form)
+        const { data } = await axios.post('/api/auth/login', form)
+        console.log(data);
     }
     return (
        <form onSubmit={handleSubmit} className='bg-red-500 p-2 w-60 flex flex-col gap-2'>
