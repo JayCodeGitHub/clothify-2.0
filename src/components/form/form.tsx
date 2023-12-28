@@ -31,7 +31,7 @@ export default function Form() {
           const { data } = await axios.post('/api/auth/register', form)
           console.log(data);
       } catch (error) {
-          console.log((error as any).response.data)
+          console.log(error);
           if((error as any).response.data.message) {
             setError((error as any).response.data.message)
           }
@@ -41,7 +41,6 @@ export default function Form() {
           email: '',
           password: '',
         })
-        console.log("Registering user")
         formRef.current?.reset()
         setError('')
 
