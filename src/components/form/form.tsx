@@ -3,7 +3,7 @@
 import { useState, useRef} from 'react'
 import axios from 'axios'
 
-export default function Form() {
+export default function Form({ action }: { action: 'login' | 'register' }) {
     const formRef = useRef<HTMLFormElement>(null)
     const [error, setError] = useState('')
     const [form, setForm] = useState({
@@ -28,8 +28,15 @@ export default function Form() {
         }
 
         try {
-          const { data } = await axios.post('/api/auth/register', form)
-          console.log(data);
+          if (action === 'login') {
+            const { data } = await axios.post('/api/auth/login', form)
+            console.log(data);
+            return
+          } else if (action === 'register') { 
+            const { data } = await axios.post('/api/auth/register', form)
+            console.log(data);
+            return
+          }
       } catch (error) {
           console.log(error);
           if((error as any).response.data.message) {
@@ -46,13 +53,13 @@ export default function Form() {
 
     }
     return (
-       <form onSubmit={handleSubmit} ref={formRef} className='bg-red-500 p-2 w-60 flex flex-col gap-2'>
+       <form onSubmit={handleSubmit} ref={formRef} className='bg-red-500 p-2 mt-2 w-60 flex flex-col gap-2'>
           <input type="email" name='email' onChange={handleChange}/>
           <input type="password" name='password' onChange={handleChange}/>
           <span className='h-14 w-full'>
             <p>{error}</p>
           </span>
-          <button type="submit">Register</button>
+          {action === 'login' ? <button type="submit">Login</button> : <button type="submit">Register</button>}
        </form>
     )
   }

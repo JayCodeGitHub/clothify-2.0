@@ -4,7 +4,8 @@ export default function Auth() {
   return (
     <main>
       <h1>Auth</h1>
-      <Form />
+      <Form action="register"/>
+      <Form action="login"/>
     </main>
   )
 }

@@ -5,5 +5,5 @@ export async function POST(req: any) {
     const email = data.email;
     const password = data.password;
   
-  return NextResponse.json({email, password}, { status: 200 });
+  return NextResponse.json({email, password, type: "login"}, { status: 200 });
 }
