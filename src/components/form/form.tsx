@@ -1,9 +1,11 @@
 "use client";
 
-import { useState} from 'react'
+import { useState, useRef} from 'react'
 import axios from 'axios'
 
 export default function Form() {
+    const formRef = useRef<HTMLFormElement>(null)
+    const [error, setError] = useState('')
     const [form, setForm] = useState({
       email: '',
       password: '',
@@ -19,14 +21,38 @@ export default function Form() {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        console.log(form)
-        const { data } = await axios.post('/api/auth/register', form)
-        console.log(data);
+
+        if (!form.email || !form.password) {
+          setError('Email and password are required')
+          return
+        }
+
+        try {
+          const { data } = await axios.post('/api/auth/register', form)
+          console.log(data);
+      } catch (error) {
+          console.log((error as any).response.data)
+          if((error as any).response.data.message) {
+            setError((error as any).response.data.message)
+          }
+          return
+      }
+        setForm({
+          email: '',
+          password: '',
+        })
+        console.log("Registering user")
+        formRef.current?.reset()
+        setError('')
+
     }
     return (
-       <form onSubmit={handleSubmit} className='bg-red-500 p-2 w-60 flex flex-col gap-2'>
+       <form onSubmit={handleSubmit} ref={formRef} className='bg-red-500 p-2 w-60 flex flex-col gap-2'>
           <input type="email" name='email' onChange={handleChange}/>
           <input type="password" name='password' onChange={handleChange}/>
+          <span className='h-14 w-full'>
+            <p>{error}</p>
+          </span>
           <button type="submit">Register</button>
        </form>
     )
