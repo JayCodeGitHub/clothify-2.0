@@ -20,7 +20,7 @@ export default function Form() {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         console.log(form)
-        const { data } = await axios.post('/api/auth/login', form)
+        const { data } = await axios.post('/api/auth/register', form)
         console.log(data);
     }
     return (
