@@ -31,11 +31,9 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
           if (action === 'login') {
             const { data } = await axios.post('/api/auth/login', form)
             console.log(data);
-            return
           } else if (action === 'register') { 
             const { data } = await axios.post('/api/auth/register', form)
             console.log(data);
-            return
           }
       } catch (error) {
           console.log(error);
@@ -49,6 +47,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
           password: '',
         })
         formRef.current?.reset()
+        
         setError('')
 
     }
