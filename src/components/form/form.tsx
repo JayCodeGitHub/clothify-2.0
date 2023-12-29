@@ -2,6 +2,7 @@
 
 import { useState, useRef} from 'react'
 import axios from 'axios'
+import { setCookie } from 'cookies-next'
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
     const formRef = useRef<HTMLFormElement>(null)
@@ -31,8 +32,10 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
           if (action === 'login') {
             const { data } = await axios.post('/api/auth/login', form)
             console.log(data);
+            setCookie('token', data)
           } else if (action === 'register') { 
             const { data } = await axios.post('/api/auth/register', form)
+            setCookie('token', data);
             console.log(data);
           }
       } catch (error) {

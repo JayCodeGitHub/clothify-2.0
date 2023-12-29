@@ -20,5 +20,5 @@ export async function POST(req: any) {
         return NextResponse.json({message: 'Email or passwod is wrong'}, { status: 400 });
     }
   
-  return NextResponse.json({email, password, type: "login"}, { status: 200 });
+  return NextResponse.json("login", { status: 200 });
 }

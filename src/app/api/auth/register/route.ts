@@ -25,5 +25,5 @@ export async function POST(req: any) {
         password: password,
     },
   });
-  return NextResponse.json({newUser}, { status: 200 });
+  return NextResponse.json('register', { status: 200 });
 }
