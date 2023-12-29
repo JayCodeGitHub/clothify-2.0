@@ -1,4 +1,9 @@
+import { cookies } from 'next/headers'
+
 export default function NavBar() {
+    const cookieStore = cookies()
+    const auth = cookieStore.get('auth')
+    console.log(auth)
     return (
         <nav>
             <a href="/">Home</a>
