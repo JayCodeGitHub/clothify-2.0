@@ -14,7 +14,7 @@ export default function Profile() {
       router.push('/auth')
     }
   }
-  , [])
+  , [router])
 
   const logout = () => {
     setToken(false);
