@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import NavBar from "@/components/navbar"
-import { cookies } from 'next/headers'
+import { AuthProvider, useAuth } from '@/hooks/useAuth'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,14 +16,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = cookies()
-  const token = cookieStore.get('token')
-  console.log(token)
   return (
     <html lang="en">
       <body className={inter.className}>
+        <AuthProvider>
           <NavBar />
           {children}
+        </AuthProvider>
         </body>
     </html>
   )
