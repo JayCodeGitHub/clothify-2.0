@@ -1,18 +1,28 @@
 "use client"
 
 import { useAuth } from "@/hooks/useAuth"
-import { deleteCookie } from 'cookies-next'
+import { deleteCookie, getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
+import { useEffect } from "react";
 
 export default function Profile() {  
   const { setToken } = useAuth();
-  const router = useRouter()
+  const router = useRouter();
+
+  useEffect(() => { 
+    if (!getCookie('token')) {
+      router.push('/auth')
+    }
+  }
+  , [])
 
   const logout = () => {
     setToken(false);
     deleteCookie('token');
     router.push('/auth')
   }
+
+  
   return (
     <main>
      <h1>Profile</h1>
