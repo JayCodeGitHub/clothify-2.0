@@ -1,4 +1,5 @@
 import Form from '@/components/form'
+import LogOut from '@/components/logout'
 
 export default function Auth() {    
   return (
@@ -6,6 +7,7 @@ export default function Auth() {
       <h1>Auth</h1>
       <Form action="register"/>
       <Form action="login"/>
+      <LogOut />
     </main>
   )
 }
