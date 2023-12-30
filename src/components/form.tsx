@@ -3,14 +3,18 @@
 import { useState, useRef} from 'react'
 import axios from 'axios'
 import { setCookie } from 'cookies-next'
+import { useAuth } from '@/hooks/useAuth'
+import { useRouter } from 'next/navigation'
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
     const formRef = useRef<HTMLFormElement>(null)
+    const { setToken } = useAuth();
+    const router = useRouter();
     const [error, setError] = useState('')
     const [form, setForm] = useState({
       email: '',
       password: '',
-    })
+    });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target
@@ -31,12 +35,14 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
         try {
           if (action === 'login') {
             const { data } = await axios.post('/api/auth/login', form)
-            console.log(data);
             setCookie('token', data)
+            setToken(data);
+            router.push('/profile')
           } else if (action === 'register') { 
             const { data } = await axios.post('/api/auth/register', form)
             setCookie('token', data);
-            console.log(data);
+            setToken(data);
+            router.push('/profile')
           }
       } catch (error) {
           console.log(error);

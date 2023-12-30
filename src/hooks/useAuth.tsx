@@ -8,19 +8,19 @@ interface AuthProviderProps {
 }
 
 interface AuthContextProps {
-  token: string | null;
-  setToken (token: string | null): void;
+  token: string | false;
+  setToken (token: string | false): void;
 }
 
 const AuthContext = React.createContext({} as AuthContextProps);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | false>(false);
 
     useEffect(() => {
         const cookieToken = getCookie("token");
         if (cookieToken) {
-        setToken(cookieToken);
+            setToken(cookieToken);
         }
     }, []);
 
