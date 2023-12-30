@@ -21,7 +21,6 @@ export default function Profile() {
     deleteCookie('token');
     router.push('/auth')
   }
-
   
   return (
     <main>
