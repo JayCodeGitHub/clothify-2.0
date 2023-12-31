@@ -1,15 +1,17 @@
 "use client"
+
 import { useAuth } from "@/hooks/useAuth"
+import Link from "next/link";
 
 export default function NavBar() {
     const { token } = useAuth();
     return (
         <nav>
-            <a href="/">Home</a>
-            <a href="/cart">Cart</a>
-            <a href="/about">About</a>
-            <a href="/shop">Shop</a>
-            {token === false ? <a href="/auth">Auth</a> : <a href="/profile">Profile</a>}
+            <Link href="/">Home</Link>
+            <Link href="/cart">Cart</Link>
+            <Link href="/about">About</Link>
+            <Link href="/shop">Shop</Link>
+            {token === false ? <Link href="/auth">Auth</Link> : <Link href="/profile">Profile</Link>}
       </nav>
     )
 }

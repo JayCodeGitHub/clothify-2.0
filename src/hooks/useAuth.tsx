@@ -28,13 +28,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
 
-    useEffect(() => {
-        const cookieToken = getCookie("token");
+  useEffect(() => {
+    const cookieToken = getCookie("token");
       
-        if (cookieToken) {
-            checkToken(cookieToken);
-        }
-    }, []);
+    if (cookieToken) {
+      checkToken(cookieToken);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ token, setToken }}>
