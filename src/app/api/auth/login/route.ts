@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from '@prisma/client'
+import jwt from 'jsonwebtoken';
 
 
 const prisma = new PrismaClient();
@@ -20,6 +21,8 @@ export async function POST(req: any) {
     } else if  (existingUser.password !== password) {
         return NextResponse.json({message: 'Email or password is wrong'}, { status: 400 });
     }
+
+    const token = jwt.sign( {email}, process.env.JWT_SECRET || '', { expiresIn: '72h' });
   
-  return NextResponse.json("login", { status: 200 });
+  return NextResponse.json(token, { status: 200 });
 }
