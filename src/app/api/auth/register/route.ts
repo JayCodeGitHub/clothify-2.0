@@ -27,7 +27,7 @@ export async function POST(req: any) {
     },
   });
 
-  const token = jwt.sign( email, process.env.JWT_SECRET || '', { expiresIn: '72h' } );
+  const token = jwt.sign( {email}, process.env.JWT_SECRET || '', { expiresIn: '72h' });
 
   return NextResponse.json(token, { status: 200 });
 }
