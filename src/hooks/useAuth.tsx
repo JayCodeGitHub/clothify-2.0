@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useContext, useState, useEffect } from "react";
-import { getCookie } from "cookies-next";
+import { getCookie, deleteCookie } from "cookies-next";
 import axios from "axios";
 
 interface AuthProviderProps {
@@ -13,26 +13,26 @@ interface AuthContextProps {
   setToken (token: string | false): void;
 }
 
-const checkToken = async (token: string) => {
-  try {
-    const { data } = await axios.post('/api/auth/me', { token });
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 const AuthContext = React.createContext({} as AuthContextProps);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | false>(false);
 
+  const checkToken = async (token: string) => {
+    try {
+      const { data } = await axios.post('/api/auth/me', { token });
+      setToken(data);
+    } catch (error) {
+      setToken((error as any).response.data);
+      deleteCookie("token");
+    }
+  }
+
     useEffect(() => {
         const cookieToken = getCookie("token");
-        
+      
         if (cookieToken) {
             checkToken(cookieToken);
-            setToken(cookieToken);
         }
     }, []);
 

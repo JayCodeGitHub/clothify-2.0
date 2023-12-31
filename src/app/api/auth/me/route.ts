@@ -12,7 +12,7 @@ export async function POST(req: any) {
             email = decoded.email;
         })
     } catch (err) {
-        return NextResponse.json({ status: 403 });
+        return NextResponse.json(false, { status: 403 });
     }
     const token = jwt.sign( {email}, process.env.JWT_SECRET || '', { expiresIn: "72h" });
 
