@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from '@prisma/client'
+import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
 
@@ -19,11 +20,14 @@ export async function POST(req: any) {
   }
   
 
-  const newUser = await prisma.user.create({
+  prisma.user.create({
     data: {
         email: email,
         password: password,
     },
   });
-  return NextResponse.json('register', { status: 200 });
+
+  const token = jwt.sign( email, process.env.JWT_SECRET || '', { expiresIn: '72h' } );
+
+  return NextResponse.json(token, { status: 200 });
 }

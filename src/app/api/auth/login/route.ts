@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from '@prisma/client'
 
+
 const prisma = new PrismaClient();
 
 export async function POST(req: any) {
@@ -15,9 +16,9 @@ export async function POST(req: any) {
     const existingUser = await prisma.user.findUnique({ where: { email: email }});
 
     if (existingUser === null) {
-        return NextResponse.json({message: 'Email or passwod is wrong'}, { status: 400 });
+        return NextResponse.json({message: 'Email or password is wrong'}, { status: 400 });
     } else if  (existingUser.password !== password) {
-        return NextResponse.json({message: 'Email or passwod is wrong'}, { status: 400 });
+        return NextResponse.json({message: 'Email or password is wrong'}, { status: 400 });
     }
   
   return NextResponse.json("login", { status: 200 });
