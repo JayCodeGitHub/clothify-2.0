@@ -18,3 +18,16 @@ export async function POST(req: any) {
 
     return NextResponse.json(token, { status: 200 });
 }
+
+
+export async function GET(req: any) {
+    const data = await req.json();
+
+    let email: string = '';
+
+    jwt.verify(data.token, process.env.JWT_SECRET as Secret, (err: any, decoded: any) => {
+        email = decoded.email;
+    })
+
+    return NextResponse.json(email, { status: 200 });
+}
