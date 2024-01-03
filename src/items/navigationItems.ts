@@ -1,9 +1,9 @@
 export const NavigationItems = {
     list: [
-        { name: "Notes", href: "/notes" },
-        { name: "Todos", href: "/todo" },
-        { name: "Sites", href: "/sites" },
+        { name: "Home", href: "/" },
+        { name: "Cart", href: "/cart" },
         { name: "About", href: "/about" },
+        { name: "Shop", href: "/shop" },
     ],
     auth: {name: "Auth", href: "/auth"},
     profile: {name: "Profile", href: "/profile"},
