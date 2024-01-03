@@ -1,10 +1,10 @@
 export const NavigationItems = {
     list: [
-        { name: "Home", href: "/" },
-        { name: "Cart", href: "/cart" },
-        { name: "About", href: "/about" },
+        { name: "Clothify", href: "/" },
         { name: "Shop", href: "/shop" },
+        { name: "About Us", href: "/about" },
     ],
     auth: {name: "Auth", href: "/auth"},
     profile: {name: "Profile", href: "/profile"},
+    cart: { name: "Cart", href: "/cart" },
 };

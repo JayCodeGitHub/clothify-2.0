@@ -61,7 +61,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
 
     }
     return (
-       <form onSubmit={handleSubmit} ref={formRef} className='bg-red-500 p-2 mt-2 w-60 flex flex-col gap-2'>
+       <form onSubmit={handleSubmit} ref={formRef} className='bg-primary p-2 mt-2 w-60 flex flex-col gap-2'>
           <input type="email" name='email' onChange={handleChange}/>
           <input type="password" name='password' onChange={handleChange}/>
           <span className='h-14 w-full'>
