@@ -3,13 +3,16 @@
 import { useAuth } from "@/hooks/useAuth"
 import NavLink from "./navlink";
 import { NavigationItems } from "@/items/navigationItems";
+import MobileMenu from "./mobileMenu";
 
 export default function NavBar() {
     const { token } = useAuth();
     const { auth, profile, cart } = NavigationItems;
 
     return (
-        <nav className="w-full h-24 flex justify-between items-center px-44">
+        <nav className="w-full">
+            <MobileMenu/>
+            <div  className="w-full h-24 md:flex justify-between items-center 2xl:px-44 xl:px-28 px-4 hidden ">
             <ul className="flex justify-center items-center gap-6">
                 {NavigationItems.list.map(({href, name}) => (
                     <li key={name}>
@@ -62,6 +65,7 @@ export default function NavBar() {
                     </NavLink>
                 </li>
             </ul>  
+            </div>
       </nav>
     )
 }
