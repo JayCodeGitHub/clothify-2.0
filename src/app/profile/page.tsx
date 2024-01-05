@@ -14,6 +14,9 @@ export default function Profile() {
   const getProfile = async () => {
     const token = getCookie('token')
     const { data } = await axios.get('/api/auth/me', { headers: { Authorization: token } });
+    if (data === false) {
+      deleteCookie('token');
+    }
     setProfile(data);
   }
 
