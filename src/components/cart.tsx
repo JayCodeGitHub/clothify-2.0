@@ -1,4 +1,9 @@
-export default function Cart() {
+interface CartProps {
+    isCart: boolean;
+    setIsCart: (a: boolean) => void;
+  }
+
+export default function Cart({ isCart, setIsCart }: CartProps) {
     return (
         <div>
             <div/>
