@@ -1,10 +1,10 @@
+import Image from 'next/image';
 import { performRequest } from '../../../lib/datocms';
 
 const ITEMS_CONTENT_QUERY = `
   query Shop {
     allItems {
-        title
-      slug
+        slug
     }
   }`;
 
@@ -26,21 +26,26 @@ export default async function Page({ params }: { params: { slug: string} }) {
 
     const ITEM_CONTENT_QUERY = `
     query Shop {
-        allItems(filter: {slug: {eq: ${params.slug}}}) {
+        allItems(filter: {slug: {eq: "${params.slug}"}}) {
           title
+          thumbnail {
+            responsiveImage(imgixParams: {w: 800, h: 1200}) {
+              src
+              width
+              height
+            }
+          }
       }
     }`;
 
-    const { data: { allItems } } = await performRequest({ query: ITEM_CONTENT_QUERY });
-
-    const items = allItems[0]
-
-    const { title } = items
+      const { data: { allItems } } = await performRequest({ query: ITEM_CONTENT_QUERY });
+      const items = allItems[0];
+      const {title, thumbnail} = items;
 
     return (
         <div>
             <h1>{title}</h1>
-            <h2>{`slug: ${params.slug}`}</h2>
+            <Image src={thumbnail.responsiveImage.src} width={thumbnail.responsiveImage.width} height={thumbnail.responsiveImage.height} alt={title}/>
         </div>
     )
   }

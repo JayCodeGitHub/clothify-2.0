@@ -7,12 +7,6 @@ const PAGE_CONTENT_QUERY = `
       id
       slug
       title
-      _status
-      _firstPublishedAt
-    }
-  
-    _allItemsMeta {
-      count
     }
   }`;
 
@@ -22,10 +16,14 @@ export default async function Shop() {
         <main>
            <section>
             <h1>Shop</h1>
+            <ul className='flex flex-col'>
             {allItems.map(({ id, slug, title}: { id: string, slug: string, title: string}) => (
-                    <NavLink key={id} href={`/items/${slug}`}>{title}</NavLink>
-                )
+                <li key={id}>
+                  <NavLink href={`/items/${slug}`}>{title}</NavLink>
+                </li>
+              )
             )}
+              </ul>
             </section>
         </main>
     )
