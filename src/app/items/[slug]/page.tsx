@@ -1,4 +1,3 @@
-import { all } from 'axios';
 import { performRequest } from '../../../lib/datocms';
 
 const ITEMS_CONTENT_QUERY = `
