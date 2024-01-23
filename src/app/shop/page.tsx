@@ -1,9 +1,11 @@
 import { performRequest } from '../../lib/datocms';
+import NavLink from '@/components/navlink';
 
 const PAGE_CONTENT_QUERY = `
   query Shop {
     allItems {
       id
+      slug
       title
       _status
       _firstPublishedAt
@@ -20,8 +22,8 @@ export default async function Shop() {
         <main>
            <section>
             <h1>Shop</h1>
-            {allItems.map(({ id, title}: {title: string, id: string}) => (
-                    <h2 key={id}>{title}</h2>
+            {allItems.map(({ id, slug, title}: { id: string, slug: string, title: string}) => (
+                    <NavLink key={id} href={`/items/${slug}`}>{title}</NavLink>
                 )
             )}
             </section>
