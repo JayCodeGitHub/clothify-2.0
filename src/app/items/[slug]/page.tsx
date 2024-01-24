@@ -53,7 +53,15 @@ export default async function Page({ params }: { params: { slug: string} }) {
 
       const { data: { allItems } } = await performRequest({ query: ITEM_CONTENT_QUERY });
       const items = allItems[0];
-      const {title, description, price, sizes, thumbnailAlt, thumbnail, gallery} = items;
+      const {
+        title,
+        description,
+        price,
+        sizes,
+        thumbnailAlt,
+        thumbnail,
+        gallery
+      } = items;
 
     return (
         <div>
@@ -61,9 +69,28 @@ export default async function Page({ params }: { params: { slug: string} }) {
             <h2>{description}</h2>
             <h3>{price}</h3>
             <h4>{sizes}</h4>
-            <Image src={thumbnail.responsiveImage.src} width={thumbnail.responsiveImage.width} height={thumbnail.responsiveImage.height} alt={thumbnailAlt}/>
-            {gallery.map(({id, responsiveImage}: {id: string, responsiveImage: {src: string, width: number, height: number}}) => (
-                <Image key={id} src={responsiveImage.src} width={responsiveImage.width} height={responsiveImage.height} alt={thumbnailAlt} className='w-52'/>
+            <Image 
+              src={thumbnail.responsiveImage.src}
+              width={thumbnail.responsiveImage.width}
+              height={thumbnail.responsiveImage.height}
+              alt={thumbnailAlt}
+            />
+            {gallery.map(({id, responsiveImage}:{
+              id: string,
+              responsiveImage: {
+                src: string,
+                width: number,
+                height: number
+              }
+            }) => (
+                <Image 
+                  key={id} 
+                  src={responsiveImage.src}
+                  width={responsiveImage.width}
+                  height={responsiveImage.height}
+                  alt={thumbnailAlt}
+                  className='w-52'
+                />
             )
             )}
         </div>

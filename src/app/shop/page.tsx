@@ -26,8 +26,8 @@ export default async function Shop() {
            <section>
             <h1>Shop</h1>
             <ul className='flex flex-col'>
-            {allItems.map(({ id, slug, title, price, thumbnail, thumbnailAlt}:
-              { id: string,
+            {allItems.map(({ id, slug, title, price, thumbnail, thumbnailAlt}: {
+                id: string,
                 slug: string,
                 title: string,
                 price: number,
