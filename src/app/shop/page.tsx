@@ -41,7 +41,7 @@ export default async function Shop() {
               }) => (
                 <li key={id} className='place-self-center'>
                   <NavLink href={`/items/${slug}`} key={id}>
-                    <div className='flex flex-col justify-center items-center gap-3 p-5 rounded-sm lg:w-72 bg-white'>
+                    <div className='flex flex-col justify-center items-center gap-3 p-5 rounded-lg lg:w-72 bg-white'>
                     <Image
                       src={thumbnail.responsiveImage.src}
                       width={thumbnail.responsiveImage.width}
