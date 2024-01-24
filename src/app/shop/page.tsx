@@ -24,7 +24,7 @@ export default async function Shop() {
     return (
         <main>
            <section className='my-14'>
-            <ul className='grid 2xl:px-44 xl:px-28 px-4 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-y-20'>
+            <ul className='grid 2xl:px-44 xl:px-28 px-4 2xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 lg:gap-y-20 gap-y-14 gap-x-2 lg:gap-x-0'>
             {allItems.map(({ id, slug, title, price, thumbnail, thumbnailAlt}: {
                 id: string,
                 slug: string,
@@ -39,17 +39,23 @@ export default async function Shop() {
                 }, 
                 thumbnailAlt: string
               }) => (
-                <li key={id} className='w-64 justify-self-center flex flex-col justify-start items-center gap-4'>
+                <li key={id} className='place-self-center'>
+                  <NavLink href={`/items/${slug}`} key={id}>
+                    <div className='flex flex-col justify-center items-center gap-3 p-5 rounded-sm lg:w-72 bg-white'>
                     <Image
                       src={thumbnail.responsiveImage.src}
                       width={thumbnail.responsiveImage.width}
                       height={thumbnail.responsiveImage.height}
                       
                       alt={thumbnailAlt}
-                      className='h-64 w-auto'
+                      className=' self-center object-cover lg:h-80 h-64 w-auto rounded-lg'
                       />
-                    <NavLink href={`/items/${slug}`}>{title}</NavLink>
-                    <p>{price}$</p>
+                      <span className='h-24 lg:h-14 flex justify-start items-center w-full'>
+                        <h2 className='text-base lg:text-lg'>{title}</h2>
+                      </span>
+                    <p className='self-start text-base lg:text-lg'>{price}$</p>
+                      </div>
+                  </NavLink>
                 </li>
               )
             )}
