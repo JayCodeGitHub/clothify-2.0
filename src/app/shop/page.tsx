@@ -23,9 +23,8 @@ export default async function Shop() {
     const { data: { allItems } } = await performRequest({ query: PAGE_CONTENT_QUERY });
     return (
         <main>
-           <section>
-            <h1>Shop</h1>
-            <ul className='flex flex-col'>
+           <section className='my-14'>
+            <ul className='grid 2xl:px-44 xl:px-28 px-4 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-y-20'>
             {allItems.map(({ id, slug, title, price, thumbnail, thumbnailAlt}: {
                 id: string,
                 slug: string,
@@ -40,16 +39,17 @@ export default async function Shop() {
                 }, 
                 thumbnailAlt: string
               }) => (
-                <li key={id}>
-                  <Image
-                    src={thumbnail.responsiveImage.src}
-                    width={thumbnail.responsiveImage.width}
-                    height={thumbnail.responsiveImage.height}
-                    alt={thumbnailAlt}
-                    className=' w-24'
-                  />
-                  <NavLink href={`/items/${slug}`}>{title}</NavLink>
-                  <p>{price}$</p>
+                <li key={id} className='w-64 justify-self-center flex flex-col justify-start items-center gap-4'>
+                    <Image
+                      src={thumbnail.responsiveImage.src}
+                      width={thumbnail.responsiveImage.width}
+                      height={thumbnail.responsiveImage.height}
+                      
+                      alt={thumbnailAlt}
+                      className='h-64 w-auto'
+                      />
+                    <NavLink href={`/items/${slug}`}>{title}</NavLink>
+                    <p>{price}$</p>
                 </li>
               )
             )}
