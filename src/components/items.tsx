@@ -21,7 +21,7 @@ interface ItemsProps {
 export default async function Items({allItems}: ItemsProps) {
     return (
            <section className='my-14'>
-            <ul className='grid 2xl:px-44 xl:px-28 px-4 2xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 lg:gap-y-20 gap-y-14 gap-x-4 lg:gap-x-0'>
+            <ul className='grid 2xl:px-44 xl:px-28 px-4 2xl:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-y-20 gap-y-14 gap-x-4 lg:gap-x-0'>
             {allItems.map(({ id, slug, title, price, thumbnail, thumbnailAlt}: {
                 id: string,
                 slug: string,
