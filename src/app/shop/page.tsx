@@ -24,7 +24,7 @@ export default async function Shop() {
     return (
         <main>
            <section className='my-14'>
-            <ul className='grid 2xl:px-44 xl:px-28 px-4 2xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 lg:gap-y-20 gap-y-14 gap-x-2 lg:gap-x-0'>
+            <ul className='grid 2xl:px-44 xl:px-28 px-4 2xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 lg:gap-y-20 gap-y-14 gap-x-4 lg:gap-x-0'>
             {allItems.map(({ id, slug, title, price, thumbnail, thumbnailAlt}: {
                 id: string,
                 slug: string,
@@ -39,7 +39,7 @@ export default async function Shop() {
                 }, 
                 thumbnailAlt: string
               }) => (
-                <li key={id} className='place-self-center'>
+                <li key={id} className='place-self-center w-full lg:w-auto'>
                   <NavLink href={`/items/${slug}`} key={id}>
                     <div className='flex flex-col justify-center items-center gap-3 p-5 rounded-lg lg:w-72 bg-white'>
                     <Image
