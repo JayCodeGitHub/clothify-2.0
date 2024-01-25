@@ -19,7 +19,7 @@ export default async function Item({slug, thumbnail, thumbnailAlt, title, price}
     return (
       <li className='place-self-center w-full lg:w-auto'>
         <NavLink href={`/items/${slug}`}>
-          <div className='flex flex-col justify-center items-center gap-3 p-5 rounded-lg lg:w-72  bg-white'>
+          <div className='flex flex-col justify-center items-center gap-3 p-5 rounded-lg lg:w-72  bg-white hover:shadow-3xl transition-all'>
             <Image
               src={thumbnail.responsiveImage.src}
               width={thumbnail.responsiveImage.width}
