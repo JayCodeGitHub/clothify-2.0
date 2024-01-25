@@ -19,7 +19,8 @@ export default function NavBar() {
 
     return (
         <nav className="w-full">
-            <MobileMenu/>
+            <MobileMenu toggleCart={toggleCart}/>
+            <Cart isCart={isCart} toggleCart={toggleCart}/>
             <div  className="w-full h-24 md:flex justify-between items-center 2xl:px-44 xl:px-28 px-4 hidden ">
                 <ul className="flex justify-center items-center gap-6">
                     {NavigationItems.list.map(({href, name}) => (
@@ -50,7 +51,7 @@ export default function NavBar() {
                             </span>
                         </NavLink>
                     </li>
-                    <Cart isCart={isCart} toggleCart={toggleCart}/>
+
                     <li onClick={toggleCart} className="cursor-pointer hover:text-primary transition-all">
                             <span className="flex justify-center items-center flex-col">
                             <svg 

@@ -5,7 +5,7 @@ import NavLink from "./navlink";
 import Link from "next/link";
 import { NavigationItems } from "@/items/navigationItems";
 
-export default function MobileMenu() {
+export default function MobileMenu({ toggleCart }: { toggleCart: () => void }) {
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => setIsOpen(currentState => !currentState);
     const { cart } = NavigationItems;
@@ -15,8 +15,7 @@ export default function MobileMenu() {
         <div className="flex md:hidden justify-between items-center px-4 h-20 ">
             <Link href={NavigationItems.list[0].href} className="text-xl">{NavigationItems.list[0].name}</Link>  
             <span className="flex justify-center items-center gap-8">
-            <NavLink href={cart.href}>
-                <span className="flex justify-center items-center flex-col text-sm">
+                <span onClick={toggleCart} className="flex justify-center items-center flex-col text-sm cursor-pointer">
                     <svg 
                         xmlns="http://www.w3.org/2000/svg" 
                         width="20" 
@@ -35,7 +34,6 @@ export default function MobileMenu() {
 
                         {cart.name}
                 </span>
-            </NavLink>
             <span
                 className="flex flex-col justify-between w-6 h-4 cursor-pointer md:hidden z-20 relative"
                 onClick={toggleMenu}
