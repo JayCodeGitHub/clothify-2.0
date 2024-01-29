@@ -1,5 +1,29 @@
-export default function Button() {
+export default function Button({
+        children
+    }: {
+        children: React.ReactNode
+    }) {
     return (
-        <h1>Button</h1>
+        <button 
+            className={`
+                w-4/5
+                py-4
+                font-semibold
+                text-sm
+                text-white
+                cursor-pointer
+                rounded-md
+                bg-primary
+                border-solid
+                border-3
+                border-transparent
+                transition-all 
+                hover:bg-transparent
+                hover:text-gray-900
+                hover:border-transparent
+            `}
+        >
+            {children}
+        </button>
     )
 }

@@ -1,3 +1,5 @@
+import Button from "./button";
+
 interface CartProps {
     isCart: boolean;
     toggleCart: () => void;
@@ -25,7 +27,7 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                 <div></div>
                 <div></div>
                 <p>Subtotal:</p>
-                <button>Purchase</button>
+                <Button>Purchase</Button>
             </section>
         </div>
     )
