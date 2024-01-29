@@ -3,9 +3,12 @@
 import { useState } from "react";
 import Button from "./button";
 import Quantity from "./quantity";
+import { useCart } from "../hooks/useCart";
 
-export default function AddToCart({ sizes, items }: { sizes: string, items: any}) {
+export default function AddToCart({ sizes, item }: { sizes: string, item: any}) {
     const [count, setCount] = useState(1);
+    const { addItem } = useCart();
+    
 
     const updateCount = (value: number) => {
         if (value === 1) {
@@ -16,9 +19,9 @@ export default function AddToCart({ sizes, items }: { sizes: string, items: any}
     }
 
     const handleAddToCart = () => {
-        console.log('add to cart');
-        console.log(count);
-        console.log(items.title);
+        if (count > 0) {
+            () => addItem(item, count);
+        }
         setCount(1);
     }
 

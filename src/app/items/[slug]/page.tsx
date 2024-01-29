@@ -1,7 +1,6 @@
 import AddToCart from '@/components/addToCart';
 import Image from 'next/image';
 import { performRequest } from '../../../lib/datocms';
-import Button from '@/components/button';
 
 const ITEMS_CONTENT_QUERY = `
   query Shop {
@@ -29,6 +28,7 @@ export default async function Page({ params }: { params: { slug: string} }) {
     const ITEM_CONTENT_QUERY = `
     query Shop {
         allItems(filter: {slug: {eq: "${params.slug}"}}) {
+          id
           title
   				description
   				price
@@ -81,7 +81,7 @@ export default async function Page({ params }: { params: { slug: string} }) {
               <h1 className='font-bold text-2xl pl-2'>{title}</h1>
               <h2>{description}</h2>
               <h3 className='font-bold text-xl pl-2'>{price}$</h3>
-              <AddToCart sizes={sizes} items={items}/>
+              <AddToCart sizes={sizes} item={items}/>
             </div>
             {gallery.map(({id, responsiveImage}:{
               id: string,
