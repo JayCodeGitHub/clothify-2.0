@@ -7,7 +7,7 @@ import { useCart } from "@/hooks/useCart";
 interface CartProps {
     isCart: boolean;
     toggleCart: () => void;
-  }
+}
 
 export default function Cart({ isCart, toggleCart }: CartProps) {
     const { cart } = useCart();
@@ -30,8 +30,14 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                 }}
             >
                 <div></div>
-                {cart.map(({id, title}) => (
-                    <CartItem key={id} title={title}/>
+                {cart.map(({id, title, price, quantity, thumbnail, thumbnailAlt}) => (
+                    <CartItem 
+                        key={id}
+                        title={title}
+                        price={price}
+                        quantity={quantity}
+                        thumbnail={thumbnail}
+                        thumbnailAlt={thumbnailAlt}/>
                 ))}
                 <p>Subtotal:</p>
                 <Button>Purchase</Button>

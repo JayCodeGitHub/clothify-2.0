@@ -11,7 +11,13 @@ interface CartContextProps {
     id: number;
     title: string;
     slug: string;
-    thumbnail: string;
+    thumbnail: {
+      responsiveImage: {
+        src: string,
+        width: number,
+        height: number
+      }
+    }
     thumbnailAlt: string;
     price: number;
     size: string;
@@ -25,7 +31,13 @@ interface CartContextProps {
       id: number;
       title: string;
       slug: string;
-      thumbnail: string;
+      thumbnail: {
+        responsiveImage: {
+          src: string,
+          width: number,
+          height: number
+        }
+      }
       thumbnailAlt: string;
       price: number;
       size: string;
@@ -85,7 +97,13 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       id: number;
       title: string;
       slug: string;
-      thumbnail: string;
+      thumbnail: {
+        responsiveImage: {
+          src: string,
+          width: number,
+          height: number
+        }
+      }
       thumbnailAlt: string;
       price: number;
       size: string;
