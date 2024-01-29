@@ -1,3 +1,4 @@
+import Quantity from '@/components/quantity';
 import Image from 'next/image';
 import { performRequest } from '../../../lib/datocms';
 import Button from '@/components/button';
@@ -52,6 +53,7 @@ export default async function Page({ params }: { params: { slug: string} }) {
       }
     }`;
 
+
       const { data: { allItems } } = await performRequest({ query: ITEM_CONTENT_QUERY });
       const items = allItems[0];
       const {
@@ -75,11 +77,12 @@ export default async function Page({ params }: { params: { slug: string} }) {
               className=' h-full w-auto rounded-lg'
             />
               </span>
-            <div className='flex flex-col justify-around gap-8 py-8 md:w-2/5 w-full'>
+            <div className='flex flex-col justify-around gap-8 py-8 md:w-2/6 w-full'>
               <h1 className='font-bold text-2xl pl-2'>{title}</h1>
               <h2>{description}</h2>
               <h3 className='font-bold text-xl pl-2'>{price}$</h3>
               <h4>{sizes}</h4>
+             <Quantity />
               <Button>Add to Cart</Button>
             </div>
             {gallery.map(({id, responsiveImage}:{
