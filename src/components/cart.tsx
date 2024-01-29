@@ -1,4 +1,8 @@
+"use client"
+
 import Button from "./button";
+import CartItem from "./cartItem";
+import { useCart } from "@/hooks/useCart";
 
 interface CartProps {
     isCart: boolean;
@@ -6,6 +10,7 @@ interface CartProps {
   }
 
 export default function Cart({ isCart, toggleCart }: CartProps) {
+    const { cart } = useCart();
     return (
         <div className="fixed z-50">
             <div 
@@ -25,7 +30,9 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                 }}
             >
                 <div></div>
-                <div></div>
+                {cart.map(({id, title}) => (
+                    <CartItem key={id} title={title}/>
+                ))}
                 <p>Subtotal:</p>
                 <Button>Purchase</Button>
             </section>

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useContext, useState } from "react";
 
 interface CartProviderProps {
@@ -103,6 +105,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     } else {
       quantityIncrementation(newItem.id, quantity);
     }
+    
   }
 
   function removeItem(id: number) {

@@ -20,7 +20,7 @@ export default function AddToCart({ sizes, item }: { sizes: string, item: any}) 
 
     const handleAddToCart = () => {
         if (count > 0) {
-            () => addItem(item, count);
+            addItem(item, count);
         }
         setCount(1);
     }

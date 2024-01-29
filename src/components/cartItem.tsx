@@ -1,5 +1,5 @@
-export default function CartItem() {
+export default function CartItem({title}: {title: string}) {
     return (
-        <h1>CartItem</h1>
+        <h1>{title}</h1>
     )
 }
