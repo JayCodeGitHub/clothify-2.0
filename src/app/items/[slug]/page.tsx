@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { performRequest } from '../../../lib/datocms';
+import Button from '@/components/button';
 
 const ITEMS_CONTENT_QUERY = `
   query Shop {
@@ -79,6 +80,7 @@ export default async function Page({ params }: { params: { slug: string} }) {
               <h2>{description}</h2>
               <h3 className='font-bold text-xl pl-2'>{price}$</h3>
               <h4>{sizes}</h4>
+              <Button>Add to Cart</Button>
             </div>
             {gallery.map(({id, responsiveImage}:{
               id: string,

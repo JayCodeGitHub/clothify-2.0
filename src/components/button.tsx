@@ -15,12 +15,13 @@ export default function Button({
                 rounded-md
                 bg-primary
                 border-solid
-                border-3
+                border-2
                 border-transparent
                 transition-all 
                 hover:bg-transparent
                 hover:text-gray-900
-                hover:border-transparent
+                hover:border-primary
+                
             `}
         >
             {children}
