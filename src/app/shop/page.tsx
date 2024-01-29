@@ -8,6 +8,7 @@ const PAGE_CONTENT_QUERY = `
       slug
       title
       price
+      thumbnailAlt
       thumbnail {
         responsiveImage(imgixParams: {w: 800, h: 1200}) {
           src

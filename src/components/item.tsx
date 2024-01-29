@@ -16,6 +16,7 @@ interface ItemProps {
 }
 
 export default async function Item({slug, thumbnail, thumbnailAlt, title, price}: ItemProps) {
+  console.log(thumbnailAlt)
     return (
       <li className='place-self-center w-full lg:w-auto'>
         <NavLink href={`/items/${slug}`}>
