@@ -1,10 +1,13 @@
 export default function Button({
-        children
+        children,
+        onClick
     }: {
         children: React.ReactNode
+        onClick?: () => void
     }) {
     return (
         <button 
+            onClick={onClick}
             className={`
                 w-4/5
                 py-4

@@ -14,11 +14,19 @@ export default function AddToCart({ sizes, items }: { sizes: string, items: any}
             count > 1 ? setCount(count - 1) : null;
         }
     }
-   return (
-    <>
-        <h4>{sizes}</h4>
-        <Quantity count={count} updateCount={updateCount}/>
-        <Button>Add to Cart</Button>
-    </>
+
+    const handleAddToCart = () => {
+        console.log('add to cart');
+        console.log(count);
+        console.log(items.title);
+        setCount(1);
+    }
+
+    return (
+        <>
+            <h4>{sizes}</h4>
+            <Quantity count={count} updateCount={updateCount}/>
+            <Button onClick={handleAddToCart}>Add to Cart</Button>
+        </>
    )
 }
