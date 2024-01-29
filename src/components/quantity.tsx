@@ -1,16 +1,13 @@
 "use client";
 
-import { useState } from "react";
-
-export default function Quantity() {
-    const [count, setCount] = useState(1);
+export default function Quantity({count, updateCount}: {count: number, updateCount: (value: number) => void}) {
     return (
     <span className=" flex items-center gap-1 mt-auto">
         Quantity:
         <button
             className="flex justify-center items-center w-8 h-8 cursor-pointer border-0 rounded-full bg-dark"
             aria-label="button with a minus icon to reduce the amount of product"
-            onClick={() => (count > 1 ? setCount(count - 1) : null)}
+            onClick={() => (updateCount(-1))}
         >
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +27,7 @@ export default function Quantity() {
         <button
             className="flex justify-center items-center w-8 h-8 cursor-pointer border-0 rounded-full bg-dark"
             aria-label="button with a plus icon to increase the amount of product"
-            onClick={() => setCount(count + 1)}
+            onClick={() => updateCount(1)}
         >
             <svg
                 xmlns="http://www.w3.org/2000/svg"

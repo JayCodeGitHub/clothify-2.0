@@ -1,4 +1,4 @@
-import Quantity from '@/components/quantity';
+import AddToCart from '@/components/addToCart';
 import Image from 'next/image';
 import { performRequest } from '../../../lib/datocms';
 import Button from '@/components/button';
@@ -81,9 +81,7 @@ export default async function Page({ params }: { params: { slug: string} }) {
               <h1 className='font-bold text-2xl pl-2'>{title}</h1>
               <h2>{description}</h2>
               <h3 className='font-bold text-xl pl-2'>{price}$</h3>
-              <h4>{sizes}</h4>
-             <Quantity />
-              <Button>Add to Cart</Button>
+              <AddToCart sizes={sizes} items={items}/>
             </div>
             {gallery.map(({id, responsiveImage}:{
               id: string,
