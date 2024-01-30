@@ -58,12 +58,12 @@ const defaultState: any[] | (() => any[]) = [];
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState(defaultState);
 
-  function quantityIncrementation(id: string, quantity: number) {
+  function quantityIncrementation(id: string, step: number) {
     const newCart = cart.map((item) => {
       if (item.id === id) {
         return {
           ...item,
-          quantity: item.quantity + quantity,
+          quantity: item.quantity + step,
         };
       }
       return item;
@@ -71,7 +71,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart(newCart);
   }
 
-  function quantityDecrementation(id: string, quantity: number) {
+  function quantityDecrementation(id: string, step: number) {
     let remove = false;
     const newCart = cart.map((item) => {
       if (item.id === id) {
@@ -80,7 +80,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         } else {
           return {
             ...item,
-            quantity: item.quantity - quantity,
+            quantity: item.quantity - step,
           };
         }
       }
