@@ -61,13 +61,21 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
 
     }
     return (
-       <form onSubmit={handleSubmit} ref={formRef} className='bg-primary p-2 mt-2 w-60 flex flex-col gap-2'>
-          <input type="email" name='email' onChange={handleChange}/>
-          <input type="password" name='password' onChange={handleChange}/>
-          <span className='h-14 w-full'>
+       <form onSubmit={handleSubmit} ref={formRef} className='p-2 mt-2 w-80 flex flex-col items-center gap-6 rounded-md py-10 px-6 bg-white'>
+          <span className='flex flex-col gap-2 w-full'>
+            <label className='text-sm self-start'>Email address</label>
+            <input type="email" name='email' placeholder='Your Email Address' onChange={handleChange} className='p-2 w-full rounded-md text-sm bg-secondary'/>
+          </span>
+          <span className='flex flex-col gap-2 w-full'>
+          <label className='text-sm self-start'>Password</label>
+          <input type="password" name='password' placeholder='password' onChange={handleChange} className='p-2 w-full rounded-md text-sm bg-secondary'/>
+          </span>
+          <span className='h-14 w-full text-sm text-red-500'>
             <p>{error}</p>
           </span>
-          {action === 'login' ? <button type="submit">Login</button> : <button type="submit">Register</button>}
+          <button type="submit" className=' py-2 px-6 bg-primary text-white rounded-lg'>
+            {action === 'login' ? "Login" : "Register"}
+          </button>
        </form>
     )
   }
