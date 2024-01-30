@@ -6,29 +6,29 @@ import Quantity from "./quantity";
 import { useCart } from "../hooks/useCart";
 
 export default function AddToCart({ sizes, item }: { sizes: string, item: any}) {
-    const [count, setCount] = useState(1);
+    const [quantity, setQuantity] = useState(1);
     const { addItem } = useCart();
     
 
     const updateCount = (value: number) => {
         if (value === 1) {
-            setCount(count + 1);
+            setQuantity(quantity + 1);
         } else if (value === -1) {
-            count > 1 ? setCount(count - 1) : null;
+            quantity > 1 ? setQuantity(quantity - 1) : null;
         }
     }
 
     const handleAddToCart = () => {
-        if (count > 0) {
-            addItem(item, count);
+        if (quantity > 0) {
+            addItem(item, quantity);
         }
-        setCount(1);
+        setQuantity(1);
     }
 
     return (
         <>
             <h4>{sizes}</h4>
-            <Quantity count={count} updateCount={updateCount}/>
+            <Quantity quantity={quantity} updateCount={updateCount}/>
             <Button onClick={handleAddToCart}>Add to Cart</Button>
         </>
    )

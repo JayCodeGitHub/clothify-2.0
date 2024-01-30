@@ -23,7 +23,7 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                 }}
             />
             <section 
-                className="flex fixed flex-col items-center gap-8 top-0 right-0 py-8 px-0 w-[80%] md:w-[35%] h-screen overflow-auto z-40 bg-white"
+                className="flex fixed flex-col items-center gap-8 top-0 right-0 py-8 px-0 w-[80%] md:w-[70%] lg:w-[45%] xl:w-[35%]   h-screen overflow-auto z-40 bg-white"
                 style={{ 
                     transform: `${ isCart ? 'translateX(0)' : 'translateX(+100%)'}`,
                     transition: 'transform .3s .1s ease-in-out',
@@ -33,6 +33,7 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                 {cart.map(({id, title, price, quantity, thumbnail, thumbnailAlt}) => (
                     <CartItem 
                         key={id}
+                        id={id}
                         title={title}
                         price={price}
                         quantity={quantity}

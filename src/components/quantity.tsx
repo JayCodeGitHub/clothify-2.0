@@ -1,6 +1,6 @@
 "use client";
 
-export default function Quantity({count, updateCount}: {count: number, updateCount: (value: number) => void}) {
+export default function Quantity({quantity, updateCount}: {quantity: number, updateCount: (value: number) => void}) {
     return (
     <span className=" flex items-center gap-1 mt-auto">
         Quantity:
@@ -23,7 +23,7 @@ export default function Quantity({count, updateCount}: {count: number, updateCou
             <line x1="5" y1="12" x2="19" y2="12"></line>
         </svg>
         </button>
-        <h3 className='w-6 items-center text-center'>{count}</h3>
+        <h3 className='w-6 items-center text-center'>{quantity}</h3>
         <button
             className="flex justify-center items-center w-8 h-8 cursor-pointer border-0 rounded-full bg-dark"
             aria-label="button with a plus icon to increase the amount of product"

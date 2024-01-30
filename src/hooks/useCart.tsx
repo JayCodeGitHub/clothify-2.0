@@ -8,7 +8,7 @@ interface CartProviderProps {
 
 interface CartContextProps {
   cart: {
-    id: number;
+    id: string;
     title: string;
     slug: string;
     thumbnail: {
@@ -24,11 +24,11 @@ interface CartContextProps {
     description: string;
     quantity: number;
   }[];
-  quantityIncrementation: (id: number, quantity: number) => void;
-  quantityDecrementation: (id: number, quantity: number) => void;
+  quantityIncrementation: (id: string, quantity: number) => void;
+  quantityDecrementation: (id: string, quantity: number) => void;
   addItem: (
     newItem: {
-      id: number;
+      id: string;
       title: string;
       slug: string;
       thumbnail: {
@@ -46,7 +46,7 @@ interface CartContextProps {
     },
     quantity: number
   ) => void;
-  removeItem: (id: number) => void;
+  removeItem: (id: string) => void;
 }
 
 const CartContext = React.createContext<CartContextProps>(
@@ -58,7 +58,7 @@ const defaultState: any[] | (() => any[]) = [];
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState(defaultState);
 
-  function quantityIncrementation(id: number, quantity: number) {
+  function quantityIncrementation(id: string, quantity: number) {
     const newCart = cart.map((item) => {
       if (item.id === id) {
         return {
@@ -71,7 +71,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart(newCart);
   }
 
-  function quantityDecrementation(id: number, quantity: number) {
+  function quantityDecrementation(id: string, quantity: number) {
     let remove = false;
     const newCart = cart.map((item) => {
       if (item.id === id) {
@@ -94,7 +94,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
   function addItem(
     newItem: {
-      id: number;
+      id: string;
       title: string;
       slug: string;
       thumbnail: {
@@ -126,7 +126,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     
   }
 
-  function removeItem(id: number) {
+  function removeItem(id: string) {
     setCart(cart.filter((item) => item.id !== id));
   }
 
