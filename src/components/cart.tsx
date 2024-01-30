@@ -11,6 +11,11 @@ interface CartProps {
 
 export default function Cart({ isCart, toggleCart }: CartProps) {
     const { cart } = useCart();
+    function subtotal() {
+        let current = 0;
+        cart.map((item) => (current += item.price * item.quantity));
+        return current;
+      }
     return (
         <div className="fixed z-50">
             <div 
@@ -40,7 +45,7 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                         thumbnail={thumbnail}
                         thumbnailAlt={thumbnailAlt}/>
                 ))}
-                <p>Subtotal:</p>
+                <p className=" self-start pt-4 pr-0 pb-0 pl-[10%]">Subtotal: {subtotal()}$</p>
                 <Button>Purchase</Button>
             </section>
         </div>
