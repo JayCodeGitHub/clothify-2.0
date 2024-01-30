@@ -14,8 +14,13 @@ export default function NavLink({
         <Link 
           href={href}
           className={
-            `md:text-base text-2xl hover:text-primary transition-all ${
-              href.length > 1 ? currentRoute.slice(0, href.length) === href ? " text-primary" : "" : currentRoute === href ? " text-primary" : "" 
-            }`}>{children}</Link>
+            `md:text-base text-2xl hover:text-primary transition-all 
+              ${
+                href.length > 1 ? 
+                currentRoute.slice(0, href.length) === href ? " text-primary" : "" :
+                currentRoute === href ? " text-primary" : "" 
+              }
+            `
+          }>{children}</Link>
     )
 }
