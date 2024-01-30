@@ -1,17 +1,10 @@
 import Form from '@/components/form'
-import Link from 'next/link'
+import AuthNavBar from '@/components/authNavbar'
 
 export default function Register() {  
   return (
     <div className='flex flex-col'>
-         <span className='flex'>
-            <Link href='/auth/login'>
-                Login
-            </Link>
-            <Link href='/auth/register'>
-                Register
-            </Link>
-        </span>
+         <AuthNavBar/>
         <Form action="register"/>
     </div>
   )
