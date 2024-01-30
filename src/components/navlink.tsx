@@ -11,6 +11,17 @@ export default function NavLink({
   }) {
     const currentRoute = usePathname();
     return (
-        <Link href={href} className={` md:text-base text-2xl hover:text-primary transition-all ${currentRoute == href ? " text-primary" : ""}`}>{children}</Link>
+        <Link 
+          href={href}
+          className={
+            `md:text-base text-2xl hover:text-primary transition-all 
+              ${ currentRoute.length > 1 ? 
+                href.substring(0, currentRoute.length) === currentRoute ? " text-primary" : "" : 
+                currentRoute === href ? " text-primary" : ""
+              }
+            `}
+        >
+          {children}
+        </Link>
     )
 }
