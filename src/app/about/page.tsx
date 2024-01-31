@@ -1,4 +1,4 @@
-import { AboutItems } from "../items/aboutItems";
+import { AboutItems } from "../../items/aboutItems";
 
 export default function About() {
     const { title, description } = AboutItems;
