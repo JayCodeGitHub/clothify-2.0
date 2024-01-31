@@ -3,6 +3,7 @@
 import Button from "./button";
 import CartItem from "./cartItem";
 import { useCart } from "@/hooks/useCart";
+import Link from "next/link";
 
 interface CartProps {
     isCart: boolean;
@@ -46,7 +47,9 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                         thumbnailAlt={thumbnailAlt}/>
                 ))}
                 <p className=" self-start pt-4 pr-0 pb-0 pl-[10%]">Subtotal: {subtotal()}$</p>
-                <Button>Purchase</Button>
+                <Link href="/purchase" onClick={toggleCart} className="w-full ml-[20%]">
+                    <Button>Purchase</Button>
+                </Link>
             </section>
         </div>
     )
