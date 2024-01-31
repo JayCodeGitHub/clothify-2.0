@@ -3,6 +3,7 @@
 import { useCart } from "@/hooks/useCart"
 import CartItem from "@/components/cartItem";
 import Button from "@/components/button";
+import PaymentForm from "@/components/paymentForm";
 
 export default function Purchase() {
     const { cart } = useCart();
@@ -30,8 +31,9 @@ export default function Purchase() {
                 </div>
             </section>
             <section className='xl:w-2/5 w-full h-full '>
+                <PaymentForm />
                 <p className="pt-4 my-4 font-medium">Subtotal: {subtotal()}$</p>
-                <Button>Order</Button>
+                <Button>Order Now</Button>
             </section>
         </main>
     )
