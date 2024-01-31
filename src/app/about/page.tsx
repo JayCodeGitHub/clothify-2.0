@@ -4,7 +4,7 @@ export default function About() {
     const { title, description } = AboutItems;
     return (
         <main className="w-full h-rest">
-            <section className="mx-auto mt-16 md:px-0 md:w-1/2">
+            <section className="mx-auto mt-16 2xl:px-56 xl:px-44 px-4">
                 <h1 className="mb-12 text-3xl">
                     {title}
                 </h1>
