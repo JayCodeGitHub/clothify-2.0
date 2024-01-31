@@ -2,9 +2,15 @@
 
 import { useCart } from "@/hooks/useCart"
 import CartItem from "@/components/cartItem";
+import Button from "@/components/button";
 
 export default function Purchase() {
     const { cart } = useCart();
+    function subtotal() {
+        let current = 0;
+        cart.map((item) => (current += item.price * item.quantity));
+        return current;
+      }
     return (
         <main className='flex flex-col justify-center items-center w-full h-rest 2xl:px-40 xl:px-28 md:flex-row md:items-start md:gap-4 py-8 px-8 md:px-2'>
             <section className='xl:w-2/5 w-full h-full'>
@@ -23,7 +29,9 @@ export default function Purchase() {
                     ))}
                 </div>
             </section>
-            <section className='xl:w-2/5 w-full h-full bg-red-500'>
+            <section className='xl:w-2/5 w-full h-full '>
+                <p className="pt-4 my-4 font-medium">Subtotal: {subtotal()}$</p>
+                <Button>Order</Button>
             </section>
         </main>
     )
