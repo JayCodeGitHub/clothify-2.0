@@ -29,7 +29,9 @@ export default function AddToCart({ sizes, item }: { sizes: string, item: any}) 
         <>
             <h4>{sizes}</h4>
             <Quantity quantity={quantity} updateCount={updateCount}/>
-            <Button onClick={handleAddToCart}>Add to Cart</Button>
+            <span className="w-4/5">
+                <Button onClick={handleAddToCart}>Add to Cart</Button>
+            </span>
         </>
    )
 }

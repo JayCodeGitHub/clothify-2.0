@@ -28,7 +28,7 @@ export default function CartItem({id, title, price, quantity, thumbnail, thumbna
     }
 }
     return (
-        <div className="flex flex-col justify-start items-center gap-8 p-4 w-4/5 bg-slate-100 rounded-lg md:flex-row">
+        <div className="flex flex-col justify-start items-center gap-8 p-4 w-full bg-slate-100 rounded-lg md:flex-row">
            <Image
               src={thumbnail.responsiveImage.src}
               width={thumbnail.responsiveImage.width}

@@ -9,7 +9,7 @@ export default function Button({
         <button 
             onClick={onClick}
             className={`
-                w-4/5
+                w-full
                 py-4
                 font-semibold
                 text-sm

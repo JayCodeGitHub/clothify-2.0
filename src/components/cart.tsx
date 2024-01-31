@@ -29,13 +29,12 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                 }}
             />
             <section 
-                className="flex fixed flex-col items-center gap-8 top-0 right-0 py-8 px-0 w-[80%] md:w-[70%] lg:w-[45%] xl:w-[35%]   h-screen overflow-auto z-40 bg-white"
+                className="flex fixed flex-col items-center gap-8 top-0 right-0 py-8 w-[80%] md:w-[70%] lg:w-[45%] xl:w-[35%] h-screen overflow-auto z-40 bg-white 2xl:px-16 xl:px-8 md:px-4 px-16"
                 style={{ 
                     transform: `${ isCart ? 'translateX(0)' : 'translateX(+100%)'}`,
                     transition: 'transform .3s .1s ease-in-out',
                 }}
             >
-                <div></div>
                 {cart.map(({id, title, price, quantity, thumbnail, thumbnailAlt}) => (
                     <CartItem 
                         key={id}
@@ -46,8 +45,8 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                         thumbnail={thumbnail}
                         thumbnailAlt={thumbnailAlt}/>
                 ))}
-                <p className=" self-start pt-4 pr-0 pb-0 pl-[10%]">Subtotal: {subtotal()}$</p>
-                <Link href="/purchase" onClick={toggleCart} className="w-full ml-[20%]">
+                <p className=" self-start pt-4 pr-0 pb-0">Subtotal: {subtotal()}$</p>
+                <Link href="/purchase" onClick={toggleCart} className="w-full">
                     <Button>Purchase</Button>
                 </Link>
             </section>
