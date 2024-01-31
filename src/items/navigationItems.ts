@@ -8,3 +8,4 @@ export const NavigationItems = {
     profile: {name: "Profile", href: "/profile"},
     cart: { name: "Cart", href: "/cart" },
 };
+

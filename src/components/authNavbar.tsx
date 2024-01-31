@@ -3,26 +3,18 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-
-
-const navigationItems = [
-    { name: 'Login', href: '/auth/login' },
-    { name: 'Register', href: '/auth/register' },
-]
+import { AuthNavigationItems } from '@/items/authNavigationItems';
 
 export default function AuthNavBar() {  
     const currentRoute = usePathname();
-    const [activeTab, setActiveTab] = useState(navigationItems[0].href)
 
   return (
         <span className='w-80 py-2 px-4'>
             <nav className='flex w-full justify-around'>
-            {navigationItems.map(({name, href}: {name: string, href: string}) => (
+            {AuthNavigationItems.map(({name, href}: {name: string, href: string}) => (
                 <Link 
                     key={href} 
                     href={href}  
-                    onClick={() => setActiveTab(href)}
                     className={`
                         ${currentRoute === href ? "text-white" : "text-dark hover:text-gray-500" }
                         relative px-3 py-1.5 font-medium outline-sky-400 transition focus-visible:outline-2
