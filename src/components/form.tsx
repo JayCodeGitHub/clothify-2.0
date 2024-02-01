@@ -18,6 +18,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
     const router = useRouter();
     const [error, setError] = useState<null | string>(null)
     const [form, setForm] = useState({ ...initialForm});
+    const [isLogin, setIsLogin] = useState(false)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target
@@ -57,6 +58,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
         }
 
         try {
+          setIsLogin(true)
           if (action === 'login') {
             const { data } = await axios.post('/api/auth/login', form)
             setCookie('token', data)
@@ -73,8 +75,10 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
           if((error as any).response.data.message) {
             setError((error as any).response.data.message)
           }
+          setIsLogin(false)
           return
       }
+        setIsLogin(false)
         setForm({ ...initialForm})
         formRef.current?.reset()
         
@@ -92,8 +96,10 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
           <span className='h-14 w-full text-sm text-red-500'>
             <p>{error}</p>
           </span>
-          <button type="submit" className=' py-2 px-6 bg-primary text-white rounded-lg'>
-            {action === 'login' ? "Login" : "Register"}
+          <button type="submit" className={`${isLogin ? 'bg-red-300 cursor-default' : 'bg-primary cursor-pointer'} transition-all py-2 px-6 text-white rounded-lg`}>
+            {isLogin ? 'Loading...' : (
+              action === 'login' ? "Login" : "Register"
+            )}
           </button>
        </form>
     )
