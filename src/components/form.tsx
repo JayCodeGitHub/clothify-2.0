@@ -6,6 +6,21 @@ import { setCookie } from 'cookies-next'
 import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 
+const formItems = [
+    {
+      name: 'email',
+      type: 'text',
+      label: 'Email address',
+      placeholder: 'Your Email Address',
+    },
+    {
+      name: 'password',
+      type: 'password',
+      label: 'Password',
+      placeholder: 'Password',
+    },
+]
+
 export default function Form({ action }: { action: 'login' | 'register' }) {
     const initialForm = {
       email: '',
@@ -82,14 +97,12 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
     }
     return (
        <form onSubmit={handleSubmit} ref={formRef} className='p-2 mt-2 w-80 flex flex-col items-center gap-6 rounded-md py-10 px-6 bg-white'>
-          <span className='flex flex-col gap-2 w-full'>
-            <label className='text-sm self-start'>Email address</label>
-            <input type="text" name='email' placeholder='Your Email Address' onChange={handleChange} className='p-2 w-full rounded-md text-sm bg-secondary'/>
-          </span>
-          <span className='flex flex-col gap-2 w-full'>
-          <label className='text-sm self-start'>Password</label>
-          <input type="password" name='password' placeholder='password' onChange={handleChange} className='p-2 w-full rounded-md text-sm bg-secondary'/>
-          </span>
+        {formItems.map(({name, label, type, placeholder}) => (
+            <span key={name} className='flex flex-col gap-2 w-full'>
+              <label className='text-sm self-start'>{label}</label>
+              <input type={type} name={name} placeholder={placeholder} onChange={handleChange} className='p-2 w-full rounded-md text-sm bg-secondary'/>
+            </span>
+        ))}
           <span className='h-14 w-full text-sm text-red-500'>
             <p>{error}</p>
           </span>
