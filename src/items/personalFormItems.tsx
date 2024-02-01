@@ -12,10 +12,10 @@ export const PersonalFormItems = [
         name: 'email'
     },
     {
-        label: 'Adress',
+        label: 'Address',
         placeholder: 'Street, City',
         type: 'text',
-        name: 'adress'
+        name: 'address'
     },
     {
         label: 'Country',

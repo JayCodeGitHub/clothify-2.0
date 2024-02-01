@@ -10,14 +10,12 @@ import PersonalForm from "@/components/personalForm";
 
 export default function Purchase() {
     const { cart } = useCart();
-
-    const [personalForm, setpersonalForm] = useState({
-        firstName: '',
+    
+    const [form, setForm] = useState({
+        fullName: '',
         email: '',
         address: '',
         country: '',
-    })
-    const [paymentForm, setpaymentForm] = useState({
         cardName: '',
         cardNumber: '',
         cardDate: '',
@@ -28,14 +26,20 @@ export default function Purchase() {
         let current = 0;
         cart.map((item) => (current += item.price * item.quantity));
         return current;
-      }
+    }
+
+    const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
     
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(personalForm);
-        console.log(paymentForm);
+        console.log(form);
+        e.currentTarget.reset();
     }
-
 
     return (
         <main className='flex flex-col justify-center items-center w-full min-h-rest 2xl:px-40 xl:px-28 md:flex-row md:items-start md:gap-4 py-8 px-8 md:px-2'>
@@ -57,9 +61,9 @@ export default function Purchase() {
             </section>
             <form onSubmit={handleSubmit} className='xl:w-2/5 w-full h-full'>
                 <h1 className="text-lg mx-8 my-6 font-medium">Personal Data</h1>
-               <PersonalForm />
+               <PersonalForm updateField={updateField}/>
                 <h1 className="text-lg mx-8 my-6 font-medium">Payment Data</h1>
-                <PaymentForm />
+                <PaymentForm updateField={updateField}/>
                 <p className="pt-4 my-4 font-medium">Subtotal: {subtotal()}$</p>
                 <Button type="submit">Order Now</Button>
             </form>
