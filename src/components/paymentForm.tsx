@@ -1,24 +1,43 @@
+const PaymentFormItems = [
+    {
+        label: `Cardholder's Name`,
+        placeholder: 'Full Name',
+        name: 'card-name',
+        type: 'text',
+        long: true,
+    },
+    {
+        label: 'Card Number',
+        placeholder: '---- ---- ---- ----',
+        name: 'card-number',
+        type: 'text',
+        long: true,
+    },
+    {
+        label: 'Expiry Date',
+        placeholder: 'MM/YY',
+        name: 'card-date',
+        type: 'text',
+        long: false,
+    },
+    {
+        label: 'CVV',
+        placeholder: 'CVV',
+        name: 'card-cvv',
+        type: 'text',
+        long: false,
+    },
+]
+
 export default function PaymentForm() {
     return (
         <form className="flex flex-col gap-2">
-             <span className='flex flex-col w-full px-2'>
-                <label className='text-sm self-start'>{`Cardholder's Name`}</label>
-                <input type="text" placeholder="Full Name" name="card-name" className="w-full p-3 border border-gray-300 rounded-md my-2" />
-             </span>
-             <span className='flex flex-col w-full px-2'>
-             <label className='text-sm self-start'>Card Number</label>
-                <input type="text" placeholder="---- ---- ---- ----" name="card-number" className="w-full p-3 border border-gray-300 rounded-md my-2" />
-             </span>
-             <span className="flex">
-                <span className='flex flex-col w-1/2 px-2'>
-                    <label className='text-sm self-start'>Expiry Date</label>
-                    <input type="text" placeholder="MM/YY" name="card-date" className="w-full p-3 border border-gray-300 rounded-md my-2" />
+            {PaymentFormItems.map(({long, label, type, placeholder, name}, index) => (
+                <span className={`flex flex-col w-full px-2 ${long ? 'w-full' : 'w-1/2'}`} key={index}>
+                    <label className='text-sm self-start'>{label}</label>
+                    <input type={type} placeholder={placeholder} name={name} className="w-full p-3 border border-gray-300 rounded-md my-2" />
                 </span>
-                <span className='flex flex-col w-1/2 px-2'>
-                    <label className='text-sm self-start'>CVV</label>
-                    <input type="text" placeholder="CVV" name="card-cvv" className="w-full p-3 border border-gray-300 rounded-md my-2" />
-                </span>
-             </span>
+            ))}
         </form>
     )
 }
