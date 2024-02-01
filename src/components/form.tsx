@@ -5,21 +5,7 @@ import axios from 'axios'
 import { setCookie } from 'cookies-next'
 import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/navigation'
-
-const formItems = [
-    {
-      name: 'email',
-      type: 'text',
-      label: 'Email address',
-      placeholder: 'Your Email Address',
-    },
-    {
-      name: 'password',
-      type: 'password',
-      label: 'Password',
-      placeholder: 'Password',
-    },
-]
+import { formItems } from '@/items/formItems';
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
     const initialForm = {
