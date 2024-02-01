@@ -10,7 +10,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
     const formRef = useRef<HTMLFormElement>(null)
     const { setToken } = useAuth();
     const router = useRouter();
-    const [error, setError] = useState('')
+    const [error, setError] = useState<null | string>(null)
     const [form, setForm] = useState({
       email: '',
       password: '',
@@ -24,12 +24,33 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
       })
     }
 
+    const validate = () => {
+      if(!form.email) {
+        setError('Email is required')
+        return false
+      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(form.email)) {
+        setError('Invalid email')
+        return false
+      }
+
+      if(!form.password) {
+        setError('Password is required')
+        return false
+      } else if (form.password.length < 6) {
+        setError('Password must be at least 6 characters')
+        return false
+      }
+      return true
+    }
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        if (!form.email || !form.password) {
-          setError('Email and password are required')
+        const isValid = validate();
+        if (!isValid) {
           return
+        } else {
+          setError(null)
         }
 
         try {
@@ -57,14 +78,14 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
         })
         formRef.current?.reset()
         
-        setError('')
+        setError(null)
 
     }
     return (
        <form onSubmit={handleSubmit} ref={formRef} className='p-2 mt-2 w-80 flex flex-col items-center gap-6 rounded-md py-10 px-6 bg-white'>
           <span className='flex flex-col gap-2 w-full'>
             <label className='text-sm self-start'>Email address</label>
-            <input type="email" name='email' placeholder='Your Email Address' onChange={handleChange} className='p-2 w-full rounded-md text-sm bg-secondary'/>
+            <input type="text" name='email' placeholder='Your Email Address' onChange={handleChange} className='p-2 w-full rounded-md text-sm bg-secondary'/>
           </span>
           <span className='flex flex-col gap-2 w-full'>
           <label className='text-sm self-start'>Password</label>
