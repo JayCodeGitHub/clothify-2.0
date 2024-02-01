@@ -10,8 +10,8 @@ import PersonalForm from "@/components/personalForm";
 
 export default function Purchase() {
     const { cart } = useCart();
-    
-    const [form, setForm] = useState({
+
+    const initialForm = {
         fullName: '',
         email: '',
         address: '',
@@ -20,12 +20,34 @@ export default function Purchase() {
         cardNumber: '',
         cardDate: '',
         cardCvv: '',
-    })
+    }
+    
+    const [form, setForm] = useState({ ...initialForm})
+    const [error, setError] = useState<null | string>(null)
 
     function subtotal() {
         let current = 0;
         cart.map((item) => (current += item.price * item.quantity));
         return current;
+    }
+
+    const validate = () => {
+        const { 
+            fullName,
+            email,
+            address,
+            country,
+            cardName,
+            cardNumber,
+            cardDate,
+            cardCvv
+        } = form;
+        if(!fullName || !email || !address || !country || !cardName || !cardNumber || !cardDate || !cardCvv) {
+            setError('All fields are required');
+            return false;
+        }
+        setError(null);
+        return true;
     }
 
     const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,8 +59,12 @@ export default function Purchase() {
     
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(form);
-        e.currentTarget.reset();
+        const isValid = validate();
+        if(isValid) {
+            console.log(form);
+            setForm({...initialForm});
+            e.currentTarget.reset();
+        }
     }
 
     return (
@@ -64,6 +90,7 @@ export default function Purchase() {
                <PersonalForm updateField={updateField}/>
                 <h1 className="text-lg mx-8 my-6 font-medium">Payment Data</h1>
                 <PaymentForm updateField={updateField}/>
+                {error && <p className="text-red-500">{error}</p>}
                 <p className="pt-4 my-4 font-medium">Subtotal: {subtotal()}$</p>
                 <Button type="submit">Order Now</Button>
             </form>
