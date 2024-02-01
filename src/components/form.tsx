@@ -60,22 +60,49 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
         try {
           setIsLogin(true)
           if (action === 'login') {
-            const { data } = await axios.post('/api/auth/login', form)
+
+
+            // artificial delay
+            let [res] = await Promise.allSettled([
+              axios.post('/api/auth/login', form),
+              new Promise((resolve) => setTimeout(resolve, 1000))
+            ])
+
+            if (res.status === 'rejected') {
+              throw res.reason
+            }
+            
+            const { data } = res.status === 'fulfilled' &&  res.value || {};
+
             setCookie('token', data)
             setToken(data);
             router.push('/profile')
           } else if (action === 'register') { 
-            const { data } = await axios.post('/api/auth/register', form)
+
+              // artificial delay
+              let [res] = await Promise.allSettled([
+                axios.post('/api/auth/register', form),
+                new Promise((resolve) => setTimeout(resolve, 1000))
+              ])
+  
+              if (res.status === 'rejected') {
+                throw res.reason
+              }
+              
+            const { data } = res.status === 'fulfilled' &&  res.value || {};
             setCookie('token', data);
             setToken(data);
             router.push('/profile')
           }
       } catch (error) {
-          console.log(error);
-          if((error as any).response.data.message) {
-            setError((error as any).response.data.message)
-          }
-          setIsLogin(false)
+        setIsLogin(false)
+        try {
+          // If Error is from server
+          setError((error as any).response.data.message)
+        } catch (error) {
+          // If Error is not from server
+          setError('Something went wrong')
+        }
           return
       }
         setIsLogin(false)
