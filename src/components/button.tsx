@@ -1,13 +1,16 @@
 export default function Button({
         children,
-        onClick
+        onClick,
+        type,
     }: {
         children: React.ReactNode
         onClick?: () => void
+        type?: 'submit' | 'button'
     }) {
     return (
         <button 
             onClick={onClick}
+            type={type}
             className={`
                 w-full
                 py-4
