@@ -7,14 +7,16 @@ import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
+    const initialForm = {
+      email: '',
+      password: '',
+    }
+
     const formRef = useRef<HTMLFormElement>(null)
     const { setToken } = useAuth();
     const router = useRouter();
     const [error, setError] = useState<null | string>(null)
-    const [form, setForm] = useState({
-      email: '',
-      password: '',
-    });
+    const [form, setForm] = useState({ ...initialForm});
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.target
@@ -72,10 +74,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
           }
           return
       }
-        setForm({
-          email: '',
-          password: '',
-        })
+        setForm({ ...initialForm})
         formRef.current?.reset()
         
         setError(null)
