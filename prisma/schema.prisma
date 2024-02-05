@@ -16,5 +16,16 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  purchaseHistory PurchaseHistory[]
 }
 
+model PurchaseHistory {
+  id      Int     @id @default(autoincrement())
+  userId  Int
+  user    User    @relation(fields: [userId], references: [id])
+  name    String
+  price   Float
+  date    DateTime @default(now())
+  size   String
+  quantity Int
+}
