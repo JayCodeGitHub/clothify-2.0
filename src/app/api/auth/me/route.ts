@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { headers } from 'next/headers';
+import { PrismaClient } from '@prisma/client'
 import jwt, { Secret } from 'jsonwebtoken';
+
+const prisma = new PrismaClient();
 
 
 export async function POST(req: any) {
@@ -34,5 +37,15 @@ export async function GET(req: any) {
         })
     }
 
-    return NextResponse.json(email, { status: 200 });
+    const profile = await prisma.user.findUnique({ where: { email: email }});
+    
+    if (profile === null) {
+        return NextResponse.json({message: 'User not found'}, { status: 404 });
+    }
+    
+    const purchaseHistory = await prisma.purchaseHistory.findUnique({ where: { id: profile.id }});
+
+    const user = {  email: profile.email, purchaseHistory: purchaseHistory}
+
+    return NextResponse.json(user, { status: 200 });
 }
