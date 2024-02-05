@@ -43,7 +43,7 @@ export async function GET(req: any) {
         return NextResponse.json({message: 'User not found'}, { status: 404 });
     }
     
-    const purchaseHistory = await prisma.purchaseHistory.findUnique({ where: { id: profile.id }});
+    const purchaseHistory = await prisma.purchaseHistory.findMany({ where: { userId: profile.id }});
 
     const user = {  email: profile.email, purchaseHistory: purchaseHistory}
 
