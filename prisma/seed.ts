@@ -8,12 +8,13 @@ async function main() {
       password: 'password',
       purchaseHistory: {
         create: [
-          { name: 'default', price: 0, size: 'default', quantity: 0 },
+          { name: 'Jersey Sleeveless Maxi Dress', price: 55, size: 'm', quantity: 2 },
+          { name: 'Olive chino pants', price: 55, size: 'xl', quantity: 2 },
+          { name: 'Grey wool Charles coat in Prince of Wales check', price: 450, size: 's', quantity: 1 },
         ],
       },
     },
   });
-
   console.log('Seed completed:', user);
 }
 
