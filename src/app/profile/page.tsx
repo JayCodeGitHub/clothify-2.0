@@ -10,7 +10,7 @@ import Button from "@/components/button";
 export default function Profile() {  
   const { setToken } = useAuth();
   const router = useRouter();
-  const [profile, setProfile] = useState<{email: string, purchaseHistory: Array<{ id: number, userId: number, name: string, price: number }>} | false>(false);
+  const [profile, setProfile] = useState<{email: string, purchaseHistory: Array<{ id: number, userId: number, title: string, price: number }>} | false>(false);
 
   const getProfile = async () => {
     const token = getCookie('token')
@@ -18,7 +18,6 @@ export default function Profile() {
     if (data === false) {
       deleteCookie('token');
     }
-    console.log(data)
     setProfile(data);
   }
 
@@ -55,8 +54,8 @@ export default function Profile() {
           <h2>Purchase History</h2>
           {profile ? (
               <>
-              {profile.purchaseHistory.map(({id, name}, index) => (
-                <h4 key={id}>{name}</h4>
+              {profile.purchaseHistory.map(({id, title}, index) => (
+                <h4 key={id}>{title}</h4>
               ))}
                 {console.log(profile)}
               </>

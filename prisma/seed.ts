@@ -8,9 +8,9 @@ async function main() {
       password: 'password',
       purchaseHistory: {
         create: [
-          { name: 'Jersey Sleeveless Maxi Dress', price: 55, size: 'm', quantity: 2 },
-          { name: 'Olive chino pants', price: 55, size: 'xl', quantity: 2 },
-          { name: 'Grey wool Charles coat in Prince of Wales check', price: 450, size: 's', quantity: 1 },
+          { title: 'Jersey Sleeveless Maxi Dress', price: 55, size: 'm', quantity: 2 },
+          { title: 'Olive chino pants', price: 55, size: 'xl', quantity: 2 },
+          { title: 'Grey wool Charles coat in Prince of Wales check', price: 450, size: 's', quantity: 1 },
         ],
       },
     },
