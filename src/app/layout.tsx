@@ -47,7 +47,6 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const { data: { allItems } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-  console.log(allItems);
   return (
     <html lang="en">
       <body className={`${inter.className} bg-secondary`}>
