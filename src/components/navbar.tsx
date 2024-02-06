@@ -1,20 +1,26 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth"
 import NavLink from "./navlink";
 import { NavigationItems } from "@/items/navigationItems";
 import MobileMenu from "./mobileMenu";
 import Cart from "./cart";
+import { useItems } from "@/hooks/useItems";
 
-export default function NavBar() {
+export default function NavBar({ items }: { items?: any }) {
     const { token } = useAuth();
+    const { shopItems } = useItems();
     const [isCart, setIsCart] = useState(false);
     const { auth, profile, cart } = NavigationItems;
 
     const toggleCart = () => {
         setIsCart(prevValue => !prevValue);
     }
+
+    useEffect(() => {
+
+    })
 
 
     return (

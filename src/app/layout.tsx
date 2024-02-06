@@ -4,6 +4,7 @@ import './globals.css'
 import NavBar from "@/components/navbar"
 import { AuthProvider } from '@/hooks/useAuth'
 import { CartProvider } from '@/hooks/useCart'
+import { ItemsProvider } from '@/hooks/useItems'
 import { performRequest } from '../lib/datocms';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -46,14 +47,17 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const { data: { allItems } } = await performRequest({ query: PAGE_CONTENT_QUERY });
+  console.log(allItems);
   return (
     <html lang="en">
       <body className={`${inter.className} bg-secondary`}>
         <AuthProvider>
+          <ItemsProvider initialItems={allItems}>
           <CartProvider>
           <NavBar items={allItems}/>
           {children}
           </CartProvider>
+          </ItemsProvider>
         </AuthProvider>
         </body>
     </html>
