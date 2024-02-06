@@ -4,6 +4,7 @@ import './globals.css'
 import NavBar from "@/components/navbar"
 import { AuthProvider } from '@/hooks/useAuth'
 import { CartProvider } from '@/hooks/useCart'
+import { performRequest } from '../lib/datocms';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,17 +21,37 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+const PAGE_CONTENT_QUERY = `
+  query Shop {
+    allItems {
+      id
+      slug
+      title
+      price
+      thumbnailAlt
+      thumbnail {
+        responsiveImage(imgixParams: {w: 800, h: 1200}) {
+          src
+          width
+          height
+        }
+      }
+    }
+  }`;
+
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const { data: { allItems } } = await performRequest({ query: PAGE_CONTENT_QUERY });
   return (
     <html lang="en">
       <body className={`${inter.className} bg-secondary`}>
         <AuthProvider>
           <CartProvider>
-          <NavBar />
+          <NavBar items={allItems}/>
           {children}
           </CartProvider>
         </AuthProvider>
