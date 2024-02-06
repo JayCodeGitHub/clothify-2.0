@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useAuth } from "@/hooks/useAuth"
 import NavLink from "./navlink";
 import { NavigationItems } from "@/items/navigationItems";

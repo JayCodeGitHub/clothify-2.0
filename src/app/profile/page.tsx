@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth"
 import { deleteCookie, getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
+import { useItems } from "@/hooks/useItems";
 import axios from "axios";
 import Button from "@/components/button";
 
 export default function Profile() {  
   const { setToken } = useAuth();
+  const { shopItems } = useItems();
   const router = useRouter();
-  const [profile, setProfile] = useState<{email: string, purchaseHistory: Array<{ id: number, userId: number, title: string, price: number }>} | false>(false);
+  const [profile, setProfile] = useState<{email: string, purchaseHistory: Array<{ id: number, userId: number, title: string, price: number, thumbnail?: {} }>} | false>(false);
 
   const getProfile = async () => {
     const token = getCookie('token')
@@ -18,17 +20,30 @@ export default function Profile() {
     if (data === false) {
       deleteCookie('token');
     }
-    setProfile(data);
+    const { email, purchaseHistory } = data;
+
+    let newPurchaseHistory: Array<{ id: number, userId: number, title: string, price: number, thumbnail?: {}}> = [];
+
+    purchaseHistory.map((item: { id: number, userId: number, title: string, price: number }, index: number) => {
+      if(shopItems) {
+        let newItem = {... item, thumbnail: shopItems.find((item) => item.title === item.title)?.thumbnail }
+        newPurchaseHistory.push(newItem)
+      }
+    })
+   
+    setProfile({ email, purchaseHistory: newPurchaseHistory });
   }
 
   useEffect(() => { 
     if (!getCookie('token')) {
       router.push('/auth')
     } else {
-      getProfile();
+      if (shopItems) {
+        getProfile();
+      }
     }
   }
-  , [router])
+  , [router, shopItems])
 
   const logout = () => {
     setToken(false);
@@ -57,7 +72,6 @@ export default function Profile() {
               {profile.purchaseHistory.map(({id, title}, index) => (
                 <h4 key={id}>{title}</h4>
               ))}
-                {console.log(profile)}
               </>
             ) : (
               <h2>Loading ...</h2>
