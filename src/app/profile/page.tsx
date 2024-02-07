@@ -42,9 +42,14 @@ export default function Profile() {
 
     let newPurchaseHistory: Array<purchaseHistoryItemType> = [];
 
-    purchaseHistory.map((item: { id: number, userId: number, title: string, price: number }, index: number) => {
+    purchaseHistory.forEach((item: { id: number, userId: number, title: string, price: number }, index: number) => {
       if(shopItems) {
-        let newItem = {... item, thumbnail: shopItems.find((item) => item.title === item.title)!.thumbnail, thumbnailAlt: shopItems.find((item) => item.title === item.title)!.thumbnailAlt,  quantity: 1  }
+        let newItem = {
+          ... item, 
+          thumbnail: shopItems.find((shopItem) => shopItem.title === item.title)!.thumbnail,
+          thumbnailAlt: shopItems.find((shopItem) => shopItem.title === item.title)!.thumbnailAlt,
+          quantity: 1
+        }
         newPurchaseHistory.push(newItem)
       }
     })
