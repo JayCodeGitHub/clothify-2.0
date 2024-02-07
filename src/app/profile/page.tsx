@@ -76,27 +76,27 @@ export default function Profile() {
   return (
     <main className='flex flex-col justify-center items-center w-full min-h-rest 2xl:px-56 xl:px-44 px-4 md:items-start gap-4 py-8'>
        <section className='xl:w-2/5 w-full h-full '>
-          <h1>Profile</h1>           
+          <h1 className="md:text-xl text-lg"> Profile</h1>           
           <div>
             {profile ? (
               <>
-              <h2>Email: {profile.email}</h2>
+              <p className="p-4 md:text-lg text-base">Email: {profile.email}</p>
               </>
             ) : (
-              <h2>Loading ...</h2>
+              <p>Loading ...</p>
             )}
           </div>
         </section>
         <section className='xl:w-2/5 w-full h-full '>
-          <h2>Purchase History</h2>
+          <h3 className="md:text-xl text-lg">Purchase History</h3>
           {profile ? (
-              <>
+              <div className="flex flex-col gap-4 p-4">
               {profile.purchaseHistory.map(({id, title, price, quantity, thumbnail, thumbnailAlt}, index) => (
                 <PurchaseHistoryItem key={id} title={title} price={price} quantity={quantity} thumbnail={thumbnail} thumbnailAlt={thumbnailAlt}/>
               ))}
-              </>
+              </div>
             ) : (
-              <h2>Loading ...</h2>
+              <p>Loading ...</p>
             )}   
         </section>
         <span className=" w-36">
