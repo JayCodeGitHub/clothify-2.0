@@ -7,12 +7,30 @@ import { useRouter } from 'next/navigation'
 import { useItems } from "@/hooks/useItems";
 import axios from "axios";
 import Button from "@/components/button";
+import PurchaseHistoryItem from "@/components/purchaseHistoryItem";
+
+
+type purchaseHistoryItemType = {
+  id: number,
+  userId: number,
+  title: string;
+  price: number,
+  quantity: number,
+  thumbnail: {
+    responsiveImage: {
+      src: string,
+      width: number,
+      height: number
+    }
+  },
+  thumbnailAlt: string;
+}
 
 export default function Profile() {  
   const { setToken } = useAuth();
   const { shopItems } = useItems();
   const router = useRouter();
-  const [profile, setProfile] = useState<{email: string, purchaseHistory: Array<{ id: number, userId: number, title: string, price: number, thumbnail?: {} }>} | false>(false);
+  const [profile, setProfile] = useState<{email: string, purchaseHistory: Array<purchaseHistoryItemType>} | false>(false);
 
   const getProfile = async () => {
     const token = getCookie('token')
@@ -22,11 +40,11 @@ export default function Profile() {
     }
     const { email, purchaseHistory } = data;
 
-    let newPurchaseHistory: Array<{ id: number, userId: number, title: string, price: number, thumbnail?: {}}> = [];
+    let newPurchaseHistory: Array<purchaseHistoryItemType> = [];
 
     purchaseHistory.map((item: { id: number, userId: number, title: string, price: number }, index: number) => {
       if(shopItems) {
-        let newItem = {... item, thumbnail: shopItems.find((item) => item.title === item.title)?.thumbnail }
+        let newItem = {... item, thumbnail: shopItems.find((item) => item.title === item.title)!.thumbnail, thumbnailAlt: shopItems.find((item) => item.title === item.title)!.thumbnailAlt,  quantity: 1  }
         newPurchaseHistory.push(newItem)
       }
     })
@@ -69,8 +87,8 @@ export default function Profile() {
           <h2>Purchase History</h2>
           {profile ? (
               <>
-              {profile.purchaseHistory.map(({id, title}, index) => (
-                <h4 key={id}>{title}</h4>
+              {profile.purchaseHistory.map(({id, title, price, quantity, thumbnail, thumbnailAlt}, index) => (
+                <PurchaseHistoryItem key={id} title={title} price={price} quantity={quantity} thumbnail={thumbnail} thumbnailAlt={thumbnailAlt}/>
               ))}
               </>
             ) : (
