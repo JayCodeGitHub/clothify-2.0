@@ -2,16 +2,22 @@ export default function Button({
         children,
         onClick,
         type,
-        active = true
+        isActive = true
     }: {
         children: React.ReactNode
         onClick?: () => void
         type?: 'submit' | 'button'
-        active?: boolean 
+        isActive?: boolean 
     }) {
+
+    const handleClick = () => {
+        if (isActive && onClick) {
+            onClick();
+        }
+    }
     return (
-        <button 
-            onClick={onClick}
+        <button
+            onClick={handleClick}
             type={type}
             className={`
                 w-full
@@ -25,7 +31,7 @@ export default function Button({
                 border-transparent
                 transition-all 
                 ${ 
-                    active ? 
+                    isActive ? 
                     'hover:text-gray-900 hover:border-primary hover:bg-transparent bg-primary cursor-pointer' :
                     ' bg-red-300 cursor-default'
                 }

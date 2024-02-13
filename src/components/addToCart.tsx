@@ -37,7 +37,7 @@ export default function AddToCart({ sizes, item }: { sizes: Array<string>, item:
         </div>
             <Quantity quantity={quantity} updateCount={updateCount}/>
             <span className="w-4/5">
-                <Button onClick={handleAddToCart} active={selectedSize ? true : false} >Add to Cart</Button>
+                <Button onClick={handleAddToCart} isActive={selectedSize ? true : false} >Add to Cart</Button>
             </span>
         </>
    )
