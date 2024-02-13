@@ -40,7 +40,7 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
             >
                 {cart.map(({id, title, price, size, quantity, thumbnail, thumbnailAlt}) => (
                     <CartItem 
-                        key={id}
+                        key={id.concat(size)}
                         id={id}
                         title={title}
                         price={price}

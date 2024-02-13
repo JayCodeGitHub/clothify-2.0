@@ -25,18 +25,19 @@ export default function CartItem({id, title, price, quantity, thumbnail, thumbna
 
   const updateCount = (value: number) => {
     if (value === 1) {
-      quantityIncrementation(id, 1);
+      quantityIncrementation(id, 1, size);
     } else if (value === -1) {
-      quantityDecrementation(id, 1);
+      quantityDecrementation(id, 1, size);
     }
-}
+  }
+
     return (
         <motion.div  
           initial={{ opacity: "0%" }}
           animate={{ opacity: "100%" }}
           transition={{ duration: 0.2, delay: 0.1, ease: "easeInOut" }}
           exit={{ opacity: "0%" }}
-          layoutId={id} 
+          layoutId={id.concat(size)} 
           className="flex flex-col justify-start items-center gap-8 p-4 w-full bg-slate-100 rounded-lg md:flex-row"
         >
            <Image

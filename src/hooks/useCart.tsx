@@ -24,8 +24,8 @@ interface CartContextProps {
     description: string;
     quantity: number;
   }[];
-  quantityIncrementation: (id: string, quantity: number) => void;
-  quantityDecrementation: (id: string, quantity: number) => void;
+  quantityIncrementation: (id: string, quantity: number, size: string) => void;
+  quantityDecrementation: (id: string, quantity: number, size: string) => void;
   addItem: (
     newItem: {
       id: string;
@@ -47,7 +47,7 @@ interface CartContextProps {
     quantity: number,
     selectedSize: string
   ) => void;
-  removeItem: (id: string) => void;
+  removeItem: (id: string, size: string) => void;
 }
 
 const CartContext = React.createContext<CartContextProps>(
@@ -59,9 +59,9 @@ const defaultState: any[] | (() => any[]) = [];
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState(defaultState);
 
-  function quantityIncrementation(id: string, step: number) {
+  function quantityIncrementation(id: string, step: number, size: string) {
     const newCart = cart.map((item) => {
-      if (item.id === id) {
+      if (item.id === id && item.size === size) {
         return {
           ...item,
           quantity: item.quantity + step,
@@ -72,10 +72,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart(newCart);
   }
 
-  function quantityDecrementation(id: string, step: number) {
+  function quantityDecrementation(id: string, step: number, size: string) {
     let remove = false;
     const newCart = cart.map((item) => {
-      if (item.id === id) {
+      if (item.id === id && item.size === size) {
         if (item.quantity === 1) {
           remove = true;
         } else {
@@ -89,7 +89,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     });
     setCart(newCart);
     if (remove) {
-      removeItem(id);
+      removeItem(id, size);
     }
   }
 
@@ -116,20 +116,20 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   ) {
     let isNew = true;
     cart.map((item) => {
-      if (item.id === newItem.id) {
+      if (item.id === newItem.id && item.size === selectedSize) {
         isNew = false;
       }
     });
     if (isNew) {
       cart.push({ ...newItem, quantity: quantity, size: selectedSize });
     } else {
-      quantityIncrementation(newItem.id, quantity);
+      quantityIncrementation(newItem.id, quantity, selectedSize);
     }
     
   }
 
-  function removeItem(id: string) {
-    setCart(cart.filter((item) => item.id !== id));
+  function removeItem(id: string, size: string) {
+    setCart(cart.filter((item) => !(item.id === id && item.size === size)));
   }
 
   return (
