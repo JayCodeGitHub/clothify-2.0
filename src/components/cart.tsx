@@ -35,12 +35,13 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                     transition: 'transform .3s .1s ease-in-out',
                 }}
             >
-                {cart.map(({id, title, price, quantity, thumbnail, thumbnailAlt}) => (
+                {cart.map(({id, title, price, size, quantity, thumbnail, thumbnailAlt}) => (
                     <CartItem 
                         key={id}
                         id={id}
                         title={title}
                         price={price}
+                        size={size}
                         quantity={quantity}
                         thumbnail={thumbnail}
                         thumbnailAlt={thumbnailAlt}/>

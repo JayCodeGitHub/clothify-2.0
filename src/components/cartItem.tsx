@@ -7,6 +7,7 @@ interface CartItemProps {
     title: string;
     price: number,
     quantity: number,
+    size: string,
     thumbnail: {
       responsiveImage: {
         src: string,
@@ -15,9 +16,10 @@ interface CartItemProps {
       }
     },
     thumbnailAlt: string;
+
 }
 
-export default function CartItem({id, title, price, quantity, thumbnail, thumbnailAlt}: CartItemProps) {
+export default function CartItem({id, title, price, quantity, thumbnail, thumbnailAlt, size}: CartItemProps) {
   const { quantityIncrementation, quantityDecrementation } = useCart();
 
   const updateCount = (value: number) => {
@@ -38,7 +40,10 @@ export default function CartItem({id, title, price, quantity, thumbnail, thumbna
           />
           <span className="flex flex-col justify-start items-start">
             <h1 className=" text-lg">{title}</h1>
-            <h2 className="">{price}$</h2>
+            <span className=" flex gap-4">
+              <h2>{price}$</h2>
+              <h2>{size}</h2>
+            </span>
             <Quantity quantity={quantity} updateCount={updateCount}/>
           </span>
          

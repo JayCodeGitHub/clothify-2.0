@@ -79,8 +79,8 @@ export default async function Page({ params }: { params: { slug: string} }) {
               </span>
             <div className='flex flex-col justify-around gap-8 py-8 md:w-2/6 w-full'>
               <h1 className='font-bold text-2xl pl-2'>{title}</h1>
-              <h2>{description}</h2>
-              <h3 className='font-bold text-xl pl-2'>{price}$</h3>
+              <p>{description}</p>
+              <h2 className='font-bold text-xl pl-2'>{price}$</h2>
               <AddToCart sizes={sizes} item={items}/>
             </div>
             {gallery.map(({id, responsiveImage}:{

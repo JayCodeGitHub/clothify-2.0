@@ -44,7 +44,8 @@ interface CartContextProps {
       description: string;
       quantity: number;
     },
-    quantity: number
+    quantity: number,
+    selectedSize: string
   ) => void;
   removeItem: (id: string) => void;
 }
@@ -110,7 +111,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       description: string;
       quantity: number;
     },
-    quantity: number
+    quantity: number,
+    selectedSize: string
   ) {
     let isNew = true;
     cart.map((item) => {
@@ -119,7 +121,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       }
     });
     if (isNew) {
-      cart.push({ ...newItem, quantity: quantity });
+      cart.push({ ...newItem, quantity: quantity, size: selectedSize });
     } else {
       quantityIncrementation(newItem.id, quantity);
     }
