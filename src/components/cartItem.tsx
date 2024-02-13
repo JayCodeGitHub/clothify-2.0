@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Quantity from "./quantity";
 import { useCart } from "@/hooks/useCart";
+import { motion } from "framer-motion";
 
 interface CartItemProps {
     id: string;
@@ -30,7 +31,14 @@ export default function CartItem({id, title, price, quantity, thumbnail, thumbna
     }
 }
     return (
-        <div className="flex flex-col justify-start items-center gap-8 p-4 w-full bg-slate-100 rounded-lg md:flex-row">
+        <motion.div  
+          initial={{ opacity: "0%" }}
+          animate={{ opacity: "100%" }}
+          transition={{ duration: 0.2, delay: 0.1, ease: "easeInOut" }}
+          exit={{ opacity: "0%" }}
+          layoutId={id} 
+          className="flex flex-col justify-start items-center gap-8 p-4 w-full bg-slate-100 rounded-lg md:flex-row"
+        >
            <Image
               src={thumbnail.responsiveImage.src}
               width={thumbnail.responsiveImage.width}
@@ -47,6 +55,6 @@ export default function CartItem({id, title, price, quantity, thumbnail, thumbna
             <Quantity quantity={quantity} updateCount={updateCount}/>
           </span>
          
-        </div>
+        </motion.div>
     )
 }

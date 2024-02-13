@@ -4,6 +4,9 @@ import Button from "./button";
 import CartItem from "./cartItem";
 import { useCart } from "@/hooks/useCart";
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+const MotionButtonWrapper = motion(Link);
 
 interface CartProps {
     isCart: boolean;
@@ -46,10 +49,16 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                         thumbnail={thumbnail}
                         thumbnailAlt={thumbnailAlt}/>
                 ))}
-                <p className=" self-start pt-4 pr-0 pb-0">Subtotal: {subtotal()}$</p>
-                <Link href="/purchase" onClick={toggleCart} className="w-full">
+                <motion.p layout transition={{ duration: 0.2, delay: 0.1, ease: "easeInOut" }} className="self-start pt-4 pr-0 pb-0">Subtotal: {subtotal()}$</motion.p>
+                <MotionButtonWrapper 
+                    layout
+                    transition={{ duration: 0.2, delay: 0.1, ease: "easeInOut" }}
+                    href="/purchase"
+                    className="w-full"
+                    onClick={toggleCart}
+                >
                     <Button>Purchase</Button>
-                </Link>
+                </MotionButtonWrapper>
             </section>
         </div>
     )

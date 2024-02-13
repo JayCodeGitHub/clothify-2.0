@@ -27,6 +27,7 @@ export default function AddToCart({ sizes, item }: { sizes: Array<string>, item:
             addItem(item, quantity, selectedSize);
         }
         setQuantity(1);
+        setSelectedSize(null);
     }
 
     return (
