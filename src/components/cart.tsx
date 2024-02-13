@@ -54,10 +54,11 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                     layout
                     transition={{ duration: 0.2, delay: 0.1, ease: "easeInOut" }}
                     href="/purchase"
-                    className="w-full"
+                    
+                    className={`w-full ${ cart.length > 0 ? ' pointer-events-auto' : ' pointer-events-none'}`}
                     onClick={toggleCart}
                 >
-                    <Button>Purchase</Button>
+                    <Button isActive={cart.length > 0 ? true : false }>Purchase</Button>
                 </MotionButtonWrapper>
             </section>
         </div>
