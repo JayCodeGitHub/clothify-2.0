@@ -2,10 +2,12 @@ export default function Button({
         children,
         onClick,
         type,
+        active = true
     }: {
         children: React.ReactNode
         onClick?: () => void
         type?: 'submit' | 'button'
+        active?: boolean 
     }) {
     return (
         <button 
@@ -17,16 +19,16 @@ export default function Button({
                 font-semibold
                 text-sm
                 text-white
-                cursor-pointer
                 rounded-md
-                bg-primary
                 border-solid
                 border-2
                 border-transparent
                 transition-all 
-                hover:bg-transparent
-                hover:text-gray-900
-                hover:border-primary
+                ${ 
+                    active ? 
+                    'hover:text-gray-900 hover:border-primary hover:bg-transparent bg-primary cursor-pointer' :
+                    ' bg-red-300 cursor-default'
+                }
                 
             `}
         >
