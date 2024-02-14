@@ -121,7 +121,14 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       }
     });
     if (isNew) {
-      cart.push({ ...newItem, quantity: quantity, size: selectedSize });
+      const newCart = () => {
+          const newCartItem = { ...newItem, quantity: quantity, size: selectedSize }
+          const newCart = [...cart, newCartItem];
+
+          return newCart;
+      };
+      
+      setCart(newCart());
     } else {
       quantityIncrementation(newItem.id, quantity, selectedSize);
     }
