@@ -5,8 +5,6 @@ import { useCart } from "@/hooks/useCart"
 import CartItem from "@/components/cartItem";
 import Button from "@/components/button";
 import PurchaseForm from "@/components/purchaseForm";
-import PaymentForm from "@/components/paymentForm";
-import PersonalForm from "@/components/personalForm";
 
 
 export default function Purchase() {
