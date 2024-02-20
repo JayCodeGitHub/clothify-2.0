@@ -5,6 +5,7 @@ import NavBar from "@/components/navbar"
 import { AuthProvider } from '@/hooks/useAuth'
 import { CartProvider } from '@/hooks/useCart'
 import { ItemsProvider } from '@/hooks/useItems'
+import { AlertProvider } from '@/hooks/useAlert'
 import { performRequest } from '../lib/datocms';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -54,8 +55,10 @@ export default async function RootLayout({
         <AuthProvider>
           <ItemsProvider initialItems={allItems}>
           <CartProvider>
-          <NavBar items={allItems}/>
-          {children}
+            <AlertProvider>
+              <NavBar items={allItems}/>
+              {children}
+            </AlertProvider>
           </CartProvider>
           </ItemsProvider>
         </AuthProvider>
