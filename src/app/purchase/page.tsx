@@ -87,16 +87,11 @@ export default function Purchase() {
                     ))}
                 </div>
             </section>
-            <PurchaseForm />
-            <form onSubmit={handleSubmit} className='xl:w-2/5 w-full h-full'>
-                <h1 className="text-lg mx-8 my-6 font-medium">Personal Data</h1>
-               <PersonalForm updateField={updateField}/>
-                <h1 className="text-lg mx-8 my-6 font-medium">Payment Data</h1>
-                <PaymentForm updateField={updateField}/>
-                {error && <p className="text-red-500">{error}</p>}
+            <section className='xl:w-2/5 w-full h-full pt-10'>
+                <PurchaseForm />
                 <p className="pt-4 my-4 font-medium">Subtotal: {subtotal()}$</p>
                 <Button type="submit">Order Now</Button>
-            </form>
+            </section>
         </main>
     )
 }

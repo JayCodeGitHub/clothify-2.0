@@ -6,7 +6,7 @@ import PurchaseFormInput from "./PurchaseFormInput";
 import PurchaseFormStep from "./PurchaseFormStep";
 import axios from "axios";
 
-export default function Form() {
+export default function PurchaseForm() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
 
