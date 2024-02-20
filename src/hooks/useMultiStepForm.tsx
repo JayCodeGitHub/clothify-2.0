@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 const initialForm = {
-  firstName: "",
-  lastName: "",
-  phone: "",
+  fullName: "",
   email: "",
-  budget: "",
-  informations: "",
+  address: "",
+  country: "",
+  cardName: "",
+  cardDate: "",
+  cardCvv: "",
 };
 
 export function useMultiStepForm() {

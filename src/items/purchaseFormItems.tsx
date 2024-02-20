@@ -6,7 +6,9 @@ export const PurchaseFormItems = [
         name: 'fullName',
         type: 'text',
         isLong: true,
-        regex: '',
+        regex: ``,
+        errorRequire: 'First name is required',
+        errorRegex: '',
     },
     {
         step: 1,
@@ -15,7 +17,9 @@ export const PurchaseFormItems = [
         name: 'email',
         type: 'email',
         isLong: true,
-        regex: '',
+        regex: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+        errorRequire: 'Email is required',
+        errorRegex: 'Please use correct formatting. Example: example@example.com',
     },
     {
         step: 2,
@@ -25,6 +29,8 @@ export const PurchaseFormItems = [
         type: 'text',
         isLong: true,
         regex: '',
+        errorRequire: 'Address is required',
+        errorRegex: 'Please use correct formatting',
     },
     {
         step: 2,
@@ -34,6 +40,8 @@ export const PurchaseFormItems = [
         type: 'text',
         isLong: true,
         regex: '',
+        errorRequire: 'Country is required',
+        errorRegex: 'Please use correct formatting',
     },
     {
         step: 3,
@@ -43,6 +51,8 @@ export const PurchaseFormItems = [
         type: 'text',
         isLong: true,
         regex: '',
+        errorRequire: `Cardholder's Name is required`,
+        errorRegex: 'Please use correct formatting',
     },
     {
         step: 3,
@@ -52,6 +62,8 @@ export const PurchaseFormItems = [
         type: 'text',
         isLong: true,
         regex: '',
+        errorRequire: `Card Number is required`,
+        errorRegex: 'Please use correct formatting',
     },
     {
         step: 4,
@@ -61,6 +73,8 @@ export const PurchaseFormItems = [
         type: 'text',
         isLong: true,
         regex: '',
+        errorRequire: `Expiry Date is required`,
+        errorRegex: 'Please use correct formatting',
     },
     {
         step: 4,
@@ -70,5 +84,7 @@ export const PurchaseFormItems = [
         type: 'text',
         isLong: true,
         regex: '',
+        errorRequire: `CVV is required`,
+        errorRegex: 'Please use correct formatting',
     },
 ]

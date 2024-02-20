@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 const initialError = {
-  firstName: "",
-  lastName: "",
-  phone: "",
+  fullName: "",
   email: "",
-  budget: "",
-  informations: "",
+  address: "",
+  country: "",
+  cardName: "",
+  cardDate: "",
+  cardCvv: "",
 };
 
 export function useError() {

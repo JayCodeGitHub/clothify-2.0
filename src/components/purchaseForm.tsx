@@ -5,6 +5,7 @@ import Loading from "./loading";
 import PurchaseFormInput from "./PurchaseFormInput";
 import PurchaseFormStep from "./PurchaseFormStep";
 import axios from "axios";
+import { PurchaseFormItems } from "@/items/purchaseFormItems";
 
 export default function PurchaseForm() {
   const [step, setStep] = useState(1);
@@ -20,55 +21,30 @@ export default function PurchaseForm() {
   };
 
   const stepContinue = () => {
-    let valid = true;
 
-    // Check setp 1
-    if (step === 1) {
-      if (!form.firstName) {
-        setError({ ...initialError, firstName: "First name is required" });
-        valid = false;
-      } else if (!form.lastName) {
-        setError({ ...initialError, lastName: "Last name is required" });
-        valid = false;
+
+      let valid = true;
+
+      const activeItems = PurchaseFormItems.filter((item) => item.step === step);
+
+      {activeItems.map((item) => {
+        if((!form[item.name as keyof typeof form]) && valid) {
+          const updatedErorr = { ...initialError, [item.name]: item.errorRequire };
+          setError(updatedErorr);
+          valid = false;
+        } else if (valid && (item.regex && !new RegExp(item.regex).test(form[item.name as keyof typeof form]))) {
+          const updatedErorr = { ...initialError, [item.name]: item.errorRegex };
+          setError(updatedErorr);
+          valid = false;
+        }
+      })}
+
+      if (valid) {
+        setStep(step > 5 ? step : step + 1);
+        setError(initialError);
       }
-
-      // Check setp 2
-    } else if (step === 2) {
-      if (!form.phone) {
-        setError({ ...initialError, phone: "Phone Number is required" });
-        valid = false;
-      } else if (!/^\+\d+\s\d{3}\s\d{3}\s\d{3}$/.test(form.phone)) {
-        setError({
-          ...initialError,
-          phone: "Please use correct formatting. Example: +48 123 456 789",
-        });
-        valid = false;
-      } else if (!form.email) {
-        setError({ ...initialError, email: "Email is required" });
-        valid = false;
-      } else if (
-        !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(form.email)
-      ) {
-        setError({
-          ...initialError,
-          email: "Please use correct formatting. Example: example@example.com",
-        });
-        valid = false;
-      }
-
-      // Check setp 3
-    } else if (step === 3) {
-      if (!form.budget) {
-        setError({ ...initialError, budget: "Budget is required" });
-        valid = false;
-      }
-    }
-
-    if (valid) {
-      setStep(step > 5 ? step : step + 1);
-      setError(initialError);
-    }
-  };
+}
+     
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,82 +83,19 @@ export default function PurchaseForm() {
         <PurchaseFormStep step={4} currentStep={step} />
       </div>
       <div className="flex flex-col justify-start gap-2 px-8 space-y-2 h-60">
-        {step === 1 ? (
-          <>
+        {PurchaseFormItems.map((item) => (
+          item.step === step && (
             <PurchaseFormInput
-              error={error.firstName}
-              name="firstName"
-              value={form.firstName}
-              placeholder="First Name"
+              key={item.name}
+              error={error[item.name as keyof typeof error]} // Add index signature
+              name={item.name}
+              value={form[item.name as keyof typeof form]} // Add index signature
+              placeholder={item.placeholder}
               onChange={updateField}
             />
-            <PurchaseFormInput
-              error={error.lastName}
-              name="lastName"
-              value={form.lastName}
-              placeholder="Last Name"
-              onChange={updateField}
-            />
-          </>
-        ) : step === 2 ? (
-          <>
-            <PurchaseFormInput
-              error={error.phone}
-              name="phone"
-              value={form.phone}
-              placeholder="Phone"
-              onChange={updateField}
-            />
-            <PurchaseFormInput
-              error={error.email}
-              name="email"
-              value={form.email}
-              placeholder="Email"
-              onChange={updateField}
-            />
-          </>
-        ) : step === 3 ? (
-          <PurchaseFormInput
-            error={error.budget}
-            name="budget"
-            value={form.budget}
-            placeholder="Estimated budget"
-            onChange={updateField}
-            number
-          />
-        ) : step === 4 ? (
-          <>
-            <motion.textarea
-              name="informations"
-              value={form.informations}
-              maxLength={250}
-              placeholder="Additional information"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
-              onChange={updateField}
-              className="w-full p-2 border-2 rounded-lg h-36 border-neutral-100"
-            />
-          </>
-        ) : step === 5 ? (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
-              className="flex flex-col w-full gap-1"
-            >
-              <p>First Name: {form.firstName}</p>
-              <p>Last Name: {form.lastName}</p>
-              <p>Phone: {form.phone}</p>
-              <p>Email: {form.email}</p>
-              <p>Budget: {form.budget}</p>
-              {form.informations ? (
-                <p>Additional information: {form.informations}</p>
-              ) : null}
-            </motion.div>
-          </>
-        ) : null}
+          )
+        )
+        )}
       </div>
       <div className="px-8 pb-8">
         <div className="flex justify-between mt-10">
