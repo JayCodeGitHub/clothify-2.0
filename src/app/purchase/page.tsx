@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useCart } from "@/hooks/useCart"
 import CartItem from "@/components/cartItem";
 import Button from "@/components/button";
+import PurchaseForm from "@/components/purchaseForm";
 import PaymentForm from "@/components/paymentForm";
 import PersonalForm from "@/components/personalForm";
 
@@ -86,6 +87,7 @@ export default function Purchase() {
                     ))}
                 </div>
             </section>
+            <PurchaseForm />
             <form onSubmit={handleSubmit} className='xl:w-2/5 w-full h-full'>
                 <h1 className="text-lg mx-8 my-6 font-medium">Personal Data</h1>
                <PersonalForm updateField={updateField}/>
