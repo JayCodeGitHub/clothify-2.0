@@ -5,8 +5,10 @@ import Loading from "./loading";
 import PurchaseFormInput from "./purchaseFormInput";
 import PurchaseFormStep from "./purchaseFormStep";
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
+import { useCart } from "@/hooks/useCart";
 
 export default function PurchaseForm() {
+  const { cart } = useCart();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -14,6 +16,12 @@ export default function PurchaseForm() {
   const { error, setError, initialError } = useError();
 
   const { dispatchAlert, setStatus } = useAlert();
+
+  function subtotal() {
+    let current = 0;
+    cart.map((item) => (current += item.price * item.quantity));
+    return current;
+}
 
   const stepBack = () => {
     setStep(step < 2 ? step : step - 1);
@@ -91,6 +99,7 @@ export default function PurchaseForm() {
               transition={{ duration: 0.2 }}
               className="flex flex-col w-full gap-1"
             >
+              <p className="pt-4 my-1 font-medium">Subtotal: {subtotal()}$</p>
               <p>Full Name: {form.fullName}</p>
               <p>Email: {form.email}</p>
               <p>Address: {form.address}</p>
