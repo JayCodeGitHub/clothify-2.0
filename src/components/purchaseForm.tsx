@@ -2,8 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useAlert, useError, useMultiStepForm } from "@/hooks";
 import Loading from "./loading";
-import PurchaseFormInput from "./PurchaseFormInput";
-import PurchaseFormStep from "./PurchaseFormStep";
+import PurchaseFormInput from "./purchaseFormInput";
+import PurchaseFormStep from "./purchaseFormStep";
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
 
 export default function PurchaseForm() {
