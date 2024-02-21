@@ -6,6 +6,7 @@ const initialError = {
   address: "",
   country: "",
   cardName: "",
+  cardNumber: "",
   cardDate: "",
   cardCvv: "",
 };

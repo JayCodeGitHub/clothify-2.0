@@ -6,6 +6,7 @@ const initialForm = {
   address: "",
   country: "",
   cardName: "",
+  cardNumber: "",
   cardDate: "",
   cardCvv: "",
 };
