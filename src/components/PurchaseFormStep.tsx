@@ -34,7 +34,7 @@ export default function PurchaseFormStep({ step, currentStep }: StepProps) {
           type: "tween",
           ease: "circOut",
         }}
-        className="absolute inset-0 bg-blue-200 rounded-full"
+        className="absolute inset-0 bg-[#FDD6D8] rounded-full"
       />
 
       <motion.div
@@ -47,13 +47,13 @@ export default function PurchaseFormStep({ step, currentStep }: StepProps) {
           },
           active: {
             backgroundColor: "#fff",
-            borderColor: "#3b82f6", // blue-500
-            color: "#3b82f6", // blue-500
+            borderColor: "#F8333C", // primary
+            color: "#F8333C", // primary
           },
           complete: {
-            backgroundColor: "#3b82f6", // blue-500
-            borderColor: "#3b82f6", // blue-500
-            color: "#3b82f6", // blue-500
+            backgroundColor: "#F8333C", // primary
+            borderColor: "#F8333C", // primary
+            color: "#F8333C", // primary
           },
         }}
         transition={{ duration: 0.2 }}
