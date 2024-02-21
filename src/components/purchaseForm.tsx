@@ -99,15 +99,15 @@ export default function PurchaseForm() {
             <motion.button
               type="submit"
               onClick={() => setStep(6)}
-              className="bg duration-350 flex items-center justify-center rounded-full bg-blue-500 py-1.5 px-3.5 font-medium tracking-tight text-white transition hover:bg-blue-600 active:bg-blue-700 min-w-[5rem] min-h-[2.4rem]"
+              className="bg duration-350 flex items-center justify-center rounded-full bg-primary py-1.5 px-3.5 font-medium tracking-tight text-white hover:bg-primaryHover active:bg-primaryActive min-w-[5rem] min-h-[2.4rem] transition-all"
             >
-              {loading ? <Loading /> : "Submit"}
+              {loading ? <Loading /> : "Order Now"}
             </motion.button>
           ) : (
             <motion.button
               type="button"
               onClick={stepContinue}
-              className="bg duration-350 flex items-center justify-center rounded-full bg-blue-500 py-1.5 px-3.5 font-medium tracking-tight text-white transition hover:bg-blue-600 active:bg-blue-700"
+              className="bg duration-350 flex items-center justify-center rounded-full bg-primary py-1.5 px-3.5 font-medium tracking-tight text-white hover:bg-primaryHover active:bg-primaryActive transition-all"
             >
               Continue
             </motion.button>
