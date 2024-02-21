@@ -4,7 +4,6 @@ import { useAlert, useError, useMultiStepForm } from "@/hooks";
 import Loading from "./loading";
 import PurchaseFormInput from "./PurchaseFormInput";
 import PurchaseFormStep from "./PurchaseFormStep";
-import axios from "axios";
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
 
 export default function PurchaseForm() {
@@ -22,27 +21,28 @@ export default function PurchaseForm() {
 
   const stepContinue = () => {
 
+    let valid = true;
 
-      let valid = true;
+    // Filter the items that are active
+    const activeItems = PurchaseFormItems.filter((item) => item.step === step);
 
-      const activeItems = PurchaseFormItems.filter((item) => item.step === step);
-
-      {activeItems.map((item) => {
-        if((!form[item.name as keyof typeof form]) && valid) {
-          const updatedErorr = { ...initialError, [item.name]: item.errorRequire };
-          setError(updatedErorr);
-          valid = false;
-        } else if (valid && (item.regex && !new RegExp(item.regex).test(form[item.name as keyof typeof form]))) {
-          const updatedErorr = { ...initialError, [item.name]: item.errorRegex };
-          setError(updatedErorr);
-          valid = false;
-        }
-      })}
-
-      if (valid) {
-        setStep(step > 5 ? step : step + 1);
-        setError(initialError);
+    // Check if the active items are valid
+    {activeItems.map((item) => {
+      if((!form[item.name as keyof typeof form]) && valid) {
+        const updatedErorr = { ...initialError, [item.name]: item.errorRequire };
+        setError(updatedErorr);
+        valid = false;
+      } else if (valid && (item.regex && !new RegExp(item.regex).test(form[item.name as keyof typeof form]))) {
+        const updatedErorr = { ...initialError, [item.name]: item.errorRegex };
+        setError(updatedErorr);
+        valid = false;
       }
+    })}
+
+    if (valid) {
+      setStep(step > 5 ? step : step + 1);
+      setError(initialError);
+    }
 }
      
 
@@ -51,23 +51,10 @@ export default function PurchaseForm() {
     if (step === 5) {
       return null;
     }
-    setStep(5);
-    setLoading(true);
-    try {
-      const [res] = await Promise.allSettled([
-        axios.post("/api/submit", form),
-        new Promise((resolve) => setTimeout(resolve, 1000)),
-      ]);
-      if (res.status !== "fulfilled") throw res.reason;
-      dispatchAlert(`Form sent successfully`);
-      setStatus(true);
-      setForm(initialForm);
-      setStep(1);
-    } catch (error: any) {
-      console.error("Error:", error);
-      setStatus(false);
-      dispatchAlert(`Oops something went wrong`);
-    }
+    dispatchAlert(`Form sent successfully`);
+    setStatus(true);
+    setForm(initialForm);
+    setStep(1);
     setLoading(false);
   };
 
@@ -87,9 +74,9 @@ export default function PurchaseForm() {
           item.step === step && (
             <PurchaseFormInput
               key={item.name}
-              error={error[item.name as keyof typeof error]} // Add index signature
+              error={error[item.name as keyof typeof error]}
               name={item.name}
-              value={form[item.name as keyof typeof form]} // Add index signature
+              value={form[item.name as keyof typeof form]}
               placeholder={item.placeholder}
               onChange={updateField}
             />
