@@ -83,6 +83,25 @@ export default function PurchaseForm() {
           )
         )
         )}
+        {step === 5 ? (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+              className="flex flex-col w-full gap-1"
+            >
+              <p>Full Name: {form.fullName}</p>
+              <p>Email: {form.email}</p>
+              <p>Address: {form.address}</p>
+              <p>Country: {form.country}</p>
+              <p>Card Name: {form.cardName}</p>
+              <p>Card Number: {form.cardNumber}</p>
+              <p>Card Date: {form.cardDate}</p>
+              <p>Card CVV: {form.cardCvv}</p>
+            </motion.div>
+          </>
+        ) : null}
       </div>
       <div className="px-8 pb-8">
         <div className="flex justify-between mt-10">
