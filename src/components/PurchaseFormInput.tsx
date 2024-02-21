@@ -19,7 +19,7 @@ export default function PurchaseFormInput({
 }: PurchaseFormInputProps) {
   return (
     <>
-      <span className="h-4 text-sm text-red-500 transition-all">
+      <span className="h-8 text-sm text-red-500 transition-all">
         {error ? (
           <motion.span
             initial={{ opacity: 0 }}
