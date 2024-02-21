@@ -95,23 +95,13 @@ export default function PurchaseForm() {
           >
             Back
           </button>
-          {step >= 5 ? (
-            <motion.button
-              type="submit"
-              onClick={() => setStep(6)}
-              className="bg duration-350 flex items-center justify-center rounded-full bg-primary py-1.5 px-3.5 font-medium tracking-tight text-white hover:bg-primaryHover active:bg-primaryActive min-w-[5rem] min-h-[2.4rem] transition-all"
+           <motion.button
+              type={step >= 5 ? "submit" : "button"}
+              onClick={step >= 5 ?  () => setStep(6) : stepContinue}
+              className="bg duration-350 flex items-center justify-center rounded-full bg-primary py-1.5 px-3.5 w-auto font-medium tracking-tight text-white hover:bg-primaryHover active:bg-primaryActive transition-all"
             >
-              {loading ? <Loading /> : "Order Now"}
+              {step >= 5 ? (loading ? <Loading /> : "Order Now") : "Continue"}
             </motion.button>
-          ) : (
-            <motion.button
-              type="button"
-              onClick={stepContinue}
-              className="bg duration-350 flex items-center justify-center rounded-full bg-primary py-1.5 px-3.5 font-medium tracking-tight text-white hover:bg-primaryHover active:bg-primaryActive transition-all"
-            >
-              Continue
-            </motion.button>
-          )}
         </div>
       </div>
     </form>
