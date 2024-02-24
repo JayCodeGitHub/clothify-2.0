@@ -23,3 +23,31 @@ query Shop {
       slug
   }
 }`;
+
+export const ITEM_CONTENT_QUERY = (slug: string) =>  `
+    query Shop {
+        allItems(filter: {slug: {eq: "${slug}"}}) {
+          id
+          title
+  				description
+  				price
+  				productType
+  				sizes
+  				thumbnailAlt
+          thumbnail {
+            responsiveImage(imgixParams: {w: 800, h: 1200}) {
+              src
+              width
+              height
+            }
+          }
+  				gallery {
+            id
+         		responsiveImage(imgixParams: {w: 800, h: 1200}) {
+              	src
+              	width
+              	height
+            }
+      		}
+      }
+    }`;

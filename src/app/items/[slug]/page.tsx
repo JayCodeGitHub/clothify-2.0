@@ -1,12 +1,11 @@
 import AddToCart from '@/components/addToCart';
 import Image from 'next/image';
 import { performRequest } from '../../../lib/datocms';
-import { ITEMS_CONTENT_QUERY } from '../../../lib/queries';
+import { ITEMS_CONTENT_QUERY, ITEM_CONTENT_QUERY } from '../../../lib/queries';
 
 export async function generateStaticParams() {
     try {
         const { data: { allItems } } = await performRequest({ query: ITEMS_CONTENT_QUERY });
-
         return allItems.map((item: any) => ({
             slug: item.slug,
         }));
@@ -15,40 +14,12 @@ export async function generateStaticParams() {
         return [];
     }
 }
-  
 
 export default async function Page({ params }: { params: { slug: string} }) {
 
-    const ITEM_CONTENT_QUERY = `
-    query Shop {
-        allItems(filter: {slug: {eq: "${params.slug}"}}) {
-          id
-          title
-  				description
-  				price
-  				productType
-  				sizes
-  				thumbnailAlt
-          thumbnail {
-            responsiveImage(imgixParams: {w: 800, h: 1200}) {
-              src
-              width
-              height
-            }
-          }
-  				gallery {
-            id
-         		responsiveImage(imgixParams: {w: 800, h: 1200}) {
-              	src
-              	width
-              	height
-            }
-      		}
-      }
-    }`;
-
-
-      const { data: { allItems } } = await performRequest({ query: ITEM_CONTENT_QUERY });
+      const query =  ITEM_CONTENT_QUERY(params.slug);
+  
+      const { data: { allItems } } = await performRequest({ query: query});
       const items = allItems[0];
       const {
         title,
