@@ -1,21 +1,8 @@
 import Item from './item';
+import { ItemType } from '@/types';
 
 interface ItemsProps {
-    allItems: {
-        id: string,
-        slug: string,
-        title: string,
-        price: number,
-        sizes: Array<string>,
-        thumbnail: {
-          responsiveImage: {
-            src: string,
-            width: number,
-            height: number
-          }
-        }, 
-        thumbnailAlt: string
-      }[]
+    allItems: ItemType[]
 }
 
 export default function Items({allItems}: ItemsProps) {
