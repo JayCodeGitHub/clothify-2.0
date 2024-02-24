@@ -1,21 +1,13 @@
 import Image from 'next/image';
 import NavLink from '@/components/navlink';
+import { ItemType } from '@/types';
 
 interface ItemProps {
-    slug: string,
-    title: string,
-    price: number,
-    thumbnail: {
-      responsiveImage: {
-        src: string,
-        width: number,
-        height: number
-      }
-    },
-    thumbnailAlt: string
+  item: ItemType
 }
 
-export default async function Item({slug, thumbnail, thumbnailAlt, title, price}: ItemProps) {
+export default async function Item({item}: ItemProps) {
+  const { slug, thumbnail, thumbnailAlt, title, price } = item;
   const { responsiveImage: {src, width, height} } = thumbnail;
     return (
       <li className='place-self-center w-full lg:w-auto'>
