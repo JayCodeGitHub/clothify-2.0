@@ -16,14 +16,15 @@ interface ItemProps {
 }
 
 export default async function Item({slug, thumbnail, thumbnailAlt, title, price}: ItemProps) {
+  const { responsiveImage: {src, width, height} } = thumbnail;
     return (
       <li className='place-self-center w-full lg:w-auto'>
         <NavLink href={`/items/${slug}`}>
           <div className='flex flex-col justify-center items-center gap-3 p-5 rounded-lg lg:w-72  bg-white hover:shadow-3xl transition-all'>
             <Image
-              src={thumbnail.responsiveImage.src}
-              width={thumbnail.responsiveImage.width}
-              height={thumbnail.responsiveImage.height}        
+              src={src}
+              width={width}
+              height={height}
               alt={thumbnailAlt}
               className=' self-center object-cover lg:h-80 h-64 w-auto rounded-lg'
             />
