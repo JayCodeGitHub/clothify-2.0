@@ -60,13 +60,15 @@ export default async function Page({ params }: { params: { slug: string} }) {
         gallery
       } = items;
 
+      const { responsiveImage: {src, width, height} } = thumbnail;
+
     return (
         <main className='flex flex-col justify-center items-center w-full 2xl:px-40 xl:px-28 md:flex-row md:items-start 2xl:gap-32 xl:gap-16 md:gap-8 py-8 px-8 md:px-0'>
           <span className='object-contain md:w-2/5 w-full aspect-square rounded-lg flex justify-center'>
            <Image 
-              src={thumbnail.responsiveImage.src}
-              width={thumbnail.responsiveImage.width}
-              height={thumbnail.responsiveImage.height}
+              src={src}
+              width={width}
+              height={height}
               alt={thumbnailAlt}
               className=' h-full w-auto rounded-lg'
             />
