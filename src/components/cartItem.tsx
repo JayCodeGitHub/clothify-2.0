@@ -11,6 +11,7 @@ interface CartItemProps {
 export default function CartItem({item} : CartItemProps) {
   const { quantityIncrementation, quantityDecrementation } = useCart();
   const { id, title, price, quantity, thumbnail, thumbnailAlt, size } = item;
+  const { responsiveImage: {src, width, height} } = thumbnail;
 
   const updateCount = (value: number) => {
     if (value === 1) {
@@ -30,9 +31,9 @@ export default function CartItem({item} : CartItemProps) {
           className="flex flex-col justify-start items-center gap-8 p-4 w-full bg-slate-100 rounded-lg md:flex-row"
         >
            <Image
-              src={thumbnail.responsiveImage.src}
-              width={thumbnail.responsiveImage.width}
-              height={thumbnail.responsiveImage.height}        
+              src={src}
+              width={width}
+              height={height}
               alt={thumbnailAlt}
               className=" self-center object-cover w-40 h-40 rounded-md md:w-32 md:h-32"
           />
