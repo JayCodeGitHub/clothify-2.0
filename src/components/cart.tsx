@@ -38,16 +38,11 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                     transition: 'transform .3s .1s ease-in-out',
                 }}
             >
-                {cart.map(({id, title, price, size, quantity, thumbnail, thumbnailAlt}) => (
+                {cart.map((item) => (
                     <CartItem 
-                        key={id.concat(size)}
-                        id={id}
-                        title={title}
-                        price={price}
-                        size={size}
-                        quantity={quantity}
-                        thumbnail={thumbnail}
-                        thumbnailAlt={thumbnailAlt}/>
+                        key={item.id.concat(item.size)}
+                        item={item}
+                        />
                 ))}
                 <motion.p layout transition={{ duration: 0.2, delay: 0.1, ease: "easeInOut" }} className="self-start pt-4 pr-0 pb-0">Subtotal: {subtotal()}$</motion.p>
                 <MotionButtonWrapper 

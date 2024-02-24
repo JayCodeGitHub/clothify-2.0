@@ -2,26 +2,15 @@ import Image from "next/image";
 import Quantity from "./quantity";
 import { useCart } from "@/hooks";
 import { motion } from "framer-motion";
+import { CartItemType } from "@/types/cartItem";
 
 interface CartItemProps {
-    id: string;
-    title: string;
-    price: number,
-    quantity: number,
-    size: string,
-    thumbnail: {
-      responsiveImage: {
-        src: string,
-        width: number,
-        height: number
-      }
-    },
-    thumbnailAlt: string;
-
+  item: CartItemType;
 }
 
-export default function CartItem({id, title, price, quantity, thumbnail, thumbnailAlt, size}: CartItemProps) {
+export default function CartItem({item} : CartItemProps) {
   const { quantityIncrementation, quantityDecrementation } = useCart();
+  const { id, title, price, quantity, thumbnail, thumbnailAlt, size } = item;
 
   const updateCount = (value: number) => {
     if (value === 1) {
