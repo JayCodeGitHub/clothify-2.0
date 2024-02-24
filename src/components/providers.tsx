@@ -16,6 +16,6 @@ export default function Providers({
                 </AlertProvider>
             </CartProvider>
         </ItemsProvider>
-  </AuthProvider>
+    </AuthProvider>
   );
 }
