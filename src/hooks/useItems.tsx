@@ -1,27 +1,14 @@
 "use client"
 
 import React, { useEffect, useContext, useState } from "react";
+import { ItemType } from "@/types";
 
 interface ItemsProviderProps {
   children: React.ReactNode;
   initialItems: Array<Item> | false;
 }
 
-type Item = {
-        id: string,
-        slug: string,
-        title: string,
-        price: number,
-        sizes: Array<string>,
-        thumbnail: {
-          responsiveImage: {
-            src: string,
-            width: number,
-            height: number
-          }
-        }, 
-        thumbnailAlt: string
-}
+type Item = ItemType;
 
 interface ItemsContextProps {
     shopItems: Array<Item> | false;
