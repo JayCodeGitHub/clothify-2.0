@@ -7,23 +7,9 @@ import { useRouter } from 'next/navigation'
 import axios from "axios";
 import Button from "@/components/button";
 import PurchaseHistoryItem from "@/components/purchaseHistoryItem";
+import { HistoryItemType } from "@/types";
 
-
-type purchaseHistoryItemType = {
-  id: number,
-  userId: number,
-  title: string;
-  price: number,
-  quantity: number,
-  thumbnail: {
-    responsiveImage: {
-      src: string,
-      width: number,
-      height: number
-    }
-  },
-  thumbnailAlt: string;
-}
+type purchaseHistoryItemType = HistoryItemType
 
 export default function Profile() {  
   const { setToken } = useAuth();
@@ -41,7 +27,7 @@ export default function Profile() {
 
     let newPurchaseHistory: Array<purchaseHistoryItemType> = [];
 
-    purchaseHistory.forEach((item: { id: number, userId: number, title: string, price: number, quantity: number }, index: number) => {
+    purchaseHistory.forEach((item: HistoryItemType) => {
       if(shopItems) {
         let newItem = {
           ... item, 
