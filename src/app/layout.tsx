@@ -4,6 +4,7 @@ import './globals.css'
 import NavBar from "@/components/navbar"
 import { performRequest } from '../lib/datocms';
 import Providers from '@/components/providers'
+import { PAGE_CONTENT_QUERY } from '@/lib/queries';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,26 +20,6 @@ export const metadata: Metadata = {
     ],
   },
 }
-
-const PAGE_CONTENT_QUERY = `
-  query Shop {
-    allItems {
-      id
-      slug
-      title
-      price
-      sizes
-      thumbnailAlt
-      thumbnail {
-        responsiveImage(imgixParams: {w: 800, h: 1200}) {
-          src
-          width
-          height
-        }
-      }
-    }
-  }`;
-
 
 export default async function RootLayout({
   children,
