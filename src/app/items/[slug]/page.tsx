@@ -1,13 +1,7 @@
 import AddToCart from '@/components/addToCart';
 import Image from 'next/image';
 import { performRequest } from '../../../lib/datocms';
-
-const ITEMS_CONTENT_QUERY = `
-  query Shop {
-    allItems {
-        slug
-    }
-  }`;
+import { ITEMS_CONTENT_QUERY } from '../../../lib/queries';
 
 export async function generateStaticParams() {
     try {

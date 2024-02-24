@@ -16,3 +16,10 @@ query Shop {
     }
   }
 }`;
+
+export const ITEMS_CONTENT_QUERY = `
+query Shop {
+  allItems {
+      slug
+  }
+}`;
