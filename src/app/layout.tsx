@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import NavBar from "@/components/navbar"
-import { AuthProvider, CartProvider, ItemsProvider, AlertProvider } from '@/hooks'
 import { performRequest } from '../lib/datocms';
+import Providers from '@/components/providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -49,16 +49,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-secondary`}>
-        <AuthProvider>
-          <ItemsProvider initialItems={allItems}>
-          <CartProvider>
-            <AlertProvider>
-              <NavBar items={allItems}/>
-              {children}
-            </AlertProvider>
-          </CartProvider>
-          </ItemsProvider>
-        </AuthProvider>
+        <Providers allItems={allItems}>
+          <NavBar items={allItems}/>
+          {children}
+        </Providers>
         </body>
     </html>
   )
