@@ -1,3 +1,4 @@
 import { ItemType } from './item';
+import { CartItemType } from './cartItem';
 
-export type { ItemType }
+export type { ItemType, CartItemType }

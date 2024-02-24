@@ -1,49 +1,18 @@
 "use client"
 
 import React, { useContext, useState } from "react";
+import { CartItemType } from "@/types"
 
 interface CartProviderProps {
   children: React.ReactNode;
 }
 
 interface CartContextProps {
-  cart: {
-    id: string;
-    title: string;
-    slug: string;
-    thumbnail: {
-      responsiveImage: {
-        src: string,
-        width: number,
-        height: number
-      }
-    }
-    thumbnailAlt: string;
-    price: number;
-    size: string;
-    description: string;
-    quantity: number;
-  }[];
+  cart: CartItemType[];
   quantityIncrementation: (id: string, quantity: number, size: string) => void;
   quantityDecrementation: (id: string, quantity: number, size: string) => void;
   addItem: (
-    newItem: {
-      id: string;
-      title: string;
-      slug: string;
-      thumbnail: {
-        responsiveImage: {
-          src: string,
-          width: number,
-          height: number
-        }
-      }
-      thumbnailAlt: string;
-      price: number;
-      size: string;
-      description: string;
-      quantity: number;
-    },
+    newItem: CartItemType,
     quantity: number,
     selectedSize: string
   ) => void;
@@ -94,23 +63,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   }
 
   function addItem(
-    newItem: {
-      id: string;
-      title: string;
-      slug: string;
-      thumbnail: {
-        responsiveImage: {
-          src: string,
-          width: number,
-          height: number
-        }
-      }
-      thumbnailAlt: string;
-      price: number;
-      size: string;
-      description: string;
-      quantity: number;
-    },
+    newItem: CartItemType,
     quantity: number,
     selectedSize: string
   ) {
