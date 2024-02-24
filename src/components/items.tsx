@@ -6,6 +6,7 @@ interface ItemsProps {
         slug: string,
         title: string,
         price: number,
+        sizes: Array<string>,
         thumbnail: {
           responsiveImage: {
             src: string,
