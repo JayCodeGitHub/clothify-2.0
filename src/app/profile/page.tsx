@@ -76,8 +76,8 @@ export default function Profile() {
           <h3 className="md:text-xl text-lg">Purchase History</h3>
           {profile ? (
               <div className="flex flex-col gap-4 md:p-4 p-2">
-              {profile.purchaseHistory.map(({id, title, price, quantity, thumbnail, thumbnailAlt}, index) => (
-                <PurchaseHistoryItem key={id} title={title} price={price} quantity={quantity} thumbnail={thumbnail} thumbnailAlt={thumbnailAlt}/>
+              {profile.purchaseHistory.map((item) => (
+                <PurchaseHistoryItem key={item.id} item={item}/>
               ))}
               </div>
             ) : (

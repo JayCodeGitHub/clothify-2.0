@@ -1,21 +1,13 @@
 import Image from "next/image";
+import { HistoryItemType } from "@/types";
 
-interface CartItemProps {
-    title: string;
-    price: number,
-    quantity: number,
-    thumbnail: {
-      responsiveImage: {
-        src: string,
-        width: number,
-        height: number
-      }
-    },
-    thumbnailAlt: string;
+interface PurchaseHistoryItemProps {
+    item : HistoryItemType
 }
 
 
-export default function PurchaseHistoryItem({title, price, quantity, thumbnail, thumbnailAlt}: CartItemProps) {
+export default function PurchaseHistoryItem({item}: PurchaseHistoryItemProps) {
+    const { title, price, quantity, thumbnail, thumbnailAlt} = item;
     return (
         <div className="flex justify-start items-center gap-8 p-4 w-full bg-slate-100 rounded-lg flex-row">
            <Image
