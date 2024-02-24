@@ -5,11 +5,13 @@ import Button from "./button";
 import Quantity from "./quantity";
 import SizePicker from "./sizePicker";
 import { useCart } from "../hooks/useCart";
+import { useAlert } from "../hooks/useAlert";
 
 export default function AddToCart({ sizes, item }: { sizes: Array<string>, item: any}) {
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState<null | string>(null);
     const { addItem } = useCart();
+    const { dispatchAlert, setStatus } = useAlert();
     
     const updateCount = (value: number) => {
         if (value === 1) {
@@ -25,6 +27,8 @@ export default function AddToCart({ sizes, item }: { sizes: Array<string>, item:
         }
         if (quantity > 0) {
             addItem(item, quantity, selectedSize);
+            dispatchAlert(`${item.title} added to your cart`);
+            setStatus(true);
         }
         setQuantity(1);
         setSelectedSize(null);

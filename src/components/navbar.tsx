@@ -2,16 +2,19 @@
 
 import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth"
+import Alert from "./alert";
 import NavLink from "./navlink";
 import { NavigationItems } from "@/items/navigationItems";
 import MobileMenu from "./mobileMenu";
 import Cart from "./cart";
 import CartIcon from "./cartIcon";
+import { useAlert } from "@/hooks/useAlert";
 
 export default function NavBar({ items }: { items?: any }) {
     const { token } = useAuth();
     const [isCart, setIsCart] = useState(false);
     const { auth, profile, cart } = NavigationItems;
+    const { alert } = useAlert();
 
     const toggleCart = () => {
         setIsCart(prevValue => !prevValue);
@@ -20,6 +23,7 @@ export default function NavBar({ items }: { items?: any }) {
 
     return (
         <nav className="w-full">
+             {alert ? <Alert message={alert} /> : null}
             <MobileMenu toggleCart={toggleCart}/>
             <Cart isCart={isCart} toggleCart={toggleCart}/>
             <div  className="w-full h-24 md:flex justify-between items-center 2xl:px-44 xl:px-28 px-4 hidden ">

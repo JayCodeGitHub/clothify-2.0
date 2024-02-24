@@ -23,6 +23,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
     setAlert(message);
     setTimeout(() => {
       setAlert("");
+      setStatus(null);
     }, 1500);
   }, []);
 
