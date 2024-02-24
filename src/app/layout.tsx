@@ -2,10 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import NavBar from "@/components/navbar"
-import { AuthProvider } from '@/hooks/useAuth'
-import { CartProvider } from '@/hooks/useCart'
-import { ItemsProvider } from '@/hooks/useItems'
-import { AlertProvider } from '@/hooks/useAlert'
+import { AuthProvider, CartProvider, ItemsProvider, AlertProvider } from '@/hooks'
 import { performRequest } from '../lib/datocms';
 
 const inter = Inter({ subsets: ['latin'] })

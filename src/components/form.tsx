@@ -3,7 +3,7 @@
 import { useState, useRef} from 'react'
 import axios from 'axios'
 import { setCookie } from 'cookies-next'
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/hooks'
 import { useRouter } from 'next/navigation'
 import { formItems } from '@/items/formItems';
 

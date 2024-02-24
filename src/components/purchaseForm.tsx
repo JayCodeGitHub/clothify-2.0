@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useAlert, useError, useMultiStepForm } from "@/hooks";
+import { useAlert, useError, useMultiStepForm, useCart } from "@/hooks";
 import Loading from "./loading";
 import PurchaseFormInput from "./purchaseFormInput";
 import PurchaseFormStep from "./purchaseFormStep";
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
-import { useCart } from "@/hooks/useCart";
 
 export default function PurchaseForm() {
   const { cart } = useCart();

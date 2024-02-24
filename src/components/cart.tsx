@@ -2,7 +2,7 @@
 
 import Button from "./button";
 import CartItem from "./cartItem";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/hooks";
 import Link from "next/link";
 import { motion } from "framer-motion";
 

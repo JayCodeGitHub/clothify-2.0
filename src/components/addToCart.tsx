@@ -4,8 +4,7 @@ import { useState } from "react";
 import Button from "./button";
 import Quantity from "./quantity";
 import SizePicker from "./sizePicker";
-import { useCart } from "../hooks/useCart";
-import { useAlert } from "../hooks/useAlert";
+import { useCart, useAlert } from "@/hooks";
 
 export default function AddToCart({ sizes, item }: { sizes: Array<string>, item: any}) {
     const [quantity, setQuantity] = useState(1);

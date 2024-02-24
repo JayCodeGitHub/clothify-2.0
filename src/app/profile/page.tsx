@@ -1,10 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { useAuth } from "@/hooks/useAuth"
+import { useAuth, useItems } from "@/hooks"
 import { deleteCookie, getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
-import { useItems } from "@/hooks/useItems";
 import axios from "axios";
 import Button from "@/components/button";
 import PurchaseHistoryItem from "@/components/purchaseHistoryItem";

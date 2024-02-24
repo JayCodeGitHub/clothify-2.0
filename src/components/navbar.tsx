@@ -1,14 +1,13 @@
 "use client"
 
 import { useState } from "react";
-import { useAuth } from "@/hooks/useAuth"
+import { useAuth, useAlert } from "@/hooks";
 import Alert from "./alert";
 import NavLink from "./navlink";
 import { NavigationItems } from "@/items/navigationItems";
 import MobileMenu from "./mobileMenu";
 import Cart from "./cart";
 import CartIcon from "./cartIcon";
-import { useAlert } from "@/hooks/useAlert";
 
 export default function NavBar({ items }: { items?: any }) {
     const { token } = useAuth();

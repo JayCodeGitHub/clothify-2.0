@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Quantity from "./quantity";
-import { useCart } from "@/hooks/useCart";
+import { useCart } from "@/hooks";
 import { motion } from "framer-motion";
 
 interface CartItemProps {

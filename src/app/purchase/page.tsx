@@ -1,6 +1,6 @@
 "use client"
 
-import { useCart } from "@/hooks/useCart"
+import { useCart } from "@/hooks"
 import CartItem from "@/components/cartItem";
 import PurchaseForm from "@/components/purchaseForm";
 
