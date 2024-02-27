@@ -31,15 +31,15 @@ export default async function Page({ params }: { params: { slug: string} }) {
 
     return (
         <main className='flex flex-col justify-center items-center w-full 2xl:px-40 xl:px-28 md:flex-row md:items-start 2xl:gap-32 xl:gap-16 md:gap-8 py-8 px-8 md:px-0'>
-          <span className='object-contain md:w-2/5 w-full aspect-square rounded-lg flex justify-center'>
+          <span className='md:w-2/5 w-full'>
             <Gallery gallery={gallery} title={title}/>
-              </span>
-            <div className='flex flex-col justify-around gap-8 py-8 md:w-2/6 w-full'>
-              <h1 className='font-bold text-2xl pl-2'>{title}</h1>
-              <p>{description}</p>
-              <h2 className='font-bold text-xl pl-2'>{price}$</h2>
-              <AddToCart sizes={sizes} item={items}/>
-            </div>
+          </span>
+          <div className='flex flex-col justify-around gap-8 py-8 md:w-2/6 w-full'>
+            <h1 className='font-bold text-2xl pl-2'>{title}</h1>
+            <p>{description}</p>
+            <h2 className='font-bold text-xl pl-2'>{price}$</h2>
+            <AddToCart sizes={sizes} item={items}/>
+          </div>
         </main>
     )
   }
