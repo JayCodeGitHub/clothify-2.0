@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import useMeasure from 'react-use-measure'
 
 const MotionImage = motion(Image);
 
@@ -11,13 +12,14 @@ const MotionImage = motion(Image);
 export default function Gallery({gallery, title}: {gallery: any[], title: string}) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [tuple, setTuple] = useState([null, selectedImage]);
+    const [ref, {width}] = useMeasure()
 
     if (tuple[1] !== selectedImage) {
         setTuple([tuple[1], selectedImage]);
     }
 
     let prev = tuple[0];
-    let direction = prev !== null && selectedImage > prev ? "right" : "left";
+    let direction = prev !== null && selectedImage > prev ? 1 : -1;
 
     const previousImage = () => {
         if (selectedImage !== 0) {
@@ -47,15 +49,15 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
 
     return (
         <span className='w-full'>
-            <span className='w-full aspect-square block relative overflow-hidden'>
-                <AnimatePresence custom={direction}>
+            <span ref={ref} className='w-full aspect-square block relative overflow-hidden'>
+                <AnimatePresence custom={{direction, width}}>
                 <MotionImage
                     key={gallery[selectedImage].id} 
                     variants={variants}
                     initial="enter"
                     animate="center"
                     exit="exit"
-                    custom={direction}
+                    custom={{direction, width}}
                     src={gallery[selectedImage].responsiveImage.src}
                     width={gallery[selectedImage].responsiveImage.width}
                     height={gallery[selectedImage].responsiveImage.height}
@@ -124,7 +126,7 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
 
 
 const variants = {
-    enter: (direction: string) => ({ x: direction === 'right' ? 600 : -600}),
+    enter: ({direction, width}: {direction: number, width: number}) => ({ x: direction * width}),
     center: { x: 0},
-    exit: (direction: string) => ({ x: direction === 'right' ? -600 : 600})
+    exit: ({direction, width}: {direction: number, width: number}) => ({ x: direction * -width})
 }
