@@ -2,26 +2,22 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+const MotionImage = motion(Image);
+
 
 
 export default function Gallery({gallery, title}: {gallery: any[], title: string}) {
     const [selectedImage, setSelectedImage] = useState(0);
+    const [tuple, setTuple] = useState([null, selectedImage]);
 
-    const setNextImage = () => {
-        if (selectedImage !== gallery.length - 1) {
-            setSelectedImage(prevImage => prevImage + 1);
-        } else {
-            setSelectedImage(0);
-        }
+    if (tuple[1] !== selectedImage) {
+        setTuple([tuple[1], selectedImage]);
     }
 
-    const setPreviousImage = () => {
-        if (selectedImage !== 0) {
-            setSelectedImage(prevImage => prevImage - 1);
-        } else {
-            setSelectedImage(gallery.length - 1);
-        }
-    }
+    let prev = tuple[0];
+    let direction = prev !== null && selectedImage > prev ? "right" : "left";
 
     const previousImage = () => {
         if (selectedImage !== 0) {
@@ -51,18 +47,25 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
 
     return (
         <span className='w-full'>
-            <span className='w-full aspect-square block'>
-                <Image 
-                key={gallery[selectedImage].id} 
-                src={gallery[selectedImage].responsiveImage.src}
-                width={gallery[selectedImage].responsiveImage.width}
-                height={gallery[selectedImage].responsiveImage.height}
-                alt={`Image of product: ${title}`}
-                className='h-full w-auto rounded-lg m-auto'
+            <span className='w-full aspect-square block relative overflow-hidden'>
+                <AnimatePresence custom={direction}>
+                <MotionImage
+                    key={gallery[selectedImage].id} 
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    custom={direction}
+                    src={gallery[selectedImage].responsiveImage.src}
+                    width={gallery[selectedImage].responsiveImage.width}
+                    height={gallery[selectedImage].responsiveImage.height}
+                    alt={`Image of product: ${title}`}
+                    className='h-full w-auto rounded-lg m-auto absolute'
                 />
+                </AnimatePresence>
             </span>
         <div className=' h-12 md:h-24 w-full mt-4 flex justify-between'>
-            <button onClick={setPreviousImage} className='h-full w-1/12 flex justify-center items-center'>
+            <button onClick={() => selectedImage > 0 ? setSelectedImage(selectedImage - 1) : null} className='h-full w-1/12 flex justify-center items-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <Image 
@@ -93,7 +96,7 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
                 alt={`Image of product: ${title}`}
                 className='h-auto w-1/6 rounded-lg object-cover'
                 />
-            <button onClick={setNextImage} className='h-full w-1/12 flex justify-center items-center'>
+            <button onClick={() => selectedImage < gallery.length -1 ? setSelectedImage(selectedImage + 1) : null} className='h-full w-1/12 flex justify-center items-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </button>
         </div>
@@ -117,4 +120,11 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
         )}
         </span>
     )
+}
+
+
+const variants = {
+    enter: (direction: string) => ({ x: direction === 'right' ? 600 : -600}),
+    center: { x: 0},
+    exit: (direction: string) => ({ x: direction === 'right' ? -600 : 600})
 }
