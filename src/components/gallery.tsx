@@ -7,8 +7,6 @@ import useMeasure from 'react-use-measure'
 
 const MotionImage = motion(Image);
 
-
-
 export default function Gallery({gallery, title}: {gallery: any[], title: string}) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [tuple, setTuple] = useState([null, selectedImage]);
@@ -20,6 +18,8 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
 
     let prev = tuple[0];
     let direction = prev !== null && selectedImage > prev ? 1 : -1;
+
+    console.log('selectedImage', selectedImage);
 
     const previousImage = () => {
         if (selectedImage !== 0) {
@@ -49,7 +49,7 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
 
     return (
         <span className='w-full'>
-            <span ref={ref} className='w-full aspect-square block relative overflow-hidden'>
+            <span ref={ref} className='w-full aspect-square block relative rounded-lg overflow-hidden'>
                 <AnimatePresence custom={{direction, width}}>
                 <MotionImage
                     key={gallery[selectedImage].id} 
