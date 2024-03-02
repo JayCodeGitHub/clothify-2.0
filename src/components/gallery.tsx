@@ -21,7 +21,7 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
 
     return (
         <span className='w-full'>
-            <span ref={ref} className='w-full aspect-square block relative rounded-lg overflow-hidden'>
+            <span ref={ref} className='w-full aspect-square flex relative rounded-lg overflow-hidden justify-center'>
                 <AnimatePresence custom={{direction, width}}>
                 <MotionImage
                     key={gallery[selectedImage].id} 
