@@ -42,43 +42,22 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
             <button onClick={() => selectedImage > 0 ? setSelectedImage(selectedImage - 1) : null} className='h-full w-1/12 flex justify-center items-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
-            {selectedImage - 1 >= 0 ? (
-                    <MotionImage
-                        onClick={() => setSelectedImage(selectedImage -1 )}
-                        src={gallery[selectedImage-1].responsiveImage.src}
-                        width={gallery[selectedImage-1].responsiveImage.width}
-                        height={gallery[selectedImage-1].responsiveImage.height}
-                        alt={`Image of product: ${title}`}
-                        className='h-auto w-1/6 rounded-lg object-cover cursor-pointer'
-                    />
-                ) : <span className='w-1/6'/>}
-                    <MotionImage
-                        src={gallery[selectedImage].responsiveImage.src}
-                        width={gallery[selectedImage].responsiveImage.width}
-                        height={gallery[selectedImage].responsiveImage.height}
-                        alt={`Image of product: ${title}`}
-                        className='h-auto w-1/6 rounded-lg object-cover cursor-pointer border-2 border-primary'
-                />
-                 {selectedImage + 1 < gallery.length ? (
-                    <MotionImage
-                        onClick={() => setSelectedImage(selectedImage + 1 )}
-                        src={gallery[selectedImage+1].responsiveImage.src}
-                        width={gallery[selectedImage+1].responsiveImage.width}
-                        height={gallery[selectedImage+1].responsiveImage.height}
-                        alt={`Image of product: ${title}`}
-                        className='h-auto w-1/6 rounded-lg object-cover cursor-pointer'
-                    />
-                ) : <span className='w-1/6'/>}
-                {selectedImage + 2 < gallery.length ? (
-                    <MotionImage
-                        onClick={() => setSelectedImage(selectedImage + 2 )}
-                        src={gallery[selectedImage+2].responsiveImage.src}
-                        width={gallery[selectedImage+2].responsiveImage.width}
-                        height={gallery[selectedImage+2].responsiveImage.height}
-                        alt={`Image of product: ${title}`}
-                        className='h-auto w-1/6 rounded-lg object-cover cursor-pointer'
-                    />
-                ) : <span className='w-1/6'/>}
+                {selectedImage - 1 < 0 ? (<span className='w-1/6'/>) : null}
+                {gallery.map(({id, responsiveImage}, i) => (
+                        (i >= selectedImage - 1 && i <= selectedImage + 2) ? (
+                            <MotionImage
+                                key={id}
+                                onClick={() => setSelectedImage(i)}
+                                src={responsiveImage.src}
+                                width={responsiveImage.width}
+                                height={responsiveImage.height}
+                                alt={`Image of product: ${title}`}
+                                className={`h-auto w-1/6 rounded-lg object-cover cursor-pointer ${ i === selectedImage ? "border-2 border-primary" : "border-0"}`}
+                            />
+                        ) : null)
+                )}
+                {selectedImage + 1 >= gallery.length ? (<span className='w-1/6'/>) : null}
+                {selectedImage + 2 >= gallery.length ? (<span className='w-1/6'/>) : null}
             <button onClick={() => selectedImage < gallery.length -1 ? setSelectedImage(selectedImage + 1) : null} className='h-full w-1/12 flex justify-center items-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </button>
