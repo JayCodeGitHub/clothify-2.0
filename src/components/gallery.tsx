@@ -19,34 +19,6 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
     let prev = tuple[0];
     let direction = prev !== null && selectedImage > prev ? 1 : -1;
 
-    console.log('selectedImage', selectedImage);
-
-    const previousImage = () => {
-        if (selectedImage !== 0) {
-            return selectedImage - 1;
-        } else {
-            return gallery.length - 1;
-        }
-    };
-
-    const nextImage = () => {
-        if (selectedImage !== gallery.length - 1) {
-            return selectedImage + 1;
-        } else {
-            return 0;
-        }
-    }
-
-    const nextImage2 = () => {
-       if (selectedImage + 2 < gallery.length - 1) {
-            return selectedImage + 2;
-       } else if (selectedImage + 2 === gallery.length) {
-            return 0;
-       } else {
-            return 1;
-       }
-    }
-
     return (
         <span className='w-full'>
             <span ref={ref} className='w-full aspect-square block relative rounded-lg overflow-hidden'>
@@ -70,34 +42,43 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
             <button onClick={() => selectedImage > 0 ? setSelectedImage(selectedImage - 1) : null} className='h-full w-1/12 flex justify-center items-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
-            <Image 
-                src={gallery[previousImage()].responsiveImage.src}
-                width={gallery[previousImage()].responsiveImage.width}
-                height={gallery[previousImage()].responsiveImage.height}
-                alt={`Image of product: ${title}`}
-                className='h-auto w-1/6 rounded-lg object-cover'
+            {selectedImage - 1 >= 0 ? (
+                    <MotionImage
+                        onClick={() => setSelectedImage(selectedImage -1 )}
+                        src={gallery[selectedImage-1].responsiveImage.src}
+                        width={gallery[selectedImage-1].responsiveImage.width}
+                        height={gallery[selectedImage-1].responsiveImage.height}
+                        alt={`Image of product: ${title}`}
+                        className='h-auto w-1/6 rounded-lg object-cover cursor-pointer'
+                    />
+                ) : <span className='w-1/6'/>}
+                    <MotionImage
+                        src={gallery[selectedImage].responsiveImage.src}
+                        width={gallery[selectedImage].responsiveImage.width}
+                        height={gallery[selectedImage].responsiveImage.height}
+                        alt={`Image of product: ${title}`}
+                        className='h-auto w-1/6 rounded-lg object-cover cursor-pointer border-2 border-primary'
                 />
-                <Image 
-                src={gallery[selectedImage].responsiveImage.src}
-                width={gallery[selectedImage].responsiveImage.width}
-                height={gallery[selectedImage].responsiveImage.height}
-                alt={`Image of product: ${title}`}
-                className='h-auto w-1/6 rounded-lg object-cover'
-                />
-                 <Image 
-                src={gallery[nextImage()].responsiveImage.src}
-                width={gallery[nextImage()].responsiveImage.width}
-                height={gallery[nextImage()].responsiveImage.height}
-                alt={`Image of product: ${title}`}
-                className='h-auto w-1/6 rounded-lg object-cover'
-                />
-                <Image 
-                src={gallery[nextImage2()].responsiveImage.src}
-                width={gallery[nextImage2()].responsiveImage.width}
-                height={gallery[nextImage2()].responsiveImage.height}
-                alt={`Image of product: ${title}`}
-                className='h-auto w-1/6 rounded-lg object-cover'
-                />
+                 {selectedImage + 1 < gallery.length ? (
+                    <MotionImage
+                        onClick={() => setSelectedImage(selectedImage + 1 )}
+                        src={gallery[selectedImage+1].responsiveImage.src}
+                        width={gallery[selectedImage+1].responsiveImage.width}
+                        height={gallery[selectedImage+1].responsiveImage.height}
+                        alt={`Image of product: ${title}`}
+                        className='h-auto w-1/6 rounded-lg object-cover cursor-pointer'
+                    />
+                ) : <span className='w-1/6'/>}
+                {selectedImage + 2 < gallery.length ? (
+                    <MotionImage
+                        onClick={() => setSelectedImage(selectedImage + 2 )}
+                        src={gallery[selectedImage+2].responsiveImage.src}
+                        width={gallery[selectedImage+2].responsiveImage.width}
+                        height={gallery[selectedImage+2].responsiveImage.height}
+                        alt={`Image of product: ${title}`}
+                        className='h-auto w-1/6 rounded-lg object-cover cursor-pointer'
+                    />
+                ) : <span className='w-1/6'/>}
             <button onClick={() => selectedImage < gallery.length -1 ? setSelectedImage(selectedImage + 1) : null} className='h-full w-1/12 flex justify-center items-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </button>
