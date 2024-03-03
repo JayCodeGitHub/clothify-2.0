@@ -15,13 +15,13 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
 
     useKeypress("ArrowRight", () => {
         if (selectedImage < gallery.length - 1) {
-          setSelectedImage(selectedImage + 1);
+          setSelectedImage(prevImage => prevImage + 1);
         }
       });
     
       useKeypress("ArrowLeft", () => {
         if (selectedImage > 0) {
-          setSelectedImage(selectedImage - 1);
+          setSelectedImage(prevImage => prevImage - 1);
         }
       });
 
