@@ -42,22 +42,21 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
             <button onClick={() => selectedImage > 0 ? setSelectedImage(selectedImage - 1) : null} className='h-full w-1/12 flex justify-center items-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
-                {selectedImage - 1 < 0 ? (<span className='w-1/6'/>) : null}
+                <div className='w-full h-full flex overflow-hidden justify-start'>
+                <motion.div className='w-full h-full flex' style={{ x: (selectedImage == 0 ? 115 : 0)}} animate={{ x: -115 * (selectedImage - 1)}}>
                 {gallery.map(({id, responsiveImage}, i) => (
-                        (i >= selectedImage - 1 && i <= selectedImage + 2) ? (
-                            <MotionImage
-                                key={id}
-                                onClick={() => setSelectedImage(i)}
-                                src={responsiveImage.src}
-                                width={responsiveImage.width}
-                                height={responsiveImage.height}
-                                alt={`Image of product: ${title}`}
-                                className={`h-auto w-1/6 rounded-lg object-cover cursor-pointer ${ i === selectedImage ? "border-2 border-primary" : "border-0"}`}
-                            />
-                        ) : null)
-                )}
-                {selectedImage + 1 >= gallery.length ? (<span className='w-1/6'/>) : null}
-                {selectedImage + 2 >= gallery.length ? (<span className='w-1/6'/>) : null}
+                        <MotionImage
+                            key={id}
+                            onClick={() => setSelectedImage(i)}
+                            src={responsiveImage.src}
+                            width={responsiveImage.width}
+                            height={responsiveImage.height}
+                            alt={`Image of product: ${title}`}
+                            className={`h-auto w-1/5 mx-3 rounded-lg shrink-0 object-cover cursor-pointer ${ i === selectedImage ? "border-2 border-primary" : "border-0" }`}
+                        />
+                ))}
+                </motion.div>
+                </div>
             <button onClick={() => selectedImage < gallery.length -1 ? setSelectedImage(selectedImage + 1) : null} className='h-full w-1/12 flex justify-center items-center'>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </button>
