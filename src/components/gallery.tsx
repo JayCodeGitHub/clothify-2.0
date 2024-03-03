@@ -56,7 +56,7 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
             </span>
         <div className=' h-12 md:h-24 w-full mt-4 flex justify-between'>
             <button 
-                onClick={() => selectedImage > 0 ? setSelectedImage(selectedImage - 1) : null}
+                onClick={() => selectedImage > 0 ? setSelectedImage(prevImage => prevImage - 1) : null}
                 className={`h-full w-1/12 flex justify-center items-center transition-all ${
                     selectedImage == 0 ? 'cursor-default text-gray-300' : 'cursor-pointer text-black'
                 }`}
@@ -97,7 +97,7 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
                 </motion.div>
                 </div>
             <button 
-                onClick={() => selectedImage < gallery.length -1 ? setSelectedImage(selectedImage + 1) : null}
+                onClick={() => selectedImage < gallery.length -1 ? setSelectedImage(prevImage => prevImage + 1) : null}
                 className={`h-full w-1/12 flex justify-center items-center transition-all ${
                     selectedImage >= gallery.length - 1 ? 'cursor-default text-gray-300' : 'cursor-pointer text-black'
                 }`}
