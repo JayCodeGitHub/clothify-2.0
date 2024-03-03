@@ -89,8 +89,8 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
                             width={responsiveImage.width}
                             height={responsiveImage.height}
                             alt={`Image of product: ${title}`}
-                            className={`h-auto w-1/5 mx-3 rounded-lg shrink-0 object-cover cursor-pointer ${
-                                i === selectedImage ? "border-2 border-primary" : "border-0" 
+                            className={`h-auto w-1/5 mx-3 rounded-lg shrink-0 object-cover cursor-pointer border-2 transition-all ${
+                                i === selectedImage ? "border-primary" : "border-transparent" 
                             }`}
                         />
                     ))}
