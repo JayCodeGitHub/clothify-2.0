@@ -12,6 +12,7 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
     const [index, setIndex] = useState(0);
     const [tuple, setTuple] = useState([null, index]);
     const [ref, {width}] = useMeasure();
+    const [carouselItem, carouselItemMeasure] = useMeasure();
 
     const variants = {
         enter: ({direction, width}: {direction: number, width: number}) => ({ x: direction * width}),
@@ -84,12 +85,13 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
                 <div className='w-full h-full flex overflow-hidden justify-start'>
                 <motion.div 
                     className='w-full h-full flex'
-                    style={{ x: (index == 0 ? 115 : 0)}}
-                    animate={{ x: -115 * (index - 1)}}
+                    initial={{ x: "calc(20% + 25px)"}}
+                    animate={ index > 0 ? { x: -(Math.floor(carouselItemMeasure.width) + 24) * (index - 1)} : undefined}
                 >
                     {gallery.map(({id, responsiveImage}, i) => (
                         <MotionImage
                             key={id}
+                            ref={carouselItem}
                             onClick={() => setIndex(i)}
                             src={responsiveImage.src}
                             width={responsiveImage.width}
