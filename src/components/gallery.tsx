@@ -4,13 +4,26 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import useMeasure from 'react-use-measure'
+import useKeypress from "react-use-keypress";
 
 const MotionImage = motion(Image);
 
 export default function Gallery({gallery, title}: {gallery: any[], title: string}) {
     const [selectedImage, setSelectedImage] = useState(0);
     const [tuple, setTuple] = useState([null, selectedImage]);
-    const [ref, {width}] = useMeasure()
+    const [ref, {width}] = useMeasure();
+
+    useKeypress("ArrowRight", () => {
+        if (selectedImage < gallery.length - 1) {
+          setSelectedImage(selectedImage + 1);
+        }
+      });
+    
+      useKeypress("ArrowLeft", () => {
+        if (selectedImage > 0) {
+          setSelectedImage(selectedImage - 1);
+        }
+      });
 
     if (tuple[1] !== selectedImage) {
         setTuple([tuple[1], selectedImage]);
