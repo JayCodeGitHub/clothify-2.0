@@ -9,28 +9,34 @@ import useKeypress from "react-use-keypress";
 const MotionImage = motion(Image);
 
 export default function Gallery({gallery, title}: {gallery: any[], title: string}) {
-    const [selectedImage, setSelectedImage] = useState(0);
-    const [tuple, setTuple] = useState([null, selectedImage]);
+    const [index, setIndex] = useState(0);
+    const [tuple, setTuple] = useState([null, index]);
     const [ref, {width}] = useMeasure();
 
+    const variants = {
+        enter: ({direction, width}: {direction: number, width: number}) => ({ x: direction * width}),
+        center: { x: 0},
+        exit: ({direction, width}: {direction: number, width: number}) => ({ x: direction * -width})
+    }
+
     useKeypress("ArrowRight", () => {
-        if (selectedImage < gallery.length - 1) {
-          setSelectedImage(prevImage => prevImage + 1);
+        if (index < gallery.length - 1) {
+          setIndex(prevIndex => prevIndex + 1);
         }
       });
     
       useKeypress("ArrowLeft", () => {
-        if (selectedImage > 0) {
-          setSelectedImage(prevImage => prevImage - 1);
+        if (index > 0) {
+          setIndex(prevIndex => prevIndex - 1);
         }
       });
 
-    if (tuple[1] !== selectedImage) {
-        setTuple([tuple[1], selectedImage]);
+    if (tuple[1] !== index) {
+        setTuple([tuple[1], index]);
     }
 
     let prev = tuple[0];
-    let direction = prev !== null && selectedImage > prev ? 1 : -1;
+    let direction = prev !== null && index > prev ? 1 : -1;
 
     return (
         <span className='w-full'>
@@ -40,15 +46,15 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
             >
                 <AnimatePresence custom={{direction, width}}>
                     <MotionImage
-                        key={gallery[selectedImage].id} 
+                        key={gallery[index].id} 
                         variants={variants}
                         initial="enter"
                         animate="center"
                         exit="exit"
                         custom={{direction, width}}
-                        src={gallery[selectedImage].responsiveImage.src}
-                        width={gallery[selectedImage].responsiveImage.width}
-                        height={gallery[selectedImage].responsiveImage.height}
+                        src={gallery[index].responsiveImage.src}
+                        width={gallery[index].responsiveImage.width}
+                        height={gallery[index].responsiveImage.height}
                         alt={`Image of product: ${title}`}
                         className='h-full w-auto rounded-lg m-auto absolute'
                     />
@@ -56,9 +62,9 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
             </span>
         <div className=' h-12 md:h-24 w-full mt-4 flex justify-between'>
             <button 
-                onClick={() => selectedImage > 0 ? setSelectedImage(prevImage => prevImage - 1) : null}
+                onClick={() => index > 0 ? setIndex(prevIndex => prevIndex - 1) : null}
                 className={`h-full w-1/12 flex justify-center items-center transition-all ${
-                    selectedImage == 0 ? 'cursor-default text-gray-300' : 'cursor-pointer text-black'
+                    index == 0 ? 'cursor-default text-gray-300' : 'cursor-pointer text-black'
                 }`}
             >
                 <svg 
@@ -78,28 +84,28 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
                 <div className='w-full h-full flex overflow-hidden justify-start'>
                 <motion.div 
                     className='w-full h-full flex'
-                    style={{ x: (selectedImage == 0 ? 115 : 0)}}
-                    animate={{ x: -115 * (selectedImage - 1)}}
+                    style={{ x: (index == 0 ? 115 : 0)}}
+                    animate={{ x: -115 * (index - 1)}}
                 >
                     {gallery.map(({id, responsiveImage}, i) => (
                         <MotionImage
                             key={id}
-                            onClick={() => setSelectedImage(i)}
+                            onClick={() => setIndex(i)}
                             src={responsiveImage.src}
                             width={responsiveImage.width}
                             height={responsiveImage.height}
                             alt={`Image of product: ${title}`}
                             className={`h-auto w-1/5 mx-3 rounded-lg shrink-0 object-cover cursor-pointer border-2 transition-all ${
-                                i === selectedImage ? "border-primary" : "border-transparent" 
+                                i === index ? "border-primary" : "border-transparent" 
                             }`}
                         />
                     ))}
                 </motion.div>
                 </div>
             <button 
-                onClick={() => selectedImage < gallery.length -1 ? setSelectedImage(prevImage => prevImage + 1) : null}
+                onClick={() => index < gallery.length -1 ? setIndex(prevIndex => prevIndex + 1) : null}
                 className={`h-full w-1/12 flex justify-center items-center transition-all ${
-                    selectedImage >= gallery.length - 1 ? 'cursor-default text-gray-300' : 'cursor-pointer text-black'
+                    index >= gallery.length - 1 ? 'cursor-default text-gray-300' : 'cursor-pointer text-black'
                 }`}
             >
                 <svg 
@@ -137,11 +143,4 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
         )}
         </span>
     )
-}
-
-
-const variants = {
-    enter: ({direction, width}: {direction: number, width: number}) => ({ x: direction * width}),
-    center: { x: 0},
-    exit: ({direction, width}: {direction: number, width: number}) => ({ x: direction * -width})
 }
