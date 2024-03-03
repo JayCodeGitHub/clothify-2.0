@@ -34,30 +34,52 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
 
     return (
         <span className='w-full'>
-            <span ref={ref} className='w-full aspect-square flex relative rounded-lg overflow-hidden justify-center'>
+            <span 
+                ref={ref}
+                className='w-full aspect-square flex relative rounded-lg overflow-hidden justify-center'
+            >
                 <AnimatePresence custom={{direction, width}}>
-                <MotionImage
-                    key={gallery[selectedImage].id} 
-                    variants={variants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    custom={{direction, width}}
-                    src={gallery[selectedImage].responsiveImage.src}
-                    width={gallery[selectedImage].responsiveImage.width}
-                    height={gallery[selectedImage].responsiveImage.height}
-                    alt={`Image of product: ${title}`}
-                    className='h-full w-auto rounded-lg m-auto absolute'
-                />
+                    <MotionImage
+                        key={gallery[selectedImage].id} 
+                        variants={variants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        custom={{direction, width}}
+                        src={gallery[selectedImage].responsiveImage.src}
+                        width={gallery[selectedImage].responsiveImage.width}
+                        height={gallery[selectedImage].responsiveImage.height}
+                        alt={`Image of product: ${title}`}
+                        className='h-full w-auto rounded-lg m-auto absolute'
+                    />
                 </AnimatePresence>
             </span>
         <div className=' h-12 md:h-24 w-full mt-4 flex justify-between'>
-            <button onClick={() => selectedImage > 0 ? setSelectedImage(selectedImage - 1) : null} className='h-full w-1/12 flex justify-center items-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            <button 
+                onClick={() => selectedImage > 0 ? setSelectedImage(selectedImage - 1) : null}
+                className='h-full w-1/12 flex justify-center items-center text-black'
+            >
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <path d="M15 18l-6-6 6-6"/>
+                </svg>
             </button>
                 <div className='w-full h-full flex overflow-hidden justify-start'>
-                <motion.div className='w-full h-full flex' style={{ x: (selectedImage == 0 ? 115 : 0)}} animate={{ x: -115 * (selectedImage - 1)}}>
-                {gallery.map(({id, responsiveImage}, i) => (
+                <motion.div 
+                    className='w-full h-full flex'
+                    style={{ x: (selectedImage == 0 ? 115 : 0)}}
+                    animate={{ x: -115 * (selectedImage - 1)}}
+                >
+                    {gallery.map(({id, responsiveImage}, i) => (
                         <MotionImage
                             key={id}
                             onClick={() => setSelectedImage(i)}
@@ -65,23 +87,40 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
                             width={responsiveImage.width}
                             height={responsiveImage.height}
                             alt={`Image of product: ${title}`}
-                            className={`h-auto w-1/5 mx-3 rounded-lg shrink-0 object-cover cursor-pointer ${ i === selectedImage ? "border-2 border-primary" : "border-0" }`}
+                            className={`h-auto w-1/5 mx-3 rounded-lg shrink-0 object-cover cursor-pointer ${
+                                i === selectedImage ? "border-2 border-primary" : "border-0" 
+                            }`}
                         />
-                ))}
+                    ))}
                 </motion.div>
                 </div>
-            <button onClick={() => selectedImage < gallery.length -1 ? setSelectedImage(selectedImage + 1) : null} className='h-full w-1/12 flex justify-center items-center'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            <button 
+                onClick={() => selectedImage < gallery.length -1 ? setSelectedImage(selectedImage + 1) : null}
+                className='h-full w-1/12 flex justify-center items-center text-black'
+            >
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
             </button>
         </div>
-        {gallery.map(({id, responsiveImage}:{
-            id: string,
-            responsiveImage: {
-                src: string,
-                width: number,
-                height: number
-            }
-        }) => (    
+            {gallery.map(({id, responsiveImage}:{
+                id: string,
+                responsiveImage: {
+                    src: string,
+                    width: number,
+                    height: number
+                }
+            }) => (    
             <Image 
                 key={id} 
                 src={responsiveImage.src}
