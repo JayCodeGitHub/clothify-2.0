@@ -6,15 +6,18 @@ import { setCookie } from 'cookies-next'
 import { useAuth, useError, useForm } from '@/hooks'
 import { useRouter } from 'next/navigation'
 import { formItems } from '@/items/formItems';
+import PurchaseFormInput from './purchaseFormInput';
+import { motion } from "framer-motion";
 
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
-  const formRef = useRef<HTMLFormElement>(null)
   const { setToken } = useAuth();
-  const router = useRouter();
   const { error, setError} = useError();
   const { form, setForm, updateField } = useForm();
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(false);
+
+  const formRef = useRef<HTMLFormElement>(null)
+  const router = useRouter();
 
   const initialError = formItems.reduce(
     (acc, item) => ({ ...acc, [item.name]: "" }),
@@ -73,7 +76,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
         if (res.status === 'rejected') {
           throw res.reason
         }
-            
+
         const { data } = res.status === 'fulfilled' &&  res.value || {};
         setCookie('token', data)
         setToken(data);
@@ -118,10 +121,25 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
     return (
        <form onSubmit={handleSubmit} ref={formRef} className='p-2 mt-2 w-80 flex flex-col items-center gap-6 rounded-md py-10 px-6 bg-white'>
         {formItems.map(({name, label, type, placeholder}) => (
-            <span key={name} className='flex flex-col gap-2 w-full'>
-              <label className='text-sm self-start'>{label}</label>
-              <input type={type} name={name} placeholder={placeholder} onChange={updateField} className='p-2 w-full rounded-md text-sm bg-secondary'/>
-            </span>
+           <motion.label  
+           key={name} 
+           htmlFor={name}
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           transition={{ duration: 0.2 }}
+           className="text-sm font-medium flex flex-col gap-2 w-full"
+         >
+             {label}
+           <PurchaseFormInput
+              type={type}
+              key={name}
+              error={error[name as keyof typeof error]}
+              name={name}
+              value={form[name as keyof typeof form]}
+              placeholder={placeholder}
+              onChange={updateField}
+           />
+         </motion.label>
         ))}
           <span className='h-14 w-full text-sm text-red-500'>
             {Object.keys(error).map((key) => (

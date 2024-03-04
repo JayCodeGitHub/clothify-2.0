@@ -131,6 +131,7 @@ export default function PurchaseForm() {
             >
                 {item.label}
               <PurchaseFormInput
+                type={item.type}
                 key={item.name}
                 error={error[item.name as keyof typeof error]}
                 name={item.name}
