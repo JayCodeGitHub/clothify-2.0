@@ -119,24 +119,24 @@ export default function PurchaseForm() {
         <PurchaseFormStep step={4} currentStep={step} />
       </div>
       <div className="flex flex-col justify-start gap-8 px-8 space-y-2">
-        {PurchaseFormItems.map((item) => (
-          item.step === step && (
+        {PurchaseFormItems.map(({step: itemStep, name, label, type, placeholder}) => (
+          itemStep === step && (
             <motion.label  
-              key={item.name} 
-              htmlFor={item.name}
+              key={name} 
+              htmlFor={name}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
               className="text-sm font-medium flex flex-col gap-2"
             >
-                {item.label}
+                {label}
               <PurchaseFormInput
-                type={item.type}
-                key={item.name}
-                error={error[item.name as keyof typeof error]}
-                name={item.name}
-                value={form[item.name as keyof typeof form]}
-                placeholder={item.placeholder}
+                type={type}
+                key={name}
+                error={error[name as keyof typeof error]}
+                name={name}
+                value={form[name as keyof typeof form]}
+                placeholder={placeholder}
                 onChange={updateField}
               />
             </motion.label>
