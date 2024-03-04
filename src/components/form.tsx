@@ -3,126 +3,116 @@
 import { useState, useRef} from 'react'
 import axios from 'axios'
 import { setCookie } from 'cookies-next'
-import { useAuth } from '@/hooks'
+import { useAuth, useError, useForm } from '@/hooks'
 import { useRouter } from 'next/navigation'
 import { formItems } from '@/items/formItems';
-import { useError } from '@/hooks/useError';
 
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
+  const formRef = useRef<HTMLFormElement>(null)
+  const { setToken } = useAuth();
+  const router = useRouter();
+  const { error, setError} = useError();
+  const { form, setForm, updateField } = useForm();
+  const [isLogin, setIsLogin] = useState(false)
 
-    const initialError = formItems.reduce(
-      (acc, item) => ({ ...acc, [item.name]: "" }),
-      { formStatus: "" }
-    );
+  const initialError = formItems.reduce(
+    (acc, item) => ({ ...acc, [item.name]: "" }),
+    { formStatus: "" }
+  );
 
-    const initialForm = formItems.reduce(
-      (acc, item) => ({ ...acc, [item.name]: "" }),{}
-    );
+  const initialForm = formItems.reduce(
+    (acc, item) => ({ ...acc, [item.name]: "" }),{}
+  );
 
-    const formRef = useRef<HTMLFormElement>(null)
-    const { setToken } = useAuth();
-    const router = useRouter();
-    const { error, setError} = useError();
-    const [form, setForm] = useState<{[key: string]: string;}>(initialForm);
-    const [isLogin, setIsLogin] = useState(false)
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target
-      setForm({
-        ...form,
-        [name]: value,
-      })
+  const validate = () => {
+    if(!form.email) {
+      const updatedErorr = { ...initialError, email: 'Email is required' };
+      setError(updatedErorr);
+      return false
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(form.email)) {
+      const updatedErorr = { ...initialError, email: 'Invalid email' };
+      setError(updatedErorr);
+      return false
     }
 
-    const validate = () => {
-      if(!form.email) {
-        const updatedErorr = { ...initialError, email: 'Email is required' };
-        setError(updatedErorr);
-        return false
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(form.email)) {
-        const updatedErorr = { ...initialError, email: 'Invalid email' };
-        setError(updatedErorr);
-        return false
-      }
+    if(!form.password) {
+      const updatedErorr = { ...initialError, password: 'Password is required' };
+      setError(updatedErorr);
+      return false
+    } else if (form.password.length < 6) {
+      const updatedErorr = { ...initialError, password: 'Password must be at least 6 characters' };
+      setError(updatedErorr);
+      return false
+    }
+    return true
+  }
 
-      if(!form.password) {
-        const updatedErorr = { ...initialError, password: 'Password is required' };
-        setError(updatedErorr);
-        return false
-      } else if (form.password.length < 6) {
-        const updatedErorr = { ...initialError, password: 'Password must be at least 6 characters' };
-        setError(updatedErorr);
-        return false
-      }
-      return true
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const isValid = validate();
+    
+    if (!isValid) {
+      return
+    } else {
+      setError(initialError)
     }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+    try {
+      setIsLogin(true);
 
-        const isValid = validate();
-        if (!isValid) {
-          return
-        } else {
-          setError(initialError)
+      if (action === 'login') {
+
+        // artificial delay
+        let [res] = await Promise.allSettled([
+          axios.post('/api/auth/login', form),
+          new Promise((resolve) => setTimeout(resolve, 1000))
+        ])
+
+        if (res.status === 'rejected') {
+          throw res.reason
         }
-
-        try {
-          setIsLogin(true)
-          if (action === 'login') {
-
-
-            // artificial delay
-            let [res] = await Promise.allSettled([
-              axios.post('/api/auth/login', form),
-              new Promise((resolve) => setTimeout(resolve, 1000))
-            ])
-
-            if (res.status === 'rejected') {
-              throw res.reason
-            }
             
-            const { data } = res.status === 'fulfilled' &&  res.value || {};
+        const { data } = res.status === 'fulfilled' &&  res.value || {};
+        setCookie('token', data)
+        setToken(data);
+        router.push('/profile')
+      } else if (action === 'register') { 
 
-            setCookie('token', data)
-            setToken(data);
-            router.push('/profile')
-          } else if (action === 'register') { 
-
-              // artificial delay
-              let [res] = await Promise.allSettled([
-                axios.post('/api/auth/register', form),
-                new Promise((resolve) => setTimeout(resolve, 1000))
-              ])
+        // artificial delay
+        let [res] = await Promise.allSettled([
+        axios.post('/api/auth/register', form),
+          new Promise((resolve) => setTimeout(resolve, 1000))
+        ])
   
-              if (res.status === 'rejected') {
-                throw res.reason
-              }
+        if (res.status === 'rejected') {
+          throw res.reason
+        }
               
-            const { data } = res.status === 'fulfilled' &&  res.value || {};
-            setCookie('token', data);
-            setToken(data);
-            router.push('/profile')
-          }
-      } catch (error) {
-        setIsLogin(false)
-        try {
-          // If Error is from server
-          const updatedErorr = { ...initialError, formStatus: (error as any).response.data.message };
+        const { data } = res.status === 'fulfilled' &&  res.value || {};
+        setCookie('token', data);
+        setToken(data);
+        router.push('/profile')
+      }
+    } catch (error) {
+      setIsLogin(false)
+      try {
+        // If Error is from server
+        const updatedErorr = { ...initialError, formStatus: (error as any).response.data.message };
           setError(updatedErorr);
         } catch (error) {
           // If Error is not from server
           const updatedErorr = { ...initialError, formStatus: "Something went wrong" };
           setError(updatedErorr);
         }
-          return
-      }
-        setIsLogin(false)
-        setForm({ ...initialForm})
-        formRef.current?.reset()
         
-        setError(initialError)
+      return
+    }
+      setIsLogin(false)
+      setForm({ ...initialForm})
+      formRef.current?.reset()  
+      setError(initialError)
 
     }
     return (
@@ -130,7 +120,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
         {formItems.map(({name, label, type, placeholder}) => (
             <span key={name} className='flex flex-col gap-2 w-full'>
               <label className='text-sm self-start'>{label}</label>
-              <input type={type} name={name} placeholder={placeholder} onChange={handleChange} className='p-2 w-full rounded-md text-sm bg-secondary'/>
+              <input type={type} name={name} placeholder={placeholder} onChange={updateField} className='p-2 w-full rounded-md text-sm bg-secondary'/>
             </span>
         ))}
           <span className='h-14 w-full text-sm text-red-500'>
