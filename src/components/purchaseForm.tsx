@@ -102,26 +102,25 @@ export default function PurchaseForm() {
               className="flex flex-col w-full gap-1"
             >
               <p className="pt-4 my-1 font-medium">Subtotal: {subtotal()}$</p>
-              <p>Full Name: {form.fullName}</p>
-              <p>Email: {form.email}</p>
-              <p>Address: {form.address}</p>
-              <p>Country: {form.country}</p>
-              <p>Card Name: {form.cardName}</p>
-              <p>Card Number: {form.cardNumber}</p>
-              <p>Card Date: {form.cardDate}</p>
-              <p>Card CVV: {form.cardCvv}</p>
+              {Object.keys(form).map((key) => (
+                  PurchaseFormItems.map((item) => (
+                    item.name === key && (
+                      <p key={key}>{item.label}: {form[key as keyof typeof form]}</p>
+                    )
+                  ))
+              ))}
             </motion.div>
           </>
         ) : null}
       </div>
       <div className="px-8 pb-8">
-      <div className="text-red-500 text-sm h-16 w-full shrink-0 flex pt-8">
-        {Object.keys(error).map((key) => (
-          <span key={key}>
-            {error[key as keyof typeof error]}
-          </span>
-            ))}
-          </div>
+        <div className="text-red-500 text-sm h-16 w-full shrink-0 flex pt-8">
+          {Object.keys(error).map((key) => (
+            <span key={key}>
+              {error[key as keyof typeof error]}
+            </span>
+          ))}
+        </div>
         <div className="flex justify-between mt-10">
           <button
             type="button"

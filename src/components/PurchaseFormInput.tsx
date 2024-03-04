@@ -30,7 +30,7 @@ export default function PurchaseFormInput({
         className={` ${
           error
             ? "bg-red-50 border-red-500 placeholder-red-700 placeholder-opacity-40"
-            : "bg-transparent border-gray-600 placeholder-slate-300 font-normal"
+            : "bg-transparent border-gray-600 placeholder-slate-300"
         } w-full p-2 border-2 rounded-lg transition-all`}
         type={number ? "number" : "string"}
       />
