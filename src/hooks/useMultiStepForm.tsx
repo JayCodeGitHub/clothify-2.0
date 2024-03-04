@@ -21,10 +21,10 @@ export function useMultiStepForm() {
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    setForm({
-      ...form,
+    setForm( pervForm => ({
+      ...pervForm,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   return { form, setForm, updateField, initialForm };

@@ -15,12 +15,12 @@ export default function PurchaseForm() {
   const { form, setForm, updateField, initialForm } = useMultiStepForm();
   const { error, setError } = useError();
 
+  const { dispatchAlert, setStatus } = useAlert();
+
   const initialError = PurchaseFormItems.reduce(
     (acc, item) => ({ ...acc, [item.name]: "" }),
     { formStatus: "" }
   );
-
-  const { dispatchAlert, setStatus } = useAlert();
 
   function subtotal() {
     let current = 0;
@@ -57,9 +57,8 @@ export default function PurchaseForm() {
       setStep(step > 5 ? step : step + 1);
       setError(initialError);
     }
-}
+  }
      
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === 5) {
