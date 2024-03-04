@@ -2,19 +2,11 @@
 
 import { useState } from "react";
 
-const initialError = {
-  fullName: "",
-  email: "",
-  address: "",
-  country: "",
-  cardName: "",
-  cardNumber: "",
-  cardDate: "",
-  cardCvv: "",
-  formStatus: "",
-};
+interface initialError {
+  [key: string]: string;
+}
 
 export function useError() {
-  const [error, setError] = useState(initialError);
-  return { error, setError, initialError };
+  const [error, setError] = useState<initialError>({});
+  return { error, setError};
 }

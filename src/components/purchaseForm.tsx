@@ -13,7 +13,12 @@ export default function PurchaseForm() {
   const [loading, setLoading] = useState(false);
 
   const { form, setForm, updateField, initialForm } = useMultiStepForm();
-  const { error, setError, initialError } = useError();
+  const { error, setError } = useError();
+
+  const initialError = PurchaseFormItems.reduce(
+    (acc, item) => ({ ...acc, [item.name]: "" }),
+    { formStatus: "" }
+  );
 
   const { dispatchAlert, setStatus } = useAlert();
 
