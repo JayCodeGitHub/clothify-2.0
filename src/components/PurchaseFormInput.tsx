@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 interface PurchaseFormInputProps {
   error: string;
   name: string;
@@ -18,22 +16,17 @@ export default function PurchaseFormInput({
   number,
 }: PurchaseFormInputProps) {
   return (
-    <>
-      <motion.input
+      <input
         name={name}
         value={value}
         placeholder={placeholder}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.2 }}
         onChange={onChange}
-        className={` ${
+        className={`bg-transparent border-gray-600 placeholder-slate-300 ${
           error
             ? "bg-red-50 border-red-500 placeholder-red-700 placeholder-opacity-40"
-            : "bg-transparent border-gray-600 placeholder-slate-300"
+            : ""
         } w-full p-2 border-2 rounded-lg transition-all`}
         type={number ? "number" : "string"}
       />
-    </>
   );
 }
