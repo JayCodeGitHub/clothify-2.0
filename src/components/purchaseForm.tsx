@@ -5,6 +5,7 @@ import Loading from "./loading";
 import PurchaseFormInput from "./purchaseFormInput";
 import PurchaseFormStep from "./purchaseFormStep";
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
+import axios from "axios";
 
 export default function PurchaseForm() {
   const { cart } = useCart();
@@ -58,10 +59,17 @@ export default function PurchaseForm() {
     if (step === 5) {
       return null;
     }
+    setLoading(true);
+    try {
+      const res = await axios.post("/api/order", form);
+      console.log(res);
+      setStep(1);
+    } catch (error) {
+      console.error(error);
+    }
     dispatchAlert(`Form sent successfully`);
     setStatus(true);
     setForm(initialForm);
-    setStep(1);
     setLoading(false);
   };
 
