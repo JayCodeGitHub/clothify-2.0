@@ -6,7 +6,7 @@ import { setCookie } from 'cookies-next'
 import { useAuth, useError, useForm } from '@/hooks'
 import { useRouter } from 'next/navigation'
 import { formItems } from '@/items/formItems';
-import PurchaseFormInput from './purchaseFormInput';
+import Input from './input';
 import { motion } from "framer-motion";
 
 
@@ -130,7 +130,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
            className="text-sm font-medium flex flex-col gap-2 w-full"
          >
              {label}
-           <PurchaseFormInput
+           <Input
               type={type}
               key={name}
               error={error[name as keyof typeof error]}

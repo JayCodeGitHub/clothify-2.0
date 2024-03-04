@@ -1,4 +1,4 @@
-interface PurchaseFormInputProps {
+interface InputProps {
   error: string;
   name: string;
   value: string | number;
@@ -7,14 +7,14 @@ interface PurchaseFormInputProps {
   type?: string;
 }
 
-export default function PurchaseFormInput({
+export default function Input({
   error,
   name,
   value,
   placeholder,
   onChange,
   type,
-}: PurchaseFormInputProps) {
+}: InputProps) {
   return (
       <input
         name={name}

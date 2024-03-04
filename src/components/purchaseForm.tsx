@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useAlert, useError, useForm, useCart } from "@/hooks";
 import Loading from "./loading";
-import PurchaseFormInput from "./purchaseFormInput";
+import Input from "./input";
 import PurchaseFormStep from "./purchaseFormStep";
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
 import axios from "axios";
@@ -130,7 +130,7 @@ export default function PurchaseForm() {
               className="text-sm font-medium flex flex-col gap-2"
             >
                 {label}
-              <PurchaseFormInput
+              <Input
                 type={type}
                 key={name}
                 error={error[name as keyof typeof error]}
