@@ -11,6 +11,7 @@ const initialError = {
   cardNumber: "",
   cardDate: "",
   cardCvv: "",
+  formStatus: "",
 };
 
 export function useError() {

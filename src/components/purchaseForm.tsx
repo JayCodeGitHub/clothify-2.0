@@ -24,6 +24,7 @@ export default function PurchaseForm() {
 }
 
   const stepBack = () => {
+    setError(initialError);
     setStep(step < 2 ? step : step - 1);
   };
 
@@ -59,17 +60,42 @@ export default function PurchaseForm() {
     if (step === 5) {
       return null;
     }
+    setStep(5);
     setLoading(true);
-    try {
-      const res = await axios.post("/api/order", form);
-      console.log(res);
-      setStep(1);
-    } catch (error) {
-      console.error(error);
+    setError(initialError);
+    if (subtotal() === 0) {
+      const updatedErorr = { ...initialError, formStatus: "Your cart is empty" };
+      setError(updatedErorr);
+      setLoading(false);
+      return;
     }
-    dispatchAlert(`Form sent successfully`);
+    try {
+      // artificial delay
+      let [res] = await Promise.allSettled([
+        axios.post("/api/order", form),
+        new Promise((resolve) => setTimeout(resolve, 1000)),
+      ]);
+  
+      if (res.status === 'rejected') {
+        throw res.reason
+      }
+      dispatchAlert(`Form sent successfully`);
+      setForm(initialForm);
+      setStep(1);
+
+    } catch (error) {
+      try {
+         // If Error is from server
+        const response = (error as any).response;
+        const updatedErorr = { ...initialError, formStatus: response.data.message};
+        setError(updatedErorr);
+      } catch (error) {
+         // If Error is not from server
+        const updatedErorr = { ...initialError, formStatus: "Something went wrong" };
+        setError(updatedErorr);
+      }
+    }
     setStatus(true);
-    setForm(initialForm);
     setLoading(false);
   };
 
@@ -101,7 +127,7 @@ export default function PurchaseForm() {
           )
         )
         )}
-        {step === 5 ? (
+        {step >= 5  ? (
           <>
             <motion.div
               initial={{ opacity: 0 }}
