@@ -6,7 +6,7 @@ interface initialForm {
   [key: string]: string;
 }
 
-export function useMultiStepForm() {
+export function useForm() {
   const [form, setForm] = useState<initialForm>({});
 
   const updateField = (

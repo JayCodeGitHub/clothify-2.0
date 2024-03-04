@@ -3,7 +3,7 @@ import { useAuth, AuthProvider } from "./useAuth";
 import { useCart, CartProvider } from "./useCart";
 import { useError } from "./useError";
 import { useItems, ItemsProvider } from "./useItems";
-import { useMultiStepForm } from "./useMultiStepForm";
+import { useForm } from "./useForm";
 
 export { 
     useAlert,
@@ -11,7 +11,7 @@ export {
     useCart,
     useError,
     useItems,
-    useMultiStepForm,
+    useForm,
     AlertProvider,
     AuthProvider,
     CartProvider,

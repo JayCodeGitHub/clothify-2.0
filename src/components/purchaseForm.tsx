@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useAlert, useError, useMultiStepForm, useCart } from "@/hooks";
+import { useAlert, useError, useForm, useCart } from "@/hooks";
 import Loading from "./loading";
 import PurchaseFormInput from "./purchaseFormInput";
 import PurchaseFormStep from "./purchaseFormStep";
@@ -12,7 +12,7 @@ export default function PurchaseForm() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const { form, setForm, updateField } = useMultiStepForm();
+  const { form, setForm, updateField } = useForm();
   const { error, setError} = useError();
 
   const { dispatchAlert, setStatus } = useAlert();
