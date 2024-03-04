@@ -2,19 +2,12 @@
 
 import { useState } from "react";
 
-const initialForm = {
-  fullName: "",
-  email: "",
-  address: "",
-  country: "",
-  cardName: "",
-  cardNumber: "",
-  cardDate: "",
-  cardCvv: "",
-};
+interface initialForm {
+  [key: string]: string;
+}
 
 export function useMultiStepForm() {
-  const [form, setForm] = useState(initialForm);
+  const [form, setForm] = useState<initialForm>({});
 
   const updateField = (
     e:
@@ -27,5 +20,5 @@ export function useMultiStepForm() {
     }));
   };
 
-  return { form, setForm, updateField, initialForm };
+  return { form, setForm, updateField };
 }

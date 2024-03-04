@@ -12,7 +12,7 @@ export default function PurchaseForm() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  const { form, setForm, updateField, initialForm } = useMultiStepForm();
+  const { form, setForm, updateField } = useMultiStepForm();
   const { error, setError } = useError();
 
   const { dispatchAlert, setStatus } = useAlert();
@@ -20,6 +20,10 @@ export default function PurchaseForm() {
   const initialError = PurchaseFormItems.reduce(
     (acc, item) => ({ ...acc, [item.name]: "" }),
     { formStatus: "" }
+  );
+
+  const initialForm = PurchaseFormItems.reduce(
+    (acc, item) => ({ ...acc, [item.name]: "" }),{}
   );
 
   function subtotal() {
