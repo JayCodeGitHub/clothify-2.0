@@ -6,6 +6,8 @@ import { setCookie } from 'cookies-next'
 import { useAuth } from '@/hooks'
 import { useRouter } from 'next/navigation'
 import { formItems } from '@/items/formItems';
+import { useError } from '@/hooks/useError';
+
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
     const initialForm = {
@@ -13,10 +15,15 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
       password: '',
     }
 
+    const initialError = formItems.reduce(
+      (acc, item) => ({ ...acc, [item.name]: "" }),
+      { formStatus: "" }
+    );
+
     const formRef = useRef<HTMLFormElement>(null)
     const { setToken } = useAuth();
     const router = useRouter();
-    const [error, setError] = useState<null | string>(null)
+    const { error, setError} = useError();
     const [form, setForm] = useState({ ...initialForm});
     const [isLogin, setIsLogin] = useState(false)
 
@@ -30,18 +37,22 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
 
     const validate = () => {
       if(!form.email) {
-        setError('Email is required')
+        const updatedErorr = { ...initialError, email: 'Email is required' };
+        setError(updatedErorr);
         return false
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(form.email)) {
-        setError('Invalid email')
+        const updatedErorr = { ...initialError, email: 'Invalid email' };
+        setError(updatedErorr);
         return false
       }
 
       if(!form.password) {
-        setError('Password is required')
+        const updatedErorr = { ...initialError, password: 'Password is required' };
+        setError(updatedErorr);
         return false
       } else if (form.password.length < 6) {
-        setError('Password must be at least 6 characters')
+        const updatedErorr = { ...initialError, password: 'Password must be at least 6 characters' };
+        setError(updatedErorr);
         return false
       }
       return true
@@ -54,7 +65,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
         if (!isValid) {
           return
         } else {
-          setError(null)
+          setError(initialError)
         }
 
         try {
@@ -98,10 +109,12 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
         setIsLogin(false)
         try {
           // If Error is from server
-          setError((error as any).response.data.message)
+          const updatedErorr = { ...initialError, formStatus: (error as any).response.data.message };
+          setError(updatedErorr);
         } catch (error) {
           // If Error is not from server
-          setError('Something went wrong')
+          const updatedErorr = { ...initialError, formStatus: "Something went wrong" };
+          setError(updatedErorr);
         }
           return
       }
@@ -109,7 +122,7 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
         setForm({ ...initialForm})
         formRef.current?.reset()
         
-        setError(null)
+        setError(initialError)
 
     }
     return (
@@ -121,7 +134,11 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
             </span>
         ))}
           <span className='h-14 w-full text-sm text-red-500'>
-            <p>{error}</p>
+            {Object.keys(error).map((key) => (
+              <p key={key}>
+                {error[key as keyof typeof error]}
+              </p>
+          ))}
           </span>
           <button type="submit" className={`${isLogin ? 'bg-red-300 cursor-default' : 'bg-primary cursor-pointer'} transition-all py-2 px-6 text-white rounded-lg`}>
             {isLogin ? 'Loading...' : (

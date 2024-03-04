@@ -8,5 +8,5 @@ interface initialError {
 
 export function useError() {
   const [error, setError] = useState<initialError>({});
-  return { error, setError};
+  return { error, setError };
 }
