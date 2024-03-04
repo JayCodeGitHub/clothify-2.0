@@ -10,21 +10,21 @@ import { useError } from '@/hooks/useError';
 
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
-    const initialForm = {
-      email: '',
-      password: '',
-    }
 
     const initialError = formItems.reduce(
       (acc, item) => ({ ...acc, [item.name]: "" }),
       { formStatus: "" }
     );
 
+    const initialForm = formItems.reduce(
+      (acc, item) => ({ ...acc, [item.name]: "" }),{}
+    );
+
     const formRef = useRef<HTMLFormElement>(null)
     const { setToken } = useAuth();
     const router = useRouter();
     const { error, setError} = useError();
-    const [form, setForm] = useState({ ...initialForm});
+    const [form, setForm] = useState<{[key: string]: string;}>(initialForm);
     const [isLogin, setIsLogin] = useState(false)
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
