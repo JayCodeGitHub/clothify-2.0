@@ -2,7 +2,7 @@ export const PurchaseFormItems = [
     {
         step: 1,
         label: 'Full Name',
-        placeholder: 'Full Name',
+        placeholder: 'John Smith',
         name: 'fullName',
         type: 'text',
         regex: /^\w+\s+\w+$/,
@@ -12,7 +12,7 @@ export const PurchaseFormItems = [
     {
         step: 1,
         label: 'Email Adress',
-        placeholder: 'Email',
+        placeholder: 'example@example.com',
         name: 'email',
         type: 'email',
         regex: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
@@ -22,7 +22,7 @@ export const PurchaseFormItems = [
     {
         step: 2,
         label: 'Address',
-        placeholder: 'Street Number, City',
+        placeholder: 'Example St 1234, City',
         name: 'address',
         type: 'text',
         regex: /^[^\d,]+ \d+, \w+$/,
@@ -32,7 +32,7 @@ export const PurchaseFormItems = [
     {
         step: 2,
         label: 'Country',
-        placeholder: 'Country',
+        placeholder: 'United Kingdom',
         name: 'country',
         type: 'text',
         regex: /^[A-Za-z\s-]+$/,
@@ -42,7 +42,7 @@ export const PurchaseFormItems = [
     {
         step: 3,
         label: `Cardholder's Name`,
-        placeholder: 'Full Name',
+        placeholder: 'John Smith',
         name: 'cardName',
         type: 'text',
         regex: /^\w+\s+\w+$/,

@@ -76,9 +76,11 @@ export default function PurchaseForm() {
         <PurchaseFormStep step={3} currentStep={step} />
         <PurchaseFormStep step={4} currentStep={step} />
       </div>
-      <div className="flex flex-col justify-start gap-2 px-8 space-y-2 h-60">
+      <div className="flex flex-col justify-start gap-8 px-8 space-y-2">
         {PurchaseFormItems.map((item) => (
           item.step === step && (
+            <label  key={item.name} htmlFor={item.name} className="text-sm font-medium flex flex-col gap-2">
+              {item.label}
             <PurchaseFormInput
               key={item.name}
               error={error[item.name as keyof typeof error]}
@@ -86,7 +88,8 @@ export default function PurchaseForm() {
               value={form[item.name as keyof typeof form]}
               placeholder={item.placeholder}
               onChange={updateField}
-            />
+              />
+              </label>
           )
         )
         )}
@@ -112,6 +115,13 @@ export default function PurchaseForm() {
         ) : null}
       </div>
       <div className="px-8 pb-8">
+      <div className="text-red-500 text-sm h-16 w-full shrink-0 flex pt-8">
+        {Object.keys(error).map((key) => (
+          <span key={key}>
+            {error[key as keyof typeof error]}
+          </span>
+            ))}
+          </div>
         <div className="flex justify-between mt-10">
           <button
             type="button"

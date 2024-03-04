@@ -19,19 +19,6 @@ export default function PurchaseFormInput({
 }: PurchaseFormInputProps) {
   return (
     <>
-      <span className="h-8 text-sm text-red-500 transition-all">
-        {error ? (
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              duration: 0.2,
-            }}
-          >
-            {error}
-          </motion.span>
-        ) : null}
-      </span>
       <motion.input
         name={name}
         value={value}
@@ -42,8 +29,8 @@ export default function PurchaseFormInput({
         onChange={onChange}
         className={` ${
           error
-            ? "bg-[#F8D3D3] border-red-500 placeholder-slate-700"
-            : "bg-transparent border-neutral-100 placeholder-slate-400"
+            ? "bg-red-50 border-red-500 placeholder-red-700 placeholder-opacity-40"
+            : "bg-transparent border-gray-600 placeholder-slate-300 font-normal"
         } w-full p-2 border-2 rounded-lg transition-all`}
         type={number ? "number" : "string"}
       />
