@@ -4,7 +4,7 @@ export const formItems = [
       type: 'text',
       label: 'Email address',
       placeholder: 'Your Email Address',
-      regex: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/,
+      regex: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
       errorRequire: 'Email is required',
       errorRegex: 'Invalid email',
     },

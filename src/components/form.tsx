@@ -29,26 +29,22 @@ export default function Form({ action }: { action: 'login' | 'register' }) {
   );
 
   const validate = () => {
-    if(!form.email) {
-      const updatedErorr = { ...initialError, email: 'Email is required' };
-      setError(updatedErorr);
-      return false
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(form.email)) {
-      const updatedErorr = { ...initialError, email: 'Invalid email' };
-      setError(updatedErorr);
-      return false
-    }
 
-    if(!form.password) {
-      const updatedErorr = { ...initialError, password: 'Password is required' };
-      setError(updatedErorr);
-      return false
-    } else if (form.password.length < 6) {
-      const updatedErorr = { ...initialError, password: 'Password must be at least 6 characters' };
-      setError(updatedErorr);
-      return false
-    }
-    return true
+    let valid = true;
+
+    {formItems.map((item) => {
+      if((!form[item.name as keyof typeof form]) && valid) {
+        const updatedErorr = { ...initialError, [item.name]: item.errorRequire };
+        setError(updatedErorr);
+        valid = false;
+      } else if (valid && (item.regex && !new RegExp(item.regex).test(form[item.name as keyof typeof form]))) {
+        const updatedErorr = { ...initialError, [item.name]: item.errorRegex };
+        setError(updatedErorr);
+        valid = false;
+      }
+    })}
+
+    return valid ? true : false
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
