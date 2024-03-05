@@ -3,7 +3,7 @@
 import { useState, useRef} from 'react'
 import axios from 'axios'
 import { setCookie } from 'cookies-next'
-import { useAuth, useError, useForm } from '@/hooks'
+import { useAuth, useForm } from '@/hooks'
 import { useRouter } from 'next/navigation'
 import { formItems } from '@/items/formItems';
 import Input from './input';
@@ -12,8 +12,7 @@ import { motion } from "framer-motion";
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
   const { setToken } = useAuth();
-  const { error, setError} = useError();
-  const { form, setForm, updateField } = useForm();
+  const { form, setForm, updateField, error, setError } = useForm();
   const [isLogin, setIsLogin] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null)

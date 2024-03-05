@@ -6,8 +6,13 @@ interface initialForm {
   [key: string]: string;
 }
 
+interface initialError {
+  [key: string]: string;
+}
+
 export function useForm() {
   const [form, setForm] = useState<initialForm>({});
+  const [error, setError] = useState<initialError>({});
 
   const updateField = (
     e:
@@ -20,5 +25,5 @@ export function useForm() {
     }));
   };
 
-  return { form, setForm, updateField };
+  return { form, setForm, updateField, error, setError };
 }
