@@ -5,10 +5,11 @@ import { motion } from "framer-motion";
 import { CartItemType } from "@/types/cartItem";
 
 interface CartItemProps {
+  name: string;
   item: CartItemType;
 }
 
-export default function CartItem({item} : CartItemProps) {
+export default function CartItem({name, item} : CartItemProps) {
   const { quantityIncrementation, quantityDecrementation } = useCart();
   const { id, title, price, quantity, thumbnail, thumbnailAlt, size } = item;
   const { responsiveImage: {src, width, height} } = thumbnail;
@@ -27,7 +28,7 @@ export default function CartItem({item} : CartItemProps) {
           animate={{ opacity: "100%" }}
           transition={{ duration: 0.2, delay: 0.1, ease: "easeInOut" }}
           exit={{ opacity: "0%" }}
-          layoutId={id.concat(size)} 
+          layoutId={id.concat(size).concat(name)} 
           className="flex flex-col justify-start items-center gap-8 p-4 w-full bg-slate-100 rounded-lg md:flex-row"
         >
            <Image

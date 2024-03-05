@@ -40,9 +40,10 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
             >
                 {cart.map((item) => (
                     <CartItem 
+                        name="CartItem"
                         key={item.id.concat(item.size)}
                         item={item}
-                        />
+                    />
                 ))}
                 <motion.p layout transition={{ duration: 0.2, delay: 0.1, ease: "easeInOut" }} className="self-start pt-4 pr-0 pb-0">Subtotal: {subtotal()}$</motion.p>
                 <MotionButtonWrapper 
