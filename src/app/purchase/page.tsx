@@ -14,7 +14,7 @@ export default function Purchase() {
                 <div className="flex flex-col w-full gap-8 items-center 2xl:px-12 xl:px-6 md:px-2 px-16">
                     {cart.map((item) => (
                         <CartItem
-                            name="purchase"
+                            name="PurchaseItem"
                             key={item.id.concat(item.size)}
                             item={item}
                         />

@@ -78,7 +78,7 @@ export default function PurchaseForm() {
     try {
       // artificial delay
       let [res] = await Promise.allSettled([
-        axios.post("/api/order", form),
+        axios.post("/api/order", {form, cart}),
         new Promise((resolve) => setTimeout(resolve, 1000)),
       ]);
   
