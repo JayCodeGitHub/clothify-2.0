@@ -8,7 +8,7 @@ import { PurchaseFormItems } from "@/items/purchaseFormItems";
 import axios from "axios";
 
 export default function PurchaseForm() {
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
 
@@ -88,6 +88,7 @@ export default function PurchaseForm() {
       dispatchAlert(`Form sent successfully`);
       setForm(initialForm);
       setStep(1);
+      clearCart();
 
     } catch (error) {
       try {

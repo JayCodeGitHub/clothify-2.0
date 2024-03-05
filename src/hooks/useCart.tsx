@@ -17,6 +17,7 @@ interface CartContextProps {
     selectedSize: string
   ) => void;
   removeItem: (id: string, size: string) => void;
+  clearCart: () => void;
 }
 
 const CartContext = React.createContext<CartContextProps>(
@@ -92,6 +93,10 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCart(cart.filter((item) => !(item.id === id && item.size === size)));
   }
 
+  function clearCart() {
+    setCart(defaultState);
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -100,6 +105,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         quantityDecrementation,
         addItem,
         removeItem,
+        clearCart,
       }}
     >
       {children}
