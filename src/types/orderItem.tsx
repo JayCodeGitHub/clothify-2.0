@@ -4,6 +4,7 @@ export type OrderItemType = {
     title: string;
     price: number,
     quantity: number,
+    size: string,
     thumbnail: {
       responsiveImage: {
         src: string,

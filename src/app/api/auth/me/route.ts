@@ -49,8 +49,6 @@ export async function GET(req: any) {
         orders[i] = { ...item, items: orderItems } as typeof item;
     }));
 
-    console.log(orders);
-
     const user = {  email: profile.email, orders: orders}
 
     return NextResponse.json(user, { status: 200 });
