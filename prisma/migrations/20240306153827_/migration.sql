@@ -36,3 +36,6 @@ CREATE TABLE "OrderItem" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Order_id_key" ON "Order"("id");

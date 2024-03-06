@@ -5,7 +5,6 @@ import jwt, { Secret } from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
 
-
 export async function POST(req: any) {
     const data = await req.json();
 
@@ -49,6 +48,8 @@ export async function GET(req: any) {
         const orderItems = await prisma.orderItem.findMany({ where: { orderId: item.id }});
         orders[i] = { ...item, items: orderItems } as typeof item;
     }));
+
+    console.log(orders);
 
     const user = {  email: profile.email, orders: orders}
 

@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
+import { PrismaClient } from '@prisma/client'
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
+
+const prisma = new PrismaClient();
 
 export async function POST(req: any) {
     let data;
     let form: { [x: string]: string; };
-    let cart;
+    let cart: any[];
     try {
         data = await req.json();
         form = data.form;
@@ -34,6 +37,29 @@ export async function POST(req: any) {
       if (cart.length === 0) {
         return NextResponse.json({message: 'Your cart is empty'}, { status: 404 });
       }
+
+        try {
+          const createdOrder = await prisma.order.create({
+            data: {
+              fullName: form.fullName,
+              email: form.email,
+              address: form.address,
+              country: form.country,
+              cardName: form.cardName,
+              cardNumber: form.cardNumber,
+              cardDate: form.cardDate,
+              cardCvv: form.cardCvv,
+              items: {
+                create: Array.isArray(cart) ? cart.map((item: any) => {
+                  return { title: item.title, price: item.price, size: item.size, quantity: item.quantity }
+                }) : [],
+              },
+            },
+          });
+          console.log('Order created:', createdOrder);
+        } catch (error) {
+          console.error('Error creating order:', error);
+        }
 
     return NextResponse.json("Order", { status: 200 });
 }
