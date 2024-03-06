@@ -16,13 +16,30 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  purchaseHistory PurchaseHistory[]
+  purchaseHistory Order[]
 }
 
-model PurchaseHistory {
+model Order {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  items     OrderItem[]
+  fullName  String
+  email     String
+  address   String
+  country   String
+  cardName  String
+  cardNumber String
+  cardDate  String
+  cardCvv   String
+}
+
+model OrderItem {
   id      Int     @id @default(autoincrement())
-  userId  Int
-  user    User    @relation(fields: [userId], references: [id])
+  orderId  Int
+  order  Order   @relation(fields: [orderId], references: [id])
   title    String
   price   Float
   date    DateTime @default(now())

@@ -8,9 +8,23 @@ async function main() {
       password: 'password',
       purchaseHistory: {
         create: [
-          { title: 'Jersey Sleeveless Maxi Dress', price: 55, size: 'm', quantity: 2 },
-          { title: 'Olive chino pants', price: 55, size: 'xl', quantity: 2 },
-          { title: 'Grey wool Charles coat in Prince of Wales check', price: 450, size: 's', quantity: 1 },
+          {
+            items: {
+              create: [
+                { title: 'Jersey Sleeveless Maxi Dress', price: 55, size: 'm', quantity: 2 },
+                { title: 'Olive chino pants', price: 55, size: 'xl', quantity: 2 },
+                { title: 'Grey wool Charles coat in Prince of Wales check', price: 450, size: 's', quantity: 1 },
+              ],
+            },
+            fullName: 'John Smith',
+            email: '',
+            address: '',
+            country: '',
+            cardName: '',
+            cardNumber: '',
+            cardDate: '',
+            cardCvv: '',
+          },
         ],
       },
     },
