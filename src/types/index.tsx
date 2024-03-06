@@ -1,5 +1,5 @@
 import { ItemType } from './item';
 import { CartItemType } from './cartItem';
-import { HistoryItemType } from './historyItem';
+import { OrderItemType } from './historyItem';
 
-export type { ItemType, CartItemType, HistoryItemType }
+export type { ItemType, CartItemType, OrderItemType }

@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { HistoryItemType } from "@/types";
+import { OrderItemType } from "@/types";
 
-interface PurchaseHistoryItemProps {
-    item : HistoryItemType
+interface OrderItemProps {
+    item : OrderItemType
 }
 
-export default function OrderItem({item}: PurchaseHistoryItemProps) {
+export default function OrderItem({item}: OrderItemProps) {
     const { title, price, quantity, thumbnail, thumbnailAlt} = item;
     const { responsiveImage: { src, width, height} } = thumbnail;
     return (

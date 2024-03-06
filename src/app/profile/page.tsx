@@ -6,11 +6,9 @@ import { deleteCookie, getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import axios from "axios";
 import Button from "@/components/button";
-import PurchaseHistoryItem from "@/components/purchaseHistoryItem";
-import { HistoryItemType } from "@/types";
+import { OrderItemType } from "@/types";
 import Order from "@/components/order";
 
-type purchaseHistoryItemType = HistoryItemType
 
 export default function Profile() {  
   const { setToken } = useAuth();
@@ -31,7 +29,7 @@ export default function Profile() {
 
 
     orders.map((order: any) => {
-      let newPurchaseHistory: Array<purchaseHistoryItemType> = [];
+      let newPurchaseHistory: Array<OrderItemType> = [];
       order.items.map((item: any) => {
         if(shopItems) {
           let newItem = {

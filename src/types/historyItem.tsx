@@ -1,6 +1,6 @@
-export type HistoryItemType = {
+export type OrderItemType = {
     id: number,
-    userId: number,
+    orderId: number,
     title: string;
     price: number,
     quantity: number,
