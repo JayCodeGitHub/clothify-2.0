@@ -27,24 +27,26 @@ export default function Profile() {
     const { email, orders } = data;
 
     setProfile({ email, orders });
-   
-    /*
+  
 
-    let newPurchaseHistory: Array<purchaseHistoryItemType> = [];
 
-     purchaseHistory.forEach((item: HistoryItemType) => {
-      if(shopItems) {
-        let newItem = {
-          ... item, 
-          thumbnail: shopItems.find((shopItem) => shopItem.title === item.title)!.thumbnail,
-          thumbnailAlt: shopItems.find((shopItem) => shopItem.title === item.title)!.thumbnailAlt,
+    orders.map((order: any) => {
+      let newPurchaseHistory: Array<purchaseHistoryItemType> = [];
+      order.items.map((item: any) => {
+        if(shopItems) {
+          let newItem = {
+            ... item, 
+            thumbnail: shopItems.find((shopItem) => shopItem.title === item.title)!.thumbnail,
+            thumbnailAlt: shopItems.find((shopItem) => shopItem.title === item.title)!.thumbnailAlt,
+          }
+          newPurchaseHistory.push(newItem)
         }
-        newPurchaseHistory.push(newItem)
-      }
-    })
-   
-    setProfile({ email, purchaseHistory: newPurchaseHistory });
-    */
+      })
+      order.items = newPurchaseHistory;
+    });
+ 
+    setProfile({ email, orders: orders });
+    
   }
 
 
