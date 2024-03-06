@@ -19,13 +19,17 @@ export async function POST(req: any) {
     return NextResponse.json({message: 'Email already exists'}, { status: 400 });
   }
   
-
-  prisma.user.create({
-    data: {
+  try {
+    const createdUser = await prisma.user.create({
+      data: {
         email: email,
         password: password,
     },
-  });
+    });
+    console.log('Order created:', createdUser);
+  } catch (error) {
+    console.error('Error creating order:', error);
+  }
 
   const token = jwt.sign( {email}, process.env.JWT_SECRET || '', { expiresIn: '72h' });
 
