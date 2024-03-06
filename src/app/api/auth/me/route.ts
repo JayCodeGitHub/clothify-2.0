@@ -43,8 +43,7 @@ export async function GET(req: any) {
         return NextResponse.json({message: 'User not found'}, { status: 404 });
     }
     
-    const orders = await prisma.order.findMany({ where: { userId: profile.id }});
-
+    const orders = await prisma.order.findMany({ where: { email: profile.email }});
 
     await Promise.all(orders.map(async (item, i) => {
         const orderItems = await prisma.orderItem.findMany({ where: { orderId: item.id }});

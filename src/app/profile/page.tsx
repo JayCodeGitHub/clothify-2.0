@@ -8,6 +8,7 @@ import axios from "axios";
 import Button from "@/components/button";
 import PurchaseHistoryItem from "@/components/purchaseHistoryItem";
 import { HistoryItemType } from "@/types";
+import Order from "@/components/order";
 
 type purchaseHistoryItemType = HistoryItemType
 
@@ -63,14 +64,6 @@ export default function Profile() {
     deleteCookie('token');
     router.push('/auth')
   }
-
-  if (profile) {
-    profile.orders.map((order: any) => {
-      order.items.map((item: any) => {
-        console.log(item)
-      })
-    })
-  }
   
   return (
     <main className='flex flex-col justify-center items-center w-full min-h-rest 2xl:px-56 xl:px-44 px-4 md:items-start gap-4 py-8'>
@@ -90,7 +83,9 @@ export default function Profile() {
           <h3 className="md:text-xl text-lg">Purchase History</h3>
           {profile ? (
               <div className="flex flex-col gap-4 md:p-4 p-2">
-                Orders
+                {profile.orders.map((order: any) => (
+                  <Order key={order.id} order={order} />                  
+                ))}
               </div>
             ) : (
               <p>Loading ...</p>
