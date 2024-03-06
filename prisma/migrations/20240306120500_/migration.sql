@@ -10,7 +10,6 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Order" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "userId" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
     "fullName" TEXT NOT NULL,
@@ -20,8 +19,7 @@ CREATE TABLE "Order" (
     "cardName" TEXT NOT NULL,
     "cardNumber" TEXT NOT NULL,
     "cardDate" TEXT NOT NULL,
-    "cardCvv" TEXT NOT NULL,
-    CONSTRAINT "Order_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    "cardCvv" TEXT NOT NULL
 );
 
 -- CreateTable

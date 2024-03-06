@@ -1,12 +1,17 @@
 import OrderItem from "./orderItem";
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
+import { OrderType } from "@/types";
 
-export default function Order({ order }: any) {
+interface OrderProps {
+    order: OrderType
+}
+
+export default function Order({ order }: OrderProps) {
     return (
         <div>
-            {PurchaseFormItems.map((item, i) => (
-                <p key={i}>{order[item.name]}</p>
-            ))}
+           {PurchaseFormItems.map((item) => (
+                <p key={item.name}>{item.label}: {String(order[item.name])}</p>
+           ))}
         {order.items.map((item: any) => (
             <OrderItem
                 key={item.id}

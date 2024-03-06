@@ -6,7 +6,7 @@ import { deleteCookie, getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import axios from "axios";
 import Button from "@/components/button";
-import { OrderItemType } from "@/types";
+import { OrderItemType, OrderType } from "@/types";
 import Order from "@/components/order";
 
 
@@ -14,7 +14,7 @@ export default function Profile() {
   const { setToken } = useAuth();
   const { shopItems } = useItems();
   const router = useRouter();
-  const [profile, setProfile] = useState<{email: string, orders: Array<any>} | false>(false);
+  const [profile, setProfile] = useState<{email: string, orders: Array<OrderType>} | false>(false);
 
   const getProfile = async () => {
     const token = getCookie('token')
@@ -26,8 +26,6 @@ export default function Profile() {
 
     setProfile({ email, orders });
   
-
-
     orders.map((order: any) => {
       let newPurchaseHistory: Array<OrderItemType> = [];
       order.items.map((item: any) => {
@@ -46,7 +44,6 @@ export default function Profile() {
     setProfile({ email, orders: orders });
     
   }
-
 
   useEffect(() => { 
     if (!getCookie('token')) {
@@ -72,7 +69,7 @@ export default function Profile() {
           <div>
             {profile ? (
               <>
-              <p className="p-2 md:p-4 md:text-lg text-base">Email: {profile.email}</p>
+                <p className="p-2 md:p-4 md:text-lg text-base">Email: {profile.email}</p>
               </>
             ) : (
               <p>Loading ...</p>
