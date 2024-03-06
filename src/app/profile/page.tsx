@@ -15,7 +15,7 @@ export default function Profile() {
   const { setToken } = useAuth();
   const { shopItems } = useItems();
   const router = useRouter();
-  const [profile, setProfile] = useState<{email: string, purchaseHistory: Array<purchaseHistoryItemType>} | false>(false);
+  const [profile, setProfile] = useState<{email: string, orders: Array<any>} | false>(false);
 
   const getProfile = async () => {
     const token = getCookie('token')
@@ -23,11 +23,15 @@ export default function Profile() {
     if (data === false) {
       deleteCookie('token');
     }
-    const { email, purchaseHistory } = data;
+    const { email, orders } = data;
+
+    setProfile({ email, orders });
+   
+    /*
 
     let newPurchaseHistory: Array<purchaseHistoryItemType> = [];
 
-    purchaseHistory.forEach((item: HistoryItemType) => {
+     purchaseHistory.forEach((item: HistoryItemType) => {
       if(shopItems) {
         let newItem = {
           ... item, 
@@ -39,7 +43,9 @@ export default function Profile() {
     })
    
     setProfile({ email, purchaseHistory: newPurchaseHistory });
+    */
   }
+
 
   useEffect(() => { 
     if (!getCookie('token')) {
@@ -56,6 +62,14 @@ export default function Profile() {
     setToken(false);
     deleteCookie('token');
     router.push('/auth')
+  }
+
+  if (profile) {
+    profile.orders.map((order: any) => {
+      order.items.map((item: any) => {
+        console.log(item)
+      })
+    })
   }
   
   return (
@@ -76,9 +90,7 @@ export default function Profile() {
           <h3 className="md:text-xl text-lg">Purchase History</h3>
           {profile ? (
               <div className="flex flex-col gap-4 md:p-4 p-2">
-              {profile.purchaseHistory.map((item) => (
-                <PurchaseHistoryItem key={item.id} item={item}/>
-              ))}
+                Orders
               </div>
             ) : (
               <p>Loading ...</p>
