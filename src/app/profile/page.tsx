@@ -76,10 +76,10 @@ export default function Profile() {
             )}
           </div>
         </section>
-        <section className='xl:w-2/5 md:w-3/5 w-full h-full flex flex-col gap-4'>
+        <section className='xl:w-6/12 md:w-4/5 w-full h-full flex flex-col gap-4'>
           <h3 className="md:text-xl text-lg">Purchase History</h3>
           {profile ? (
-              <div className="flex flex-col gap-4 md:p-4 p-2">
+              <div className="flex flex-col gap-8 md:p-4 p-2">
                 {profile.orders.map((order: any) => (
                   <Order key={order.id} order={order} />                  
                 ))}
