@@ -19,7 +19,6 @@ export default function NavBar({ items }: { items?: any }) {
         setIsCart(prevValue => !prevValue);
     }
 
-
     return (
         <nav className="w-full">
              {alert ? <Alert message={alert} /> : null}
@@ -55,7 +54,7 @@ export default function NavBar({ items }: { items?: any }) {
                             </span>
                         </NavLink>
                     </li>
-                    <li onClick={toggleCart} className={`cursor-pointer hover:text-primary `}>
+                    <li onClick={toggleCart} className={`cursor-pointer hover:text-primary transition-all`}>
                            <CartIcon name={cart.name}/>
                     </li>
                 </ul>  
