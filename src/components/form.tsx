@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef} from 'react'
+import { useState, useRef } from 'react'
 import axios from 'axios'
 import { setCookie } from 'cookies-next'
 import { useAuth, useForm } from '@/hooks'
@@ -12,20 +12,22 @@ import { motion } from "framer-motion";
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
   const { setToken } = useAuth();
-  const { form, setForm, updateField, error, setError } = useForm();
   const [isLogin, setIsLogin] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null)
   const router = useRouter();
+
+  const initialForm = formItems.reduce(
+    (acc, item) => ({ ...acc, [item.name]: "" }),{}
+  );
 
   const initialError = formItems.reduce(
     (acc, item) => ({ ...acc, [item.name]: "" }),
     { formStatus: "" }
   );
 
-  const initialForm = formItems.reduce(
-    (acc, item) => ({ ...acc, [item.name]: "" }),{}
-  );
+  const { form, setForm, updateField, error, setError } = useForm(initialForm, initialError);
+
 
   const validate = () => {
 

@@ -10,9 +10,9 @@ interface initialError {
   [key: string]: string;
 }
 
-export function useForm() {
-  const [form, setForm] = useState<initialForm>({});
-  const [error, setError] = useState<initialError>({});
+export function useForm(initialForm: initialForm, initialError: initialError) {
+  const [form, setForm] = useState<initialForm>(initialForm);
+  const [error, setError] = useState<initialError>(initialError);
 
   const updateField = (
     e:

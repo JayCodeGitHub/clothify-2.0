@@ -11,18 +11,18 @@ export default function PurchaseForm() {
   const { cart, clearCart } = useCart();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-
-  const { form, setForm, updateField, error, setError } = useForm();
   const { dispatchAlert, setStatus } = useAlert();
+
+  const initialForm = PurchaseFormItems.reduce(
+    (acc, item) => ({ ...acc, [item.name]: "" }),{}
+  );
 
   const initialError = PurchaseFormItems.reduce(
     (acc, item) => ({ ...acc, [item.name]: "" }),
     { formStatus: "" }
   );
 
-  const initialForm = PurchaseFormItems.reduce(
-    (acc, item) => ({ ...acc, [item.name]: "" }),{}
-  );
+  const { form, setForm, updateField, error, setError } = useForm(initialForm, initialError);
 
   function subtotal() {
     let current = 0;
