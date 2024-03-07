@@ -9,7 +9,7 @@ import MobileMenu from "./mobileMenu";
 import Cart from "./cart";
 import CartIcon from "./cartIcon";
 
-export default function NavBar({ items }: { items?: any }) {
+export default function NavBar() {
     const { token } = useAuth();
     const [isCart, setIsCart] = useState(false);
     const { auth, profile, cart } = NavigationItems;

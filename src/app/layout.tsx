@@ -31,7 +31,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-secondary`}>
         <Providers allItems={allItems}>
-          <NavBar items={allItems}/>
+          <NavBar/>
           {children}
         </Providers>
         </body>
