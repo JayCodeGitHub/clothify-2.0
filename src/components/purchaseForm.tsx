@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useRouter } from 'next/navigation'
 import { useAlert, useForm, useCart } from "@/hooks";
 import Loading from "./loading";
 import Input from "./input";
 import PurchaseFormStep from "./purchaseFormStep";
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
-import axios from "axios";
 
 export default function PurchaseForm() {
   const { cart, clearCart } = useCart();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const { dispatchAlert, setStatus } = useAlert();
+  const router = useRouter();
 
   const initialForm = PurchaseFormItems.reduce(
     (acc, item) => ({ ...acc, [item.name]: "" }),{}
@@ -89,6 +91,7 @@ export default function PurchaseForm() {
       setForm(initialForm);
       setStep(1);
       clearCart();
+      router.push('/');
 
     } catch (error) {
       try {
