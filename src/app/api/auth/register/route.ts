@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken';
 const prisma = new PrismaClient();
 
 export async function POST(req: any) {
+  return NextResponse.json({message: 'Sorry our database is full'}, { status: 400 });
+  
   const data = await req.json();
   const email = data.email;
   const password = data.password;
