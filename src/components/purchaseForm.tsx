@@ -12,7 +12,7 @@ export default function PurchaseForm() {
   const { cart, clearCart } = useCart();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const { dispatchAlert, setStatus } = useAlert();
+  const { dispatchAlert } = useAlert();
   const router = useRouter();
 
   const initialForm = PurchaseFormItems.reduce(
@@ -105,7 +105,6 @@ export default function PurchaseForm() {
         setError(updatedErorr);
       }
     }
-    setStatus(true);
     setLoading(false);
   };
 
