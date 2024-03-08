@@ -91,7 +91,7 @@ export default function PurchaseForm() {
       setForm(initialForm);
       setStep(1);
       clearCart();
-      router.push('/');
+      router.push('/shop');
 
     } catch (error) {
       try {
