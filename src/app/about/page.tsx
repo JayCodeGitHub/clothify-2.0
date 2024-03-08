@@ -1,7 +1,12 @@
-import { AboutItems } from "../../items/aboutItems";
+import { performRequest } from '../../lib/datocms';
+import { ABOUT_QUERY } from '../../lib/queries';
 
-export default function About() {
-    const { title, description } = AboutItems;
+export default async function About() {
+    const query =  ABOUT_QUERY();
+  
+    const { data: { about } } = await performRequest({ query: query});
+     
+    const { title, description } = about;
     return (
         <main className="w-full h-rest">
             <section className="mx-auto mt-16 2xl:px-56 xl:px-44 px-4">
