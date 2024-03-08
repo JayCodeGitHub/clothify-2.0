@@ -51,3 +51,12 @@ export const ITEM_CONTENT_QUERY = (slug: string) =>  `
       		}
       }
     }`;
+
+export const ABOUT_QUERY = () =>  `
+    query Shop {
+      about {
+        title,
+         description
+     }
+    }
+`;
