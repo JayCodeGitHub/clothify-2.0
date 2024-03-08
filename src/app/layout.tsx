@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import NavBar from "@/components/navbar"
+import Footer from '@/components/footer'
 import { performRequest } from '../lib/datocms';
 import Providers from '@/components/providers'
 import { PAGE_CONTENT_QUERY } from '@/lib/queries';
@@ -33,6 +34,7 @@ export default async function RootLayout({
         <Providers allItems={allItems}>
           <NavBar/>
           {children}
+          <Footer />
         </Providers>
         </body>
     </html>

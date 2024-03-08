@@ -24,7 +24,8 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       height: {
-        rest: 'calc(100vh - 6rem)',
+        restPhone: 'calc(100vh - 5rem)',
+        restDesktop: 'calc(100vh - 6rem)',
       }
     },
   },

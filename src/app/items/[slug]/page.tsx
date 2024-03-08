@@ -30,7 +30,7 @@ export default async function Page({ params }: { params: { slug: string} }) {
       } = items;
 
     return (
-        <main className='flex flex-col justify-center items-center w-full 2xl:px-40 xl:px-28 md:flex-row md:items-start 2xl:gap-32 xl:gap-16 md:gap-8 py-8 px-8 md:px-0'>
+        <main className='flex flex-col justify-center items-center w-full 2xl:px-40 xl:px-28 md:flex-row md:items-start 2xl:gap-32 xl:gap-16 md:gap-8 py-8 px-8 md:px-0 min-h-[91vh]'>
           <span className='md:w-2/5 w-full'>
             <Gallery gallery={gallery} title={title}/>
           </span>
