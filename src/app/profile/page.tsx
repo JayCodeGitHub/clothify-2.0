@@ -63,7 +63,7 @@ export default function Profile() {
   }
   
   return (
-    <main className='flex flex-col justify-center items-center w-full min-h-[91vh] 2xl:px-56 xl:px-44 px-4 md:items-start gap-4 py-8'>
+    <main className='flex flex-col justify-center items-start w-full min-h-[91vh] 2xl:px-56 xl:px-44 px-4 md:items-start gap-4 py-8'>
        <section className='xl:w-2/5 md:w-3/5 w-full h-full flex flex-col gap-4'>
           <h1 className="md:text-xl text-lg"> Profile</h1>           
           <div>
