@@ -1,11 +1,13 @@
 "use client";
 
-export default function Quantity({quantity, updateCount}: {quantity: number, updateCount: (value: number) => void}) {
+export default function Quantity({quantity, updateCount, inactive}: {quantity: number, updateCount: (value: number) => void, inactive?: boolean}) {
     return (
     <span className=" flex items-center gap-1 mt-auto">
         Quantity:
         <button
-            className="flex justify-center items-center w-8 h-8 cursor-pointer border-0 rounded-full bg-dark"
+            className={`flex justify-center items-center w-8 h-8 border-0 rounded-full bg-dark ${
+                inactive &&  quantity <= 1 ? "opacity-50 cursor-default" : "opacity-100 cursor-pointer"
+            } transition-all `}
             aria-label="button with a minus icon to reduce the amount of product"
             onClick={() => (updateCount(-1))}
         >

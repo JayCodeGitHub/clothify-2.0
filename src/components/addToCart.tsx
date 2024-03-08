@@ -6,7 +6,7 @@ import Quantity from "./quantity";
 import SizePicker from "./sizePicker";
 import { useCart, useAlert } from "@/hooks";
 
-export default function AddToCart({ sizes, item }: { sizes: Array<string>, item: any}) {
+export default function AddToCart({ sizes, item, inactive }: { sizes: Array<string>, item: any, inactive?: boolean}) {
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState<null | string>(null);
     const { addItem } = useCart();
@@ -38,7 +38,7 @@ export default function AddToCart({ sizes, item }: { sizes: Array<string>, item:
          <div className="flex gap-2">
             <SizePicker sizes={sizes} selectedSize={selectedSize} setSelectedSize={setSelectedSize}/>
         </div>
-            <Quantity quantity={quantity} updateCount={updateCount}/>
+            <Quantity quantity={quantity} updateCount={updateCount} inactive/>
             <span className="w-4/5">
                 <Button onClick={handleAddToCart} isActive={selectedSize ? true : false} >Add to Cart</Button>
             </span>

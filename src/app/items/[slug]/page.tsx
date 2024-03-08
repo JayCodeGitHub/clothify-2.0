@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: { slug: string} }) {
             <h1 className='font-bold text-2xl pl-2'>{title}</h1>
             <p>{description}</p>
             <h2 className='font-bold text-xl pl-2'>{price}$</h2>
-            <AddToCart sizes={sizes} item={items}/>
+            <AddToCart sizes={sizes} item={items} inactive/>
           </div>
         </main>
     )
