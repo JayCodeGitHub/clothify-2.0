@@ -6,10 +6,10 @@ import Link from "next/link";
 import CartIcon from "./cartIcon";
 import { NavigationItems } from "@/items/navigationItems";
 
-export default function MobileMenu({ toggleCart }: { toggleCart: () => void }) {
+export default function MobileMenu({ toggleCart, token }: { toggleCart: () => void, token: string | false }) {
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => setIsOpen(currentState => !currentState);
-    const { cart } = NavigationItems;
+    const { auth, profile, cart } = NavigationItems;
 
 
     return (
@@ -34,8 +34,10 @@ export default function MobileMenu({ toggleCart }: { toggleCart: () => void }) {
                     </li>
                 ))}
                 <li onClick={toggleMenu}>
-                <NavLink href={NavigationItems.profile.href}>{NavigationItems.profile.name}</NavLink>  
-                </li>
+                        <NavLink href={`${token === false ? auth.href : profile.href}`}>
+                                {token === false ? auth.name : profile.name}
+                        </NavLink>
+                    </li>
             </ul>
             </div>
         </span>

@@ -22,7 +22,7 @@ export default function NavBar() {
     return (
         <nav className="w-full">
              {alert ? <Alert message={alert} /> : null}
-            <MobileMenu toggleCart={toggleCart}/>
+            <MobileMenu toggleCart={toggleCart} token={token}/>
             <Cart isCart={isCart} toggleCart={toggleCart}/>
             <div  className="w-full h-24 md:flex justify-between items-center 2xl:px-44 xl:px-28 px-4 hidden ">
                 <ul className="flex justify-center items-center gap-6">
