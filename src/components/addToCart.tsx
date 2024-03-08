@@ -11,7 +11,7 @@ export default function AddToCart({ sizes, item }: { sizes: Array<string>, item:
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState<null | string>(null);
     const { addItem } = useCart();
-    const { dispatchAlert, setStatus } = useAlert();
+    const { dispatchAlert } = useAlert();
     
     const updateCount = (value: number) => {
         if (value === 1) {
@@ -28,7 +28,6 @@ export default function AddToCart({ sizes, item }: { sizes: Array<string>, item:
         if (quantity > 0) {
             addItem(item, quantity, selectedSize);
             dispatchAlert(`${item.title} added to your cart`);
-            setStatus(true);
         }
         setQuantity(1);
         setSelectedSize(null);
