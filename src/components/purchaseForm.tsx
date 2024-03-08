@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAlert, useForm, useCart } from "@/hooks";
 import Loading from "./loading";
 import Input from "./input";
-import PurchaseFormStep from "./purchaseFormStep";
+import PurchaseFormStep from "@/components/purchaseFormStep";
 import { PurchaseFormItems } from "@/items/purchaseFormItems";
 
 export default function PurchaseForm() {
