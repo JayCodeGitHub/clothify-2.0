@@ -20,13 +20,13 @@ export default function MobileMenu({ toggleCart }: { toggleCart: () => void }) {
                     <CartIcon name={cart.name}/>
                 </span>
                 <span
-                    className="flex flex-col justify-between w-6 h-4 cursor-pointer md:hidden z-20 relative"
+                    className="flex flex-col justify-between w-6 h-4 cursor-pointer md:hidden z-40 relative"
                     onClick={toggleMenu}
                 >
                     <span className={`w-full h-[0.2rem] rounded-sm transition-all absolute top-1/2 left-0 ${isOpen ? "bg-white translate-y-0 rotate-45" : "bg-black translate-y-1 rotate-0"}`} />
                     <span className={`w-full h-[0.2rem] rounded-sm transition-all absolute top-1/2 left-0 ${isOpen ? "bg-white -translate-y-0 -rotate-45" : "bg-black -translate-y-1 -rotate-0"}`} />
                 </span>
-            <div className={`z-10 absolute top-0 left-0 bg-dark w-full h-full transition-all ${isOpen ? "-translate-x-0" : "-translate-x-full"}`}>
+            <div className={`z-30 absolute top-0 left-0 bg-dark w-full h-full transition-all ${isOpen ? "-translate-x-0" : "-translate-x-full"}`}>
             <ul className="flex flex-col w-full h-full justify-around items-center gap-6 text-white py-48">
                 {NavigationItems.list.map(({href, name}) => (
                     <li key={name} onClick={toggleMenu}>
