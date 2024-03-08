@@ -5,8 +5,9 @@ import Button from "./button";
 import Quantity from "./quantity";
 import SizePicker from "./sizePicker";
 import { useCart, useAlert } from "@/hooks";
+import { CartItemType } from "@/types";
 
-export default function AddToCart({ sizes, item, inactive }: { sizes: Array<string>, item: any, inactive?: boolean}) {
+export default function AddToCart({ sizes, item }: { sizes: Array<string>, item: CartItemType }) {
     const [quantity, setQuantity] = useState(1);
     const [selectedSize, setSelectedSize] = useState<null | string>(null);
     const { addItem } = useCart();
