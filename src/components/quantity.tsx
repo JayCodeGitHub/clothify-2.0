@@ -1,6 +1,12 @@
 "use client";
 
-export default function Quantity({quantity, updateCount, inactive}: {quantity: number, updateCount: (value: number) => void, inactive?: boolean}) {
+interface QuantityProps {
+    quantity: number;
+    updateCount: (value: number) => void;
+    inactive?: boolean;
+}
+
+export default function Quantity({quantity, updateCount, inactive}: QuantityProps) {
     return (
     <span className=" flex items-center gap-1 mt-auto">
         Quantity:
