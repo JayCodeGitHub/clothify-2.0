@@ -2,6 +2,12 @@
 
 Clothify is a clothing store project created for my developer portfolio. The main goal of this project was to understand how to manage application state in React at an advanced level.
 
+#### Demo Account ####
+<br/>
+ email: example@example.com<br/>
+ password: password
+ <br/><br/>
+
 ## Tech Stack ##
 
 
