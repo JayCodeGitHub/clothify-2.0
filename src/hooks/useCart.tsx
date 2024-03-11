@@ -2,7 +2,7 @@
 
 import React, { useContext, useState, useEffect } from "react";
 import { getCookie, deleteCookie, setCookie } from "cookies-next";
-import { CartItemType, ItemType } from "@/types"
+import { CartItemType } from "@/types"
 import { useItems } from "./useItems";
 
 interface CartProviderProps {
