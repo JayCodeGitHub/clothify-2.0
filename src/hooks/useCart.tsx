@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { getCookie, deleteCookie, setCookie } from "cookies-next";
 import { CartItemType } from "@/types"
 
 interface CartProviderProps {
@@ -29,6 +30,16 @@ const defaultState: any[] | (() => any[]) = [];
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState(defaultState);
 
+  useEffect(() => {
+    const cookieCart = getCookie("cart");
+      
+    if (cookieCart) {
+      setCart(JSON.parse(cookieCart));
+    } else {
+      setCookie("cart", JSON.stringify(cart))
+    }
+  }, []);
+
   function quantityIncrementation(id: string, step: number, size: string) {
     const newCart = cart.map((item) => {
       if (item.id === id && item.size === size) {
@@ -40,6 +51,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       return item;
     });
     setCart(newCart);
+    setCookie("cart", JSON.stringify(newCart))
   }
 
   function quantityDecrementation(id: string, step: number, size: string) {
@@ -58,6 +70,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       return item;
     });
     setCart(newCart);
+    setCookie("cart", JSON.stringify(newCart))
     if (remove) {
       removeItem(id, size);
     }
@@ -83,6 +96,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       };
       
       setCart(newCart());
+      setCookie("cart", JSON.stringify(newCart()))
     } else {
       quantityIncrementation(newItem.id, quantity, selectedSize);
     }
@@ -90,11 +104,14 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   }
 
   function removeItem(id: string, size: string) {
-    setCart(cart.filter((item) => !(item.id === id && item.size === size)));
+    const newCart = cart.filter((item) => !(item.id === id && item.size === size));
+    setCart(newCart);
+    setCookie("cart", JSON.stringify(newCart))
   }
 
   function clearCart() {
     setCart(defaultState);
+    deleteCookie("cart");
   }
 
   return (
