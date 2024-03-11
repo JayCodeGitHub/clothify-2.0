@@ -15,7 +15,7 @@ export default function AddToCart({ sizes, item }: { sizes: Array<string>, item:
     
     const updateCount = (value: number) => {
         if (value === 1) {
-            setQuantity(quantity + 1);
+            quantity < 9 ? setQuantity(quantity + 1) : null;
         } else if (value === -1) {
             quantity > 1 ? setQuantity(quantity - 1) : null;
         }

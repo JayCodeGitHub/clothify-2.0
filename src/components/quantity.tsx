@@ -12,7 +12,7 @@ export default function Quantity({quantity, updateCount, inactive}: QuantityProp
         Quantity:
         <button
             className={`flex justify-center items-center w-8 h-8 border-0 rounded-full bg-dark ${
-                inactive &&  quantity <= 1 ? "opacity-50 cursor-default" : "opacity-100 cursor-pointer"
+                inactive && quantity <= 1 ? "opacity-50 cursor-default" : "opacity-100 cursor-pointer"
             } transition-all `}
             aria-label="button with a minus icon to reduce the amount of product"
             onClick={() => (updateCount(-1))}
@@ -33,7 +33,9 @@ export default function Quantity({quantity, updateCount, inactive}: QuantityProp
         </button>
         <h3 className='w-6 items-center text-center'>{quantity}</h3>
         <button
-            className="flex justify-center items-center w-8 h-8 cursor-pointer border-0 rounded-full bg-dark"
+             className={`flex justify-center items-center w-8 h-8 border-0 rounded-full bg-dark ${
+                quantity >= 9 ? "opacity-50 cursor-default" : "opacity-100 cursor-pointer"
+            } transition-all `}
             aria-label="button with a plus icon to increase the amount of product"
             onClick={() => updateCount(1)}
         >
