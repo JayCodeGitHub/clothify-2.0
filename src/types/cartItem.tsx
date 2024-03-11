@@ -12,6 +12,6 @@ export interface CartItemType {
     thumbnailAlt: string;
     price: number;
     size: string;
-    description: string;
+    description?: string;
     quantity: number;
 }

@@ -2,7 +2,8 @@
 
 import React, { useContext, useState, useEffect } from "react";
 import { getCookie, deleteCookie, setCookie } from "cookies-next";
-import { CartItemType } from "@/types"
+import { CartItemType, ItemType } from "@/types"
+import { useItems } from "./useItems";
 
 interface CartProviderProps {
   children: React.ReactNode;
@@ -29,16 +30,26 @@ const defaultState: any[] | (() => any[]) = [];
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState(defaultState);
+  const { shopItems } = useItems();
 
   useEffect(() => {
     const cookieCart = getCookie("cart");
-      
+
     if (cookieCart) {
-      setCart(JSON.parse(cookieCart));
+      let restoreCart: Array<any> = [];
+      JSON.parse(cookieCart).map((item: CartItemType) => {
+        if(shopItems) {
+         const shopItem = shopItems.find(shopItem => shopItem.title === item.title);
+         const newItem = { ...shopItem, size: item.size, quantity: item.quantity };
+         restoreCart.push(newItem);
+        }
+      })
+      setCart(restoreCart)    
+  
     } else {
       setCookie("cart", JSON.stringify(cart))
     }
-  }, []);
+  }, [shopItems]);
 
   function quantityIncrementation(id: string, step: number, size: string) {
     const newCart = cart.map((item) => {
@@ -51,7 +62,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       return item;
     });
     setCart(newCart);
-    setCookie("cart", JSON.stringify(newCart))
+    const newCookie = newCart.map(({title, size, quantity}) => { return {title, size, quantity} })
+    setCookie("cart", JSON.stringify(newCookie));
   }
 
   function quantityDecrementation(id: string, step: number, size: string) {
@@ -70,7 +82,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       return item;
     });
     setCart(newCart);
-    setCookie("cart", JSON.stringify(newCart))
+    const newCookie = newCart.map(({title, size, quantity}) => { return {title, size, quantity} })
+    setCookie("cart", JSON.stringify(newCookie));
     if (remove) {
       removeItem(id, size);
     }
@@ -96,7 +109,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       };
       
       setCart(newCart());
-      setCookie("cart", JSON.stringify(newCart()))
+
+      const newCookie = newCart().map(({title, size, quantity}) => { return {title, size, quantity} })
+      setCookie("cart", JSON.stringify(newCookie));
     } else {
       quantityIncrementation(newItem.id, quantity, selectedSize);
     }
@@ -106,7 +121,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   function removeItem(id: string, size: string) {
     const newCart = cart.filter((item) => !(item.id === id && item.size === size));
     setCart(newCart);
-    setCookie("cart", JSON.stringify(newCart))
+    const newCookie = newCart.map(({title, size, quantity}) => { return {title, size, quantity} })
+    setCookie("cart", JSON.stringify(newCookie))
   }
 
   function clearCart() {
