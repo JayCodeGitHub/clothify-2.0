@@ -1,21 +1,17 @@
-import { AuthProvider, CartProvider, ItemsProvider, AlertProvider } from '@/hooks'
-import { ItemType } from '@/types';
+import { AuthProvider, CartProvider, AlertProvider } from '@/hooks'
 
 export default function Providers({
-    children, allItems
+    children
   }: {
     children: React.ReactNode
-    allItems: Array<ItemType>
   }) {
   return (
       <AuthProvider>
-          <ItemsProvider initialItems={allItems}>
               <CartProvider>
                   <AlertProvider>
                       {children}
                   </AlertProvider>
               </CartProvider>
-          </ItemsProvider>
       </AuthProvider>
   );
 }

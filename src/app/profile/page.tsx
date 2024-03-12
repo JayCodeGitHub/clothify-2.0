@@ -1,18 +1,19 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { useAuth, useItems } from "@/hooks"
+import { useAuth } from "@/hooks"
 import { deleteCookie, getCookie } from 'cookies-next'
 import { useRouter } from 'next/navigation'
 import axios from "axios";
 import Button from "@/components/button";
 import { OrderItemType, OrderType } from "@/types";
 import Order from "@/components/order";
+import { useStore } from "@/state";
 
 
 export default function Profile() {  
   const { setToken } = useAuth();
-  const { shopItems } = useItems();
+  const shopItems = useStore((state) => state.shopItems);
   const router = useRouter();
   const [profile, setProfile] = useState<{email: string, orders: Array<OrderType>} | false>(false);
 

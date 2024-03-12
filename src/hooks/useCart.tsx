@@ -3,7 +3,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { getCookie, deleteCookie, setCookie } from "cookies-next";
 import { CartItemType } from "@/types"
-import { useItems } from "./useItems";
+import { useStore } from "@/state";
 
 interface CartProviderProps {
   children: React.ReactNode;
@@ -30,7 +30,7 @@ const defaultState: any[] | (() => any[]) = [];
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState(defaultState);
-  const { shopItems } = useItems();
+  const shopItems = useStore((state) => state.shopItems);
 
   useEffect(() => {
     const cookieCart = getCookie("cart");
