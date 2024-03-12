@@ -3,15 +3,16 @@
 import { useState, useRef } from 'react'
 import axios from 'axios'
 import { setCookie } from 'cookies-next'
-import { useAuth, useForm } from '@/hooks'
+import { useForm } from '@/hooks'
 import { useRouter } from 'next/navigation'
 import { formItems } from '@/items/formItems';
 import Input from './input';
 import { motion } from "framer-motion";
+import { useStore } from '@/state';
 
 
 export default function Form({ action }: { action: 'login' | 'register' }) {
-  const { setToken } = useAuth();
+  const { setToken } = useStore();
   const [isLogin, setIsLogin] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null)

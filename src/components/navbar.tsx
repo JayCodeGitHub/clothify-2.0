@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react";
-import { useAuth, useAlert } from "@/hooks";
 import Alert from "./alert";
 import NavLink from "./navlink";
 import { NavigationItems } from "@/items/navigationItems";
@@ -11,10 +10,9 @@ import CartIcon from "./cartIcon";
 import { useStore } from "@/state";
 
 export default function NavBar() {
-    const { token } = useAuth();
     const [isCart, setIsCart] = useState(false);
     const { auth, profile, cart } = NavigationItems;
-    const { alert } = useStore();
+    const { alert, token } = useStore();
 
     const toggleCart = () => {
         setIsCart(prevValue => !prevValue);
