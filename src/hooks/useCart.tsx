@@ -1,35 +1,13 @@
 "use client"
 
-import React, { useContext, useState, useEffect } from "react";
+import { useEffect } from "react";
 import { getCookie, deleteCookie, setCookie } from "cookies-next";
 import { CartItemType } from "@/types"
 import { useStore } from "@/state";
 
-interface CartProviderProps {
-  children: React.ReactNode;
-}
-
-interface CartContextProps {
-  cart: CartItemType[];
-  quantityIncrementation: (id: string, quantity: number, size: string) => void;
-  quantityDecrementation: (id: string, quantity: number, size: string) => void;
-  addItem: (
-    newItem: CartItemType,
-    quantity: number,
-    selectedSize: string
-  ) => void;
-  removeItem: (id: string, size: string) => void;
-  clearCart: () => void;
-}
-
-const CartContext = React.createContext<CartContextProps>(
-  {} as CartContextProps
-);
-
-const defaultState: any[] | (() => any[]) = [];
-
-export const CartProvider = ({ children }: CartProviderProps) => {
-  const [cart, setCart] = useState(defaultState);
+export const useCart = () => {
+  const cart = useStore((state) => state.cart);
+  const setCart = useStore((state) => state.setCart);
   const shopItems = useStore((state) => state.shopItems);
 
   useEffect(() => {
@@ -126,28 +104,16 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   }
 
   function clearCart() {
-    setCart(defaultState);
+    setCart([]);
     deleteCookie("cart");
   }
 
-  return (
-    <CartContext.Provider
-      value={{
-        cart,
-        quantityIncrementation,
-        quantityDecrementation,
-        addItem,
-        removeItem,
-        clearCart,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
+  return { 
+    cart,
+    quantityIncrementation,
+    quantityDecrementation,
+    addItem,
+    removeItem,
+    clearCart,
+  }
 };
-
-export function useCart() {
-  const cart = useContext(CartContext);
-
-  return cart;
-}

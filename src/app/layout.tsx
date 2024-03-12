@@ -4,7 +4,6 @@ import './globals.css'
 import NavBar from "@/components/navbar"
 import Footer from '@/components/footer'
 import { performRequest } from '../lib/datocms';
-import Providers from '@/components/providers'
 import { PAGE_CONTENT_QUERY } from '@/lib/queries';
 import { SetupState } from '@/state'
 
@@ -33,12 +32,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-secondary`}>
-        <Providers>
           <SetupState allItems={allItems} />
           <NavBar/>
           {children}
           <Footer />
-        </Providers>
         </body>
     </html>
   )
