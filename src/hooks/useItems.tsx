@@ -22,6 +22,7 @@ export const ItemsProvider = ({ children, initialItems }: ItemsProviderProps) =>
 
   useEffect(() => {
     setShopItems(initialItems);
+
   }, [initialItems])
 
   return (

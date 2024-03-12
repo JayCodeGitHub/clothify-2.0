@@ -8,14 +8,14 @@ export default function Providers({
     allItems: Array<ItemType>
   }) {
   return (
-    <AuthProvider>
-        <ItemsProvider initialItems={allItems}>
-            <CartProvider>
-                <AlertProvider>
-                    {children}
-                </AlertProvider>
-            </CartProvider>
-        </ItemsProvider>
-    </AuthProvider>
+      <AuthProvider>
+          <ItemsProvider initialItems={allItems}>
+              <CartProvider>
+                  <AlertProvider>
+                      {children}
+                  </AlertProvider>
+              </CartProvider>
+          </ItemsProvider>
+      </AuthProvider>
   );
 }
