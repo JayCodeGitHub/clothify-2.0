@@ -8,12 +8,13 @@ import { NavigationItems } from "@/items/navigationItems";
 import MobileMenu from "./mobileMenu";
 import Cart from "./cart";
 import CartIcon from "./cartIcon";
+import { useStore } from "@/state";
 
 export default function NavBar() {
     const { token } = useAuth();
     const [isCart, setIsCart] = useState(false);
     const { auth, profile, cart } = NavigationItems;
-    const { alert } = useAlert();
+    const { alert } = useStore();
 
     const toggleCart = () => {
         setIsCart(prevValue => !prevValue);

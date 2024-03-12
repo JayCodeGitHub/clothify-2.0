@@ -1,4 +1,4 @@
-import { AuthProvider, CartProvider, AlertProvider } from '@/hooks'
+import { AuthProvider, CartProvider } from '@/hooks'
 
 export default function Providers({
     children
@@ -6,12 +6,10 @@ export default function Providers({
     children: React.ReactNode
   }) {
   return (
-      <AuthProvider>
-              <CartProvider>
-                  <AlertProvider>
-                      {children}
-                  </AlertProvider>
-              </CartProvider>
-      </AuthProvider>
+    <AuthProvider>
+      <CartProvider>
+        {children}
+      </CartProvider>
+    </AuthProvider>
   );
 }

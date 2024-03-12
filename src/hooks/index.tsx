@@ -1,4 +1,4 @@
-import { useAlert, AlertProvider } from "./useAlert";
+import { useAlert } from "./useAlert";
 import { useAuth, AuthProvider } from "./useAuth";
 import { useCart, CartProvider } from "./useCart";
 import { useForm } from "./useForm";
@@ -8,7 +8,6 @@ export {
     useAuth,
     useCart,
     useForm,
-    AlertProvider,
     AuthProvider,
     CartProvider,
 };
