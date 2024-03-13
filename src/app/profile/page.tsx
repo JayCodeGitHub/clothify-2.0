@@ -11,8 +11,7 @@ import { useStore } from "@/state";
 
 
 export default function Profile() {  
-  const { setToken } = useStore();
-  const shopItems = useStore((state) => state.shopItems);
+  const { setToken, shopItems } = useStore();
   const router = useRouter();
   const [profile, setProfile] = useState<{email: string, orders: Array<OrderType>} | false>(false);
 

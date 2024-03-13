@@ -6,9 +6,7 @@ import { CartItemType } from "@/types"
 import { useStore } from "@/state";
 
 export const useCart = () => {
-  const cart = useStore((state) => state.cart);
-  const setCart = useStore((state) => state.setCart);
-  const shopItems = useStore((state) => state.shopItems);
+  const { cart, setCart, shopItems } = useStore();
 
   useEffect(() => {
     const cookieCart = getCookie("cart");
