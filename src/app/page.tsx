@@ -1,18 +1,9 @@
-"use client"
+import Hero from '@/components/hero';
 
-import { useLayoutEffect } from 'react';
-import { useRouter } from 'next/navigation'
-
-export default function Home() {
-  const router = useRouter();
-
-  useLayoutEffect(() => {
-    router.push('/shop');
-  }, [])
-  
+export default function Home() {  
   return (
     <main>
-      <h1>Home</h1>
+      <Hero />
     </main>
   )
 }
