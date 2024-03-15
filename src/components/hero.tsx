@@ -16,24 +16,32 @@ export default function Hero() {
           width="3500"
           height="2333"
           alt="Hero Image"
-          className=' object-cover w-full h-full z-0 rounded-3xl'
-          initial={{ scale: 1.1}}
+          className='w-full'
+          initial={{ scale: 1.2}}
           animate={{ scale: 1}}
+          transition={{ duration: 0.5}}
         />
       </div>      
-    <header className='z-10 absolute bg-red-500 top-1/2'>
-      <h1>
+    <motion.header
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5, duration: 0.5 }}
+      className='z-10 absolute top-1/2 -translate-y-1/2 left-80 max-w-xl flex flex-col gap-4'
+    >
+      <h1 className='text-5xl font-bold'>
         Unleash Innovation in Every Byte.
       </h1>
-      <h2>
+      <h2 className='text-3xl font-semibold'>
         Explore a World of Cutting-Edge Technology.
       </h2>
-      <NavLink
-        href="/shop"
-      >
-        <Button>Our Offer</Button>
-      </NavLink>
-    </header>
+      <div className='w-32 mt-8'>
+        <NavLink
+          href="/shop"
+          >
+          <Button>Our Offer</Button>
+        </NavLink>
+      </div>
+    </motion.header>
   </section>
   )
 }
