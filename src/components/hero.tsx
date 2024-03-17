@@ -9,7 +9,7 @@ const MotionImage = motion(Image)
 
 export default function Hero() {
   return (
-    <section className='2xl:px-44 xl:px-28 px-4 py-10 w-full h-restDesktop relative'>
+    <section className='2xl:px-44 xl:px-28 px-4 py-10 w-full h-restDesktop  relative'>
       <div className='w-full h-full z-0 overflow-hidden rounded-3xl'>
         <MotionImage
           src="/images/hero.jpg"
