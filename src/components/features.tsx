@@ -1,28 +1,18 @@
+import { FeaturesItems } from "@/items/FeaturesItems"
+
 export default function Features() {
   return (
     <section>
       <div>
-        <div>
-          <div>
-            Icon
+        {FeaturesItems.map((item, index) => (
+          <div key={index}>
+            <div>
+              {item.icon}
+            </div>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
           </div>
-          <h3>Title</h3>
-          <p>description</p>
-        </div>
-        <div>
-          <div>
-            Icon
-          </div>
-          <h3>Title</h3>
-          <p>description</p>
-        </div>
-        <div>
-          <div>
-            Icon
-          </div>
-          <h3>Title</h3>
-          <p>description</p>
-        </div>
+        ))}
       </div>
     </section>
   )
