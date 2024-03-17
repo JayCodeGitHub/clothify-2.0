@@ -10,7 +10,7 @@ export default function Features() {
               {icon}
             </div>
             <h3 className="mb-2 text-xl font-bold text-light">{title}</h3>
-            <p className="text-gray-400">{ description}</p>
+            <p className="text-gray-400">{description}</p>
           </div>
         ))}
       </div>
