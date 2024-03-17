@@ -1,7 +1,29 @@
 export default function Features() {
-    return (
-      <section>
-        <h1>Features</h1>
-      </section>
-    )
+  return (
+    <section>
+      <div>
+        <div>
+          <div>
+            Icon
+          </div>
+          <h3>Title</h3>
+          <p>description</p>
+        </div>
+        <div>
+          <div>
+            Icon
+          </div>
+          <h3>Title</h3>
+          <p>description</p>
+        </div>
+        <div>
+          <div>
+            Icon
+          </div>
+          <h3>Title</h3>
+          <p>description</p>
+        </div>
+      </div>
+    </section>
+  )
 }
