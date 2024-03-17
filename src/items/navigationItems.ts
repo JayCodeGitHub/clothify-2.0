@@ -1,5 +1,6 @@
 export const NavigationItems = {
     list: [
+        { name: "Clothify", href: "/" },
         { name: "Shop", href: "/shop" },
         { name: "About Us", href: "/about" },
     ],
