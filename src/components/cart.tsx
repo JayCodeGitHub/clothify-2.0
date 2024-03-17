@@ -32,7 +32,7 @@ export default function Cart({ isCart, toggleCart }: CartProps) {
                 }}
             />
             <section 
-                className="flex fixed flex-col items-center gap-8 top-0 right-0 py-8 w-[80%] md:w-[70%] lg:w-[45%] xl:w-[35%] h-screen overflow-auto z-40 bg-white 2xl:px-16 xl:px-8 md:px-4 px-16"
+                className="flex fixed flex-col items-center gap-8 top-0 right-0 py-8 w-[80%] md:w-[70%] lg:w-[45%] xl:w-[35%] h-screen overflow-auto z-40 bg-white 2xl:px-16 xl:px-8 md:px-4 px-8"
                 style={{ 
                     transform: `${ isCart ? 'translateX(0)' : 'translateX(+100%)'}`,
                     transition: 'transform .3s .1s ease-in-out',
