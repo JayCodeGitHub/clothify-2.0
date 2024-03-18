@@ -10,13 +10,13 @@ const MotionImage = motion(Image)
 export default function Hero() {
   return (
     <section className='2xl:px-44 xl:px-28 px-4 py-10 w-full h-restDesktop relative'>
-      <div className='w-full h-full z-0 overflow-hidden rounded-3xl blur-[3px]'>
+      <div className='w-full h-full z-0 overflow-hidden rounded-3xl'>
         <MotionImage
           src="/images/hero.jpg"
           width="3500"
           height="2333"
           alt="Hero Image"
-          className='w-full h-full object-cover'
+          className='w-full h-full object-cover blur-[3px]'
           initial={{ scale: 1.2}}
           animate={{ scale: 1}}
           transition={{ duration: 0.5}}
