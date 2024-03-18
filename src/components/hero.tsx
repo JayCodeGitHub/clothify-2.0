@@ -29,10 +29,10 @@ export default function Hero() {
       className='z-10 absolute top-1/2 -translate-y-1/2 2xl:left-80 left-12 xl:left-64 xl:max-w-xl max-w-sm flex flex-col gap-4'
     >
       <h1 className='2xl:text-5xl xl:text-4xl text-3xl font-bold text-primary'>
-        Unleash Innovation in Every Byte.
+        Discover Fashion Forwardness at Its Best.
       </h1>
       <h2 className='2xl:text-3xl xl:text-xl text-lg font-semibold text-gray-700'>
-        Explore a World of Cutting-Edge Technology.
+        Embrace Style Evolution with Every Click.
       </h2>
       <div className='w-32 mt-8'>
         <NavLink
