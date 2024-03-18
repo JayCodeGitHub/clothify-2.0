@@ -34,6 +34,8 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
                             src={responsiveImage.src}
                             width={responsiveImage.width}
                             height={responsiveImage.height}
+                            loading='eager'
+                            priority={i === index}
                             alt={`Image of product: ${title}`}
                             className="h-full rounded-lg shrink-0 object-cover aspect-square"
                         />
@@ -75,6 +77,8 @@ export default function Gallery({gallery, title}: {gallery: any[], title: string
                                 src={responsiveImage.src}
                                 width={responsiveImage.width}
                                 height={responsiveImage.height}
+                                loading='eager'
+                                priority={i === index}
                                 alt={`Image of product: ${title}`}
                                 className={`h-auto w-1/5 mx-3 rounded-lg shrink-0 object-cover cursor-pointer border-2 transition-all ${
                                     i === index ? "border-primary" : "border-transparent" 
