@@ -8,8 +8,8 @@ interface productExampleProps {
 
 export default function productExamples({productExamples}: productExampleProps) {
   return (
-    <section className='my-14'>
-       <div className="flex md:flex-row flex-col justify-between md:items-center items-start 2xl:px-44 xl:px-28 px-4 my-16">
+    <section className='my-24'>
+       <div className="flex md:flex-row flex-col justify-between md:items-center items-start 2xl:px-48 xl:px-28 px-4 my-16">
         <h2 className=" text-lg font-semibold">Some of our Products</h2>
         <ArrowButton/>
       </div>
