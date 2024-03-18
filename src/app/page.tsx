@@ -6,7 +6,7 @@ import { performRequest } from '../lib/datocms';
 
 export default async function Home() {
   const { data: { allItems } } = await performRequest({ query: PAGE_CONTENT_QUERY });
-  const items = allItems.slice(0, 3);
+  const items = allItems.slice(0, 4);
   return (
     <main>
       <Hero />

@@ -8,11 +8,15 @@ interface productExampleProps {
 export default function productExamples({productExamples}: productExampleProps) {
   return (
     <section className='my-14'>
-    <ul className='grid 2xl:px-40 xl:px-28 px-4 2xl:grid-cols-4 md:grid-cols-3 grid-cols-2 lg:gap-y-20 gap-y-14 gap-x-4 lg:gap-x-0'>
-      {productExamples.map((item) => (
-        <Item key={item.id} item={item}/>
-      ))}
-    </ul>
+       <div className="flex md:flex-row flex-col justify-between md:items-center items-start 2xl:px-44 xl:px-28 px-4 my-16">
+        <h2 className=" text-lg font-semibold">Some of our Products</h2>
+        <button className='text-sm text-gray-500'>View all</button>
+      </div>
+      <ul className='grid 2xl:px-40 xl:px-28 px-4 2xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-2 lg:gap-y-20 gap-y-14 gap-x-4 lg:gap-x-0'>
+        {productExamples.map((item) => (
+          <Item key={item.id} item={item}/>
+        ))}
+      </ul>
   </section>
   )
 }
